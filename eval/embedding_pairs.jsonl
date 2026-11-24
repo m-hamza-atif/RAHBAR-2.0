@@ -1,0 +1,30 @@
+{"left":"What CGPA prevents an academic warning?","right":"Which cumulative GPA keeps students off academic warning?","label":"paraphrase"}
+{"left":"What CGPA prevents an academic warning?","right":"The lab coordinator reserves project workstations.","label":"unrelated"}
+{"left":"When do I qualify to graduate?","right":"What minimum academic standing is needed to finish my degree?","label":"paraphrase"}
+{"left":"When do I qualify to graduate?","right":"The hostel cafeteria serves a rotating menu.","label":"unrelated"}
+{"left":"What attendance is required for lectures?","right":"What portion of class meetings must a student attend?","label":"paraphrase"}
+{"left":"What attendance is required for lectures?","right":"The swimming pool charges for locker rentals.","label":"unrelated"}
+{"left":"Can the department head excuse absences?","right":"Does the HoD have discretion to condone missed sessions?","label":"paraphrase"}
+{"left":"Can the department head excuse absences?","right":"Renewing a book requires visiting the circulation desk.","label":"unrelated"}
+{"left":"What grade follows insufficient attendance?","right":"How is a student graded for missing too many classes?","label":"paraphrase"}
+{"left":"What grade follows insufficient attendance?","right":"An official transcript is requested through the records office.","label":"unrelated"}
+{"left":"How much is each undergraduate credit hour?","right":"What tuition is charged per BBA or BS credit?","label":"paraphrase"}
+{"left":"How much is each undergraduate credit hour?","right":"Campus shuttle buses operate on a weekend schedule.","label":"unrelated"}
+{"left":"What refund is available on day ten?","right":"How much tuition comes back if I withdraw within the first ten days?","label":"paraphrase"}
+{"left":"What refund is available on day ten?","right":"Departments print the final exam room assignment.","label":"unrelated"}
+{"left":"What grade points equal A+?","right":"How many points does the highest letter grade carry?","label":"paraphrase"}
+{"left":"What grade points equal A+?","right":"The sports office accepts equipment returns at the main desk.","label":"unrelated"}
+{"left":"Can students upload private data to AI tools?","right":"May confidential information be entered in an unsupported generative AI service?","label":"paraphrase"}
+{"left":"Can students upload private data to AI tools?","right":"A committee reviews scholarship renewal applications.","label":"unrelated"}
+{"left":"Can final-year students take one extra course?","right":"Can a student in the last year add a sixth class?","label":"paraphrase"}
+{"left":"Can final-year students take one extra course?","right":"The dining hall posts opening hours at its entrance.","label":"unrelated"}
+{"left":"How many courses can a student on warning take?","right":"What course load is permitted while on academic warning?","label":"paraphrase"}
+{"left":"How many courses can a student on warning take?","right":"Applicants can submit a student ID replacement form.","label":"unrelated"}
+{"left":"How much is the final exam worth?","right":"What weight does the end-of-semester examination carry?","label":"paraphrase"}
+{"left":"How much is the final exam worth?","right":"The transport office requires a bus permit.","label":"unrelated"}
+{"left":"Can an assigned library book be renewed?","right":"How does a borrower extend the due date of a library loan?","label":"paraphrase"}
+{"left":"Can an assigned library book be renewed?","right":"The spring holiday timetable is printed on posters.","label":"unrelated"}
+{"left":"How do I order an official transcript?","right":"Where can a student request their certified academic record?","label":"paraphrase"}
+{"left":"How do I order an official transcript?","right":"Students register for practical lab sessions online.","label":"unrelated"}
+{"left":"What hours are hostel residents allowed out?","right":"When is the residence hall curfew?","label":"paraphrase"}
+{"left":"What hours are hostel residents allowed out?","right":"The bursar publishes tuition rates per credit hour.","label":"unrelated"}

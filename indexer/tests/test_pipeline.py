@@ -214,8 +214,14 @@ class FakeCollection:
         return len(self.rows)
     def upsert(self, ids, documents, embeddings, metadatas):
         self.rows.update({i: (d, e, m) for i, d, e, m in zip(ids, documents, embeddings, metadatas)})
-    def get(self, include):
-        return {'ids': list(self.rows)}
+    def get(self, include=(), where=None):
+        ids = [key for key, (_, _, meta) in self.rows.items()
+               if not where or all(meta.get(k) == v for k, v in where.items())]
+        return {'ids': ids, 'metadatas': [self.rows[key][2] for key in ids]}
+    def update(self, ids, metadatas):
+        for key, metadata in zip(ids, metadatas, strict=True):
+            document, embedding, existing = self.rows[key]
+            self.rows[key] = document, embedding, {**existing, **metadata}
     def delete(self, ids):
         for key in ids:
             del self.rows[key]
@@ -225,6 +231,8 @@ class FakeClient:
     def __init__(self):
         self.collection = FakeCollection()
     def get_or_create_collection(self, **kwargs):
+        return self.collection
+    def get_collection(self, name):
         return self.collection
     def delete_collection(self, name):
         self.collection = FakeCollection()

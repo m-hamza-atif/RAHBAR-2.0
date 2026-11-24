@@ -1,0 +1,129 @@
+[
+    {
+        "request_id":  "3a86a8e2c998483da076290969b8985e",
+        "answer":  "The available corpus does not cover the requested information.",
+        "citations":  [
+
+                      ],
+        "answered_from_context":  false,
+        "confidence":  "low",
+        "retrieved":  [
+                          {
+                              "chunk_id":  "1a3a9f311dd67b932027e1239d9c72fa973ae4cc74245701ed1a5e6b562177c9",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 5.12",
+                              "page":  25,
+                              "score":  0.72844452,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 1.22",
+                              "page":  10,
+                              "score":  0.72206295,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+                              "source":  "06-academic-rules.md",
+                              "section":  "Document",
+                              "page":  1,
+                              "score":  0.719321,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-11"
+                          },
+                          {
+                              "chunk_id":  "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 6.7",
+                              "page":  28,
+                              "score":  0.7163762499999999,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "ab0dc7e6478c0d06d7042eb7d9c42874beca8f3dbd730e35811c4f57b4313169",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 1.21",
+                              "page":  10,
+                              "score":  0.70837432,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          }
+                      ],
+        "provider":  "ollama",
+        "cached":  false,
+        "trace_id":  "a35e0cc43e474646bbbc41e52746cbe9"
+    },
+    {
+        "request_id":  "352ed03397f4425f8b2a02982c21e730",
+        "answer":  "A student can request an official transcript from the records office.",
+        "citations":  [
+                          {
+                              "source":  "05-injection.md",
+                              "section":  "Document",
+                              "page":  1
+                          },
+                          {
+                              "source":  "01-registration.md",
+                              "section":  "Document",
+                              "page":  1
+                          }
+                      ],
+        "answered_from_context":  true,
+        "confidence":  "high",
+        "retrieved":  [
+                          {
+                              "chunk_id":  "f1766623d75625f7f5fc8ec8083157a7597067dd1a3880f7702c347f1b5d52cb",
+                              "source":  "05-injection.md",
+                              "section":  "Document",
+                              "page":  1,
+                              "score":  0.78375489,
+                              "document_id":  "student-records",
+                              "document_version":  "2026-10"
+                          },
+                          {
+                              "chunk_id":  "ff8eafef4618f61f2867f644ffd85b4ac24d544a8c55ed816fe817e49d42040d",
+                              "source":  "01-registration.md",
+                              "section":  "Document",
+                              "page":  1,
+                              "score":  0.70392036,
+                              "document_id":  "course-registration",
+                              "document_version":  "2026-10"
+                          },
+                          {
+                              "chunk_id":  "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+                              "source":  "06-academic-rules.md",
+                              "section":  "Document",
+                              "page":  1,
+                              "score":  0.6399599300000001,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-11"
+                          },
+                          {
+                              "chunk_id":  "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+                              "source":  "grading-page.html",
+                              "section":  "Incomplete Course",
+                              "page":  1,
+                              "score":  0.63072598,
+                              "document_id":  "grading-page",
+                              "document_version":  "2026"
+                          },
+                          {
+                              "chunk_id":  "b66b7a99e396047904d608650a547dcb201909e02e9f297de06beac443cb8951",
+                              "source":  "prospectus-2026-academic-rules-and-regulations.pdf",
+                              "section":  "12. Semester Registration Director of the campus can allow",
+                              "page":  2,
+                              "score":  0.62465328,
+                              "document_id":  "prospectus-2026-academic-rules-and-regulations",
+                              "document_version":  "2026"
+                          }
+                      ],
+        "provider":  "ollama",
+        "cached":  false,
+        "trace_id":  "c24461d21d754aea84e9375de9ddbe23"
+    }
+]

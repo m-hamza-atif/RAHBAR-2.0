@@ -9,7 +9,7 @@ import redis
 
 def main():
     url = os.getenv('REDIS_URL') or (
-        f"redis://{os.getenv('REDIS_HOST', 'redis')}:{os.getenv('REDIS_PORT', '6379')}/0")
+        f"redis://{os.getenv('REDIS_HOST', 'localhost')}:{os.getenv('REDIS_PORT', '6379')}/0")
     client = redis.Redis.from_url(url, socket_timeout=5, socket_connect_timeout=5)
     # Outside rahbar:cache:* so the pipeline's cache invalidation cannot erase it.
     lock = client.lock('rahbar:indexer:writer', timeout=120, blocking=False)
@@ -26,9 +26,10 @@ def main():
     signal.signal(signal.SIGINT, stop)
     if not lock.acquire():
         print('writer lock held: refusing concurrent indexing', flush=True)
-        return 75
+        return 1 if any(arg in sys.argv[1:] for arg in ('--incremental', '--rollback-doc')) else 75
     try:
-        child = subprocess.Popen([sys.executable, '-m', 'pipeline.run', *sys.argv[1:]])
+        pipeline = f'{__package__}.pipeline.run' if __package__ else 'pipeline.run'
+        child = subprocess.Popen([sys.executable, '-m', pipeline, *sys.argv[1:]])
         while True:
             try:
                 return child.wait(timeout=10)

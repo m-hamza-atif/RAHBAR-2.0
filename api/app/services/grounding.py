@@ -1,8 +1,23 @@
 """Preserve obligation levels in complex cited clauses without paraphrase."""
 import re
 
-from ..providers.llm.stub import POISON
 from ..schemas import Answer, Citation, Passage
+from .prompt import POISON, legitimate
+
+
+def protect_evidence(passages: list[Passage]) -> tuple[list[Passage], list[dict[str, str]]]:
+    safe = []
+    actions = []
+    for passage in passages:
+        if not POISON.search(passage.text):
+            safe.append(passage)
+            continue
+        remaining = legitimate(passage.text)
+        action = "injection_text_removed" if remaining.strip() else "injection_passage_dropped"
+        actions.append({"action": action, "source": "evidence", "chunk_id": passage.chunk_id})
+        if remaining.strip():
+            safe.append(passage.model_copy(update={"text": remaining}))
+    return safe, actions
 
 
 def preserve_obligations(answer: Answer, passages: list[Passage]) -> Answer:

@@ -1,6 +1,7 @@
 """Only writer to Chroma; rebuild snapshot and invalidate semantic cache."""
 from __future__ import annotations
 
+import os
 from typing import Any
 from uuid import uuid4
 
@@ -44,6 +45,8 @@ def store(chunks: list[Chunk], vectors: list[list[float]], settings: IndexerSett
     invalidate_cache(settings)
     collection = client.get_or_create_collection(
         name=settings.collection, metadata={"hnsw:space": "cosine"})
+    if (collection.metadata or {}).get("ragops_state"):
+        raise ValueError("use incremental mode for this RAGOps collection")
     # Chroma 1.0 rejects hnsw:space in modify(), even if its value is unchanged.
     # The distance configuration persists internally after creation.
     metadata = {k: v for k, v in (collection.metadata or {}).items()
@@ -53,6 +56,10 @@ def store(chunks: list[Chunk], vectors: list[list[float]], settings: IndexerSett
                      "index_revision": uuid4().hex,
                      "embedding_backend": "stub" if settings.llm_provider == "stub"
                      or settings.embed_model == "stub" else "ollama"})
+    if revision := os.getenv("EMBED_VERSION"):
+        metadata["embed_version"] = revision
+    else:
+        metadata.pop("embed_version", None)
     old = {k: v for k, v in (collection.metadata or {}).items()
            if not k.startswith("hnsw:")}
     collection.modify(metadata={**old, "index_state": "building"})

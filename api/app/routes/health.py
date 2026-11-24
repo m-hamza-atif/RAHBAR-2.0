@@ -22,6 +22,7 @@ def readyz(request: Request, response: Response) -> dict[str, object]:
     settings = request.app.state.settings
     configuration = {key: getattr(settings, key) for key in (
         'retriever', 'llm_provider', 'llm_model', 'embed_model', 'embed_dim',
-        'collection', 'top_k', 'relevance_floor', 'cache_threshold')}
+        'collection', 'top_k', 'relevance_floor', 'cache_threshold', 'embed_version',
+        'temperature', 'generation_seed')}
     return {"status": "ready" if revision else "not_ready", "checks": checks,
             "index_revision": revision or None, "configuration": configuration}

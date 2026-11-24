@@ -148,3 +148,55 @@ answers remain terse (for example a Boolean-looking answer string), which is why
 expected-substring mismatches are diagnostic rather than automatic semantic failures.
 The multipart Clause 4.4 answer is now verbatim evidence preserving must/should
 and the second-warning condition. Review notes are in eval/generation-review.json.
+## Assignment 03 three-level evaluation
+
+The original YAML evaluation remains the default for Assignment 02 CI. Select
+`--suite ragops` for the JSONL golden set, embedding benchmark and timestamped
+reports. Run from the repository root against a ready endpoint and use an
+`OLLAMA_BASE_URL` reachable by the evaluator for the real-model profile.
+
+```sh
+uv run python eval/run_eval.py --suite ragops --api "$API_URL" \
+  --golden eval/golden.jsonl --embedding-pairs eval/embedding_pairs.jsonl
+uv run python eval/release_gate.py --baseline "$BASELINE_JSON" \
+  --candidate "$CANDIDATE_JSON"
+```
+
+`EVAL_RESULTS_DIR` sets the output directory. Cache bypass is the default.
+For the repeat-run comparison, set `GENERATION_SEED=42` on the Ollama API and add
+`--stochasticity-check`. Keep the generation profile, dataset and embedding
+model identical across the release comparison while changing the retrieval
+configuration or index. The gate defaults to `eval/gate_config.yaml`, with
+`GATE_CONFIG_PATH` or `--config` available for overrides.
+
+Retrieval matches the logical document and physical page and counts each
+relevant page once. The noise check repeats three queries with a character
+transposition and reports the metric deltas. The answer faithfulness measure
+is a reference-based proxy that checks the annotated facts and a valid citation
+to a gold page. It does not evaluate additional claims outside the annotations.
+Embedding latency includes one local embedding request per benchmark text.
+
+Draft golden rows retain their actual authorship and review status. Treat
+reports with fewer than eight human-authored or eight reviewed synthetic rows
+as preliminary and rerun the comparison after the annotations are complete.
+
+## Query coverage and document drift
+
+Use the fixed simulated live-query log to compare coverage before and after
+adding golden cases. The default nearest-question cosine cutoff is 0.78, and
+the default required coverage is 85%. More golden questions can improve how
+well the tests represent an intent even when the available policies still
+require an abstention.
+
+```sh
+uv run python eval/check_coverage.py --live eval/live_queries.jsonl \
+  --golden eval/results/coverage-before-golden.jsonl --out eval/results/coverage_before.json
+uv run python eval/check_coverage.py --live eval/live_queries.jsonl \
+  --golden eval/golden.jsonl --out eval/results/coverage_after.json
+```
+
+For document drift, hold the golden snapshot and API configuration fixed.
+Measure Batch A, ingest Batch B through the same writer and repeat against
+the new index revision. Use a separate lake and collection for synthetic
+fixtures. Interpret changes to historical answer labels and high-scoring
+passages in light of the archived and current policy versions.

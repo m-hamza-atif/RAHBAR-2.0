@@ -1,0 +1,3319 @@
+{
+  "schema": "ragops-v1",
+  "configuration": {
+    "retriever": "chroma",
+    "llm_provider": "ollama-host",
+    "llm_model": "llama3.2:3b",
+    "embed_model": "nomic-embed-text",
+    "embed_dim": 768,
+    "collection": "ragops-phase3",
+    "top_k": 5,
+    "relevance_floor": 0.35,
+    "cache_threshold": 0.9,
+    "embed_version": "sha256:0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "temperature": 0.1,
+    "generation_seed": 42
+  },
+  "index_revision": "f9b13273b50b43788661ace21644e2a4",
+  "golden_sha256": "2a19cfeb6c9b8781b71b97076ef036dc6fe1d0b4d32271a046c4356710b1b14f",
+  "pairs_sha256": "4d8199ced9bd45334d340d4d8d4fed7bb854d5a21518e6e30499a6ac432b6976",
+  "cache_bypass": true,
+  "annotation_status": {
+    "human_written": 8,
+    "synthetic_reviewed": 0
+  },
+  "embedding": {
+    "paraphrase_mean_cosine": 0.6985103147421976,
+    "unrelated_mean_cosine": 0.41136108624206846,
+    "separation_gap": 0.28714922850012914,
+    "mean_embedding_ms": 30.805091111162458,
+    "max_absolute_repeat_difference": 0.0,
+    "pair_counts": {
+      "paraphrase": 15,
+      "unrelated": 15
+    }
+  },
+  "retrieval": {
+    "recall_at_3": 0.2972972972972973,
+    "recall_at_5": 0.2972972972972973,
+    "mrr": 0.27927927927927926,
+    "ndcg_at_5": 0.28378378378378377
+  },
+  "noise": {
+    "rows": [
+      {
+        "id": "q01",
+        "question": "What mniimum CGPA must an undergraduate maintain to avoid academic warning?",
+        "clean": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "noisy": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      },
+      {
+        "id": "q06",
+        "question": "What is the tiution fee per credit hour for BBA and BS in academic year 2026-27?",
+        "clean": {
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0
+        },
+        "noisy": {
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      },
+      {
+        "id": "q12",
+        "question": "What does Caluse 1.21 require about attendance?",
+        "clean": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "noisy": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      }
+    ],
+    "mean_delta": {
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_5": 0.0
+    }
+  },
+  "end_to_end": {
+    "faithfulness": 0.21621621621621623,
+    "faithfulness_method": "reference_facts_and_gold_page_citation",
+    "citation_validity": 1.0,
+    "citation_count": 66,
+    "abstention_correctness": 1,
+    "p50_latency_ms": 5244.43914999938,
+    "p95_latency_ms": 22698.587900000348
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "response": {
+        "request_id": "e6b2a14d2c934b6781f0a2f37755a5e2",
+        "answer": "2.0",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.80033171,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.742855,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "6fbb094da0bd6d934bb6be458dc1d04133746230766c288bb63dbd996474ec37",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 2,
+            "score": 0.7018419499999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "46dca4985c7594e7dc22d6ee346824eed16778282db5397864d0968df27ee817",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Clause 3.99",
+            "page": 2,
+            "score": 0.6884061,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b18fe6d19f70e342b2585b1fc348a2d37602edd6d91d06583dd1bb00916b8662",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.67788863,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "70bf35c3b92f4a6baa15be7a58c546d9"
+      },
+      "latency_ms": 4314.913300000626,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q02",
+      "response": {
+        "request_id": "f9fe5a1d796a4a8faeccbf3ee5b9c9c2",
+        "answer": "2.0",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1
+          },
+          {
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.7419986700000001,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b18fe6d19f70e342b2585b1fc348a2d37602edd6d91d06583dd1bb00916b8662",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.6961195,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.68943548,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.68607223,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "94f798a6cae29b08d61a91bd813c38bd918cb57e192f0455402291b34cde52f9",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.6806878000000001,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "a9e0770a94bb4893a9d79092508cce90"
+      },
+      "latency_ms": 4737.777799999094,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q03",
+      "response": {
+        "request_id": "9202f37b1a9e429c98f3056d21bddd6f",
+        "answer": "At least 80% attendance is required. The HoD can condone up to 20% absence (3 hours of lab work per week) for genuine reasons.",
+        "citations": [
+          {
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1
+          },
+          {
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "220 Prospectus 2026",
+            "page": 5
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.65617824,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          },
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.5960571800000001,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "ee2a8f7cb0d4416e24135f47a35b05ee8bd8dc24dd14f4bfcc0b8f4e09c3de27",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "220 Prospectus 2026",
+            "page": 5,
+            "score": 0.58532447,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b18fe6d19f70e342b2585b1fc348a2d37602edd6d91d06583dd1bb00916b8662",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.5812312399999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "cb4b1e88af76a7381b6ca1e0852001f51080383df892bf4bf46c073e4e3903e6",
+            "source": "annual-report-2019-20.pdf",
+            "section": "of HEC Quality Assurance Policy:",
+            "page": 29,
+            "score": 0.5795796,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "984afde78a644e10b2e6f96efcb9a349"
+      },
+      "latency_ms": 6899.329199999556,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q04",
+      "response": {
+        "request_id": "fab9ee95469e451999574c66a409dd04",
+        "answer": "A student will be rendered ineligible to appear in the final examination of the concerned course.",
+        "citations": [
+          {
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 4
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.74658406,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.71254492,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "5e9f04fe4c0349b2c00ac9c887848fc43d7019a6f731f2295eb12b1234d299ba",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.6764562000000001,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "924bc85f4b1e6a61b4a9f95b4c193995d0533371b742b7585103a023cc05d08c",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 4,
+            "score": 0.66469407,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b18fe6d19f70e342b2585b1fc348a2d37602edd6d91d06583dd1bb00916b8662",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.66380996,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "cffdd212d8e5461882f7d101e0abdfc2"
+      },
+      "latency_ms": 11289.915499999552,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q05",
+      "response": {
+        "request_id": "2ae8c81f9d0c410d82a91dcdbbf80dd1",
+        "answer": "The semester work and the final examination are normally weighted at 50% each in the final grade.",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Academic Grading",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "9fbfcd8d78be3063b67184bed173254cd1bfb1a547e0152c9ddf0f7ffcf46e11",
+            "source": "grading-page.html",
+            "section": "Academic Grading",
+            "page": 1,
+            "score": 0.69977784,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.67318594,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "94f798a6cae29b08d61a91bd813c38bd918cb57e192f0455402291b34cde52f9",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.64839107,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.6366229,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "6fbb094da0bd6d934bb6be458dc1d04133746230766c288bb63dbd996474ec37",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 2,
+            "score": 0.62578106,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "974cf6a39e0f4736b87b65410a61053d"
+      },
+      "latency_ms": 5138.24250000107,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q06",
+      "response": {
+        "request_id": "568036d1ad0942d5a9b7ed63bc36e396",
+        "answer": "Rs. 12,000",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.25",
+            "page": 27
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.85517764,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "8961324c49f1af2a2fd6451728381569aa358495a4cec3561a4a4dfe54f5cc71",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.7",
+            "page": 14,
+            "score": 0.6777591700000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "09f1f773de44fcf24bd7a222fbd6875fab2f374b5e20550f4610389ed5305812",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 7.3",
+            "page": 30,
+            "score": 0.6715093999999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "08c4112b9320c913bf8afd55d083ee73c8b0017cba00ab5e732974dddddd13bf",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.25",
+            "page": 27,
+            "score": 0.6508839,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.7",
+            "page": 28,
+            "score": 0.64905685,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "356608c8207e489cb93e9aadf04048c2"
+      },
+      "latency_ms": 4237.463499999649,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q07",
+      "response": {
+        "request_id": "a8d7959d64bb47d78b2c85e288b7e445",
+        "answer": "100%",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.745835,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.6615222700000001,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "476c4ff3cd8611cef05696aa91a1bcb36508f15bff97db064043fe68f607dd04",
+            "source": "fee-structure-page.html",
+            "section": "Security Deposit",
+            "page": 1,
+            "score": 0.6082002,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "b66b7a99e396047904d608650a547dcb201909e02e9f297de06beac443cb8951",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "12. Semester Registration Director of the campus can allow",
+            "page": 2,
+            "score": 0.60784864,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.59695524,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "cadd11d619834ef1a213a5f1bacb83d4"
+      },
+      "latency_ms": 3229.269600000407,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q08",
+      "response": {
+        "request_id": "82e27947698c4439a5b373dc9cc94aff",
+        "answer": "4.00",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "998151e0c16de939bee019a2949a4bc9f490f3a6e0e6f952d113ffde1c6a20cf",
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1,
+            "score": 0.7403444,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.719877,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "94f798a6cae29b08d61a91bd813c38bd918cb57e192f0455402291b34cde52f9",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.67976594,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "75b74dccf6359b29bf695bbe95a20e0774c26f6444640bbda473fcfa73e00e5c",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Chapter-3 Students\u2019 Profile",
+            "page": 19,
+            "score": 0.66915548,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "876a17ebecc1af8210292d38adb69f6f17c075d20a98268d8e5702808a49c227",
+            "source": "annual-report-2023-24.pdf",
+            "section": "3. Master of Business Administration ISB, LHR Accredited",
+            "page": 70,
+            "score": 0.6631418,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "5c72e4752817429f8d24619454f7b544"
+      },
+      "latency_ms": 3564.7862999994686,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q09",
+      "response": {
+        "request_id": "b34f5f8ea4ee47fe88d94755fee498d7",
+        "answer": "No",
+        "citations": [
+          {
+            "source": "annual-report-2023-24.pdf",
+            "section": "Escape Room Adventure Engineering-Themed Puzzle Challenge",
+            "page": 33
+          },
+          {
+            "source": "05-injection.md",
+            "section": "Document",
+            "page": 1
+          },
+          {
+            "source": "01-registration.md",
+            "section": "Document",
+            "page": 1
+          },
+          {
+            "source": "annual-report-2023-24.pdf",
+            "section": "Secure Future",
+            "page": 24
+          },
+          {
+            "source": "annual-report-2019-20.pdf",
+            "section": "Chapter-3 Students\u2019 Profile",
+            "page": 19
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "11bb300291bc4d924be2d0a0617a092fe8b8f3188a015bf1b886cab433e5a83f",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Escape Room Adventure Engineering-Themed Puzzle Challenge",
+            "page": 33,
+            "score": 0.5753088,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "f1766623d75625f7f5fc8ec8083157a7597067dd1a3880f7702c347f1b5d52cb",
+            "source": "05-injection.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.5628679999999999,
+            "document_id": "student-records",
+            "document_version": "2026-10"
+          },
+          {
+            "chunk_id": "ff8eafef4618f61f2867f644ffd85b4ac24d544a8c55ed816fe817e49d42040d",
+            "source": "01-registration.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.55988097,
+            "document_id": "course-registration",
+            "document_version": "2026-10"
+          },
+          {
+            "chunk_id": "d2788c41cbe6361ab04379c46818382677121366bb8ea14ab3625ef70ec2f9a1",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Secure Future",
+            "page": 24,
+            "score": 0.55587208,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "75b74dccf6359b29bf695bbe95a20e0774c26f6444640bbda473fcfa73e00e5c",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Chapter-3 Students\u2019 Profile",
+            "page": 19,
+            "score": 0.5478179000000001,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "fae2ad3b83f5404abe79d4261a170698"
+      },
+      "latency_ms": 7354.564900000696,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q10",
+      "response": {
+        "request_id": "5a938cef346c49c7be27be1b32fa0770",
+        "answer": "Yes",
+        "citations": [
+          {
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 4.3",
+            "page": 14
+          },
+          {
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 1.19",
+            "page": 7
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "b4652d78997fc8a74305d2dac6ecbb48f6486e9b7001e94b13b88a94e7fd419c",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 4.3",
+            "page": 14,
+            "score": 0.79756486,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "b94bac7683604cd5aeab3a97a7c60413efdc547ba4067449db82deecbd1ba5b0",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 1.19",
+            "page": 7,
+            "score": 0.7712536999999999,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "ab1d9c22bf541f3e92e0052deafc4eb62e5700c40ca5dd8613f6fbfa19e27702",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "44 Astudent under academic warning or probation:",
+            "page": 14,
+            "score": 0.76977205,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "3ef86058e6a83a3f9c23b29ab5bf314a46827fb8c031f419e4b615eb327cd49f",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 6.4",
+            "page": 20,
+            "score": 0.76886475,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "8f9a1e4dea1c89bf48b2c2681adbe17070d709733eb31fd4ca80be8a6d4d72f8",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 1.20",
+            "page": 7,
+            "score": 0.7552129,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "cd75b4e9f9b54921ae0c0dec7af5428e"
+      },
+      "latency_ms": 5186.235999999553,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q11",
+      "response": {
+        "request_id": "49ee52c2179e444da043efc44aeec5ad",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "64466cd0f13fdf3d819322d44355c1728afc2529675845222b5b5609f7f8fa76",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.20",
+            "page": 9,
+            "score": 0.77053934,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "8e405695e081083032dd29d39897f8611f30f001d57fd91ad70297030fe63b6a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 38,
+            "score": 0.7625230000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f8e1e3ee00465fd7df9e55ccbb54ff40d5825a0473cdc34dc88ffdedac5b1749",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 19,
+            "score": 0.7492333,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f741da096cef0bfce4104cdd38ac469b9b19ccfc96e67a73437d7beb3835cb7b",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.19",
+            "page": 9,
+            "score": 0.7264725000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "74a7102cde54a78fc4ef00dbe99a554dfb0c48b4440d6b67c60674d0351701b9",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.28",
+            "page": 23,
+            "score": 0.7261655300000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "7ea92d9705204f42a5d830afad61ff95"
+      },
+      "latency_ms": 5302.642299999206,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_5": 0.5
+      },
+      "faithful": false
+    },
+    {
+      "id": "q12",
+      "response": {
+        "request_id": "1ffb196c08f3473da79c1c8e24fcbcc5",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.64209116,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          },
+          {
+            "chunk_id": "81eca92bb96b30af68fdfb9f564a0ca0b028d80b43a989c3b9494cab21de34a0",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 9.6",
+            "page": 3,
+            "score": 0.6101023,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "c30bffdd0bb8f061bb9c3b2267e35e79491057644c43dfab8b9ca9d804c707f4",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 9.2",
+            "page": 3,
+            "score": 0.58731848,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "e8302c847d983a558a36cdc4f94877f3473913d62bb66f5edf6ca3e59b0d7fa1",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 4.2",
+            "page": 1,
+            "score": 0.58614767,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "de14fa7319c34302d320aeb703cf8408961e9f86edc629943449b6b9cf5b0cd3",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Signature and Date",
+            "page": 7,
+            "score": 0.5773461,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "bd2009165bab4fbc96674db04f443f28"
+      },
+      "latency_ms": 2352.02019999997,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q13",
+      "response": {
+        "request_id": "6ebfac48d75f4565a4d026273eed15a1",
+        "answer": "No",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.73037,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.68057126,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.6727894999999999,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b18fe6d19f70e342b2585b1fc348a2d37602edd6d91d06583dd1bb00916b8662",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.6677634,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "6fbb094da0bd6d934bb6be458dc1d04133746230766c288bb63dbd996474ec37",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 2,
+            "score": 0.664146,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "4d3ae08204c845a5962c6b2841c5c695"
+      },
+      "latency_ms": 3537.6931999999215,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q14",
+      "response": {
+        "request_id": "21c2eb39a1f648e7b853bb777665347b",
+        "answer": "Rs. 12,000",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1
+          },
+          {
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.8176928800000001,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "8961324c49f1af2a2fd6451728381569aa358495a4cec3561a4a4dfe54f5cc71",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.7",
+            "page": 14,
+            "score": 0.6558764,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "09f1f773de44fcf24bd7a222fbd6875fab2f374b5e20550f4610389ed5305812",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 7.3",
+            "page": 30,
+            "score": 0.65113372,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.7",
+            "page": 28,
+            "score": 0.63890475,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.63639104,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "d22c2077cc3140ec9e23b6706ad83f6e"
+      },
+      "latency_ms": 3930.9964000003674,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q15",
+      "response": {
+        "request_id": "2e07bc06f16442ee8a5e9294767605a1",
+        "answer": "Students on academic warning cannot register for FYP-I without approval of the relevant Head of Department or any other senior faculty nominated by him.",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Clause 3.99",
+            "page": 2
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.71846765,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "924bc85f4b1e6a61b4a9f95b4c193995d0533371b742b7585103a023cc05d08c",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 4,
+            "score": 0.7078848,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "46dca4985c7594e7dc22d6ee346824eed16778282db5397864d0968df27ee817",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Clause 3.99",
+            "page": 2,
+            "score": 0.70577377,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b66b7a99e396047904d608650a547dcb201909e02e9f297de06beac443cb8951",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "12. Semester Registration Director of the campus can allow",
+            "page": 2,
+            "score": 0.6962016799999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "196b896dcc0c29a89bf6a84593e4e524248addf133163002ae84c4f9fa38f0c0",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "13. Registration of Students under",
+            "page": 2,
+            "score": 0.6862763199999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "b039790afa7740acabf3e1ff6fdd7bc9"
+      },
+      "latency_ms": 4132.640400001037,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q16",
+      "response": {
+        "request_id": "751219516148414da75db4e58a75070d",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "f3a858f65a4e1fe5f20041fda4170d4f4318b091a7eba4c7fc1bbe0ba5e86f10",
+            "source": "annual-report-2023-24.pdf",
+            "section": "In-house Medical Center",
+            "page": 85,
+            "score": 0.5867262,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.5524425,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "ee2a8f7cb0d4416e24135f47a35b05ee8bd8dc24dd14f4bfcc0b8f4e09c3de27",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "220 Prospectus 2026",
+            "page": 5,
+            "score": 0.5502024999999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "f8c9b1a34ad48f0cc401c7bcef2841c8b5d4250e877ac540d7d3446f75f5e737",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Peshawar Campus",
+            "page": 32,
+            "score": 0.544276,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "171255cb8736d3ca0056ba083b6f18a985492212e8a6ce0e931f26f93c516b7e",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Peshawar Campus",
+            "page": 78,
+            "score": 0.54326856,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "d45ceadf4be2480285279a88e33d9065"
+      },
+      "latency_ms": 8314.793999999893,
+      "correct_abstention": true
+    },
+    {
+      "id": "q17",
+      "response": {
+        "request_id": "7a42d345c7e84a71a8d27fa4e6913368",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.67111266,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "476c4ff3cd8611cef05696aa91a1bcb36508f15bff97db064043fe68f607dd04",
+            "source": "fee-structure-page.html",
+            "section": "Security Deposit",
+            "page": 1,
+            "score": 0.5981114000000001,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "c306135a357470675b567a0a38d3b2224c56d59691e6d09502aa522e82d9038e",
+            "source": "fee-structure-page.html",
+            "section": "Miscellaneous Fees",
+            "page": 1,
+            "score": 0.5899114599999999,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "f1c8a491c456c5cbbd05e22f53f747156cd66445fd088e350530dbad505da12e",
+            "source": "fee-structure-page.html",
+            "section": "Admission Fee",
+            "page": 1,
+            "score": 0.5764908799999999,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.56692553,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "a2c844720fec44b280ab7a164b72e1c8"
+      },
+      "latency_ms": 11012.019100000543,
+      "correct_abstention": true
+    },
+    {
+      "id": "q18",
+      "response": {
+        "request_id": "5d4f2a588cd944f685d16ba9ebec8f49",
+        "answer": "80% of scheduled sessions",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.65166366,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          },
+          {
+            "chunk_id": "988f18d20b00c20bec9b3493b3e3d77ff4527d43faa27a9d127c237824c6f351",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 9.1",
+            "page": 2,
+            "score": 0.600276,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "81eca92bb96b30af68fdfb9f564a0ca0b028d80b43a989c3b9494cab21de34a0",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 9.6",
+            "page": 3,
+            "score": 0.5979947999999999,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "c30bffdd0bb8f061bb9c3b2267e35e79491057644c43dfab8b9ca9d804c707f4",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 9.2",
+            "page": 3,
+            "score": 0.58439416,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.5801654,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "5fcf348063e54fb994a4ddb8110384e9"
+      },
+      "latency_ms": 3274.727999998504,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q19",
+      "response": {
+        "request_id": "f6e25bfadefd47d5a2253e23d1357147",
+        "answer": "Students must maintain 100% attendance. The HoD may excuse up to 20% absence for genuine reasons such as illness. Failure to meet the requirement renders the student ineligible for the final examination.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.13",
+            "page": 25
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab0dc7e6478c0d06d7042eb7d9c42874beca8f3dbd730e35811c4f57b4313169",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10,
+            "score": 0.81212759,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9d072595541f9649461ab9f6fca6943ec15a185e7d3660716d7f44450a2232ae",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.13",
+            "page": 25,
+            "score": 0.74049997,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10,
+            "score": 0.72645402,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "8e405695e081083032dd29d39897f8611f30f001d57fd91ad70297030fe63b6a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 38,
+            "score": 0.7139672,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "4225eecdad608516cf5468eb8b67ec70b5c5fbb6d92b0c8113e7517780c700d3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 39,
+            "score": 0.7092780000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "ca6d49b7673a47faa69864765efe586f"
+      },
+      "latency_ms": 7625.304200000755,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q20",
+      "response": {
+        "request_id": "d269b43666a04da3a9cf6a0a0c4de26c",
+        "answer": "Final year students",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.3",
+            "page": 19
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.9",
+            "page": 20
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "a348b4e81a79accbe0318034b5a783a4072b6042ccfac7de450f26d9efa25f5c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.3",
+            "page": 19,
+            "score": 0.7302223400000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "78354c1bd77e5077d021ff3a8d0c84927869167908daff22aef03bf9f4f03dc6",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.6",
+            "page": 28,
+            "score": 0.7042942,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "96821226abb3f8ae8e54af4a8380e82983c6d2a9a17850b50dfa2135477cdfe4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.9",
+            "page": 20,
+            "score": 0.6937595,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "312caf949cf68689a6652e9115ccc5042eac2cf0c2eb1af68a75c8cf86664d92",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.2",
+            "page": 28,
+            "score": 0.6842398599999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9a9495e896bff32d7bcb46d4ea0e1a68987e7af0214c202ef5068f8776eb0237",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.3",
+            "page": 28,
+            "score": 0.6836198600000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "20ec0f6180294c76b782993a10ab8305"
+      },
+      "latency_ms": 3820.4611999990448,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q21",
+      "response": {
+        "request_id": "6d0aed043dc64cba893380eb6921ecec",
+        "answer": "2.00",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.4",
+            "page": 24
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "91e87ddba3290e98530d390ce08a6e02279040b3093bc2f30b2005c02f6b2813",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10,
+            "score": 0.84172064,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "67e31c0dbe4d3574b6da2ef721bc16669b2fa8df9e6ed16021efab3a2be979bd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.4",
+            "page": 24,
+            "score": 0.82445073,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "72033120b0bd8730c38dc4e3855ba8c103ba1cd184341c99d10d0e4179dfe01b",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 5.4",
+            "page": 17,
+            "score": 0.82445073,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "672dd4b93cb495eb14cdcb9dedb3cb6213d6486c3411b6fa41e30403753c6a14",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 1.26",
+            "page": 8,
+            "score": 0.8150509,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.80682594,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "bf15e3b40ff14410b957e1eac2f896c2"
+      },
+      "latency_ms": 4062.871600001017,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q22",
+      "response": {
+        "request_id": "7663326c92104f7a80b6b5ab84151db7",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "171255cb8736d3ca0056ba083b6f18a985492212e8a6ce0e931f26f93c516b7e",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Peshawar Campus",
+            "page": 78,
+            "score": 0.6074805999999999,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "f8c9b1a34ad48f0cc401c7bcef2841c8b5d4250e877ac540d7d3446f75f5e737",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Peshawar Campus",
+            "page": 32,
+            "score": 0.6032245199999999,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "f641a2d44706ad859937521d0df7798833f56dd48ea0287d4e814bdbbdc2fe9a",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Islamabad Campus",
+            "page": 78,
+            "score": 0.5863967,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "e2357828c5f7938d1541e9bb53571952a50e4ddcd331d2960bd9a445d84558f4",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Islamabad Campus",
+            "page": 32,
+            "score": 0.58442092,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "f3a858f65a4e1fe5f20041fda4170d4f4318b091a7eba4c7fc1bbe0ba5e86f10",
+            "source": "annual-report-2023-24.pdf",
+            "section": "In-house Medical Center",
+            "page": 85,
+            "score": 0.572415,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "961fa801f4544ace804f890443591bf1"
+      },
+      "latency_ms": 9979.32469999978,
+      "correct_abstention": true
+    },
+    {
+      "id": "q23",
+      "response": {
+        "request_id": "d9cdc256b7524d38829033f6e1c03db5",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "f3a858f65a4e1fe5f20041fda4170d4f4318b091a7eba4c7fc1bbe0ba5e86f10",
+            "source": "annual-report-2023-24.pdf",
+            "section": "In-house Medical Center",
+            "page": 85,
+            "score": 0.52281272,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.51600528,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "d752772b3ddd280b586e16fddca9eb330e02f284cfaabb1904a5edd6c29fbe69",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Indoor Hospitalization Insurance",
+            "page": 84,
+            "score": 0.5077814,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "476c4ff3cd8611cef05696aa91a1bcb36508f15bff97db064043fe68f607dd04",
+            "source": "fee-structure-page.html",
+            "section": "Security Deposit",
+            "page": 1,
+            "score": 0.50300956,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "d96908725ee6ab0766d026bd718a8e177af9ad5c0dec8e8e72ee4249c842670c",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Chapter-9 Health Care Facilities",
+            "page": 84,
+            "score": 0.491193,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "a94dcd0754bc4082a9cffeb1b33a399a"
+      },
+      "latency_ms": 10457.109999999375,
+      "correct_abstention": true
+    },
+    {
+      "id": "q24",
+      "response": {
+        "request_id": "46bc935bd86043debd9389209079d1bd",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "f1c8a491c456c5cbbd05e22f53f747156cd66445fd088e350530dbad505da12e",
+            "source": "fee-structure-page.html",
+            "section": "Admission Fee",
+            "page": 1,
+            "score": 0.56674695,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.5649737,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "476c4ff3cd8611cef05696aa91a1bcb36508f15bff97db064043fe68f607dd04",
+            "source": "fee-structure-page.html",
+            "section": "Security Deposit",
+            "page": 1,
+            "score": 0.53944695,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "74a35f04ea93134a03b9ea1939aa72e79921af94565d2660bd8fbe3c6b0c1c4c",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Karachi Campus",
+            "page": 32,
+            "score": 0.51965934,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "fc2bcafa9fdf18f43bc9efe08c2b6d4dfabe063f12aa9462f81da3abea890745",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Karachi Campus",
+            "page": 78,
+            "score": 0.5179305000000001,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "450163dc1de2403f92f9a6cfd1aa34df"
+      },
+      "latency_ms": 5112.198299999363,
+      "correct_abstention": true
+    },
+    {
+      "id": "q25",
+      "response": {
+        "request_id": "02c4f62ba32749a69049e38c942377e2",
+        "answer": "4.00",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "998151e0c16de939bee019a2949a4bc9f490f3a6e0e6f952d113ffde1c6a20cf",
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1,
+            "score": 0.70937335,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.68575418,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "75b74dccf6359b29bf695bbe95a20e0774c26f6444640bbda473fcfa73e00e5c",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Chapter-3 Students\u2019 Profile",
+            "page": 19,
+            "score": 0.66218626,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "885cf7fc60916d16aad0d7922d5fb71e001217b36fb56dffa3e20d9dde55fc40",
+            "source": "annual-report-2023-24.pdf",
+            "section": "1. Applications Statistics (Discipline Wise)",
+            "page": 18,
+            "score": 0.65330064,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "b18fe6d19f70e342b2585b1fc348a2d37602edd6d91d06583dd1bb00916b8662",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.647206,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "c2979dba1fe34a318d77552e0ad904c9"
+      },
+      "latency_ms": 4176.7011000010825,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q26",
+      "response": {
+        "request_id": "dc536ec19ec84cb28a758362b0f92b47",
+        "answer": "Rs. 12,000",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.7",
+            "page": 7
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.79838711,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "12864b50fe4ed1d4b7b7535d973e9f66355de961e989acaa59cf4310303a759f",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.7",
+            "page": 7,
+            "score": 0.66747493,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "09f1f773de44fcf24bd7a222fbd6875fab2f374b5e20550f4610389ed5305812",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 7.3",
+            "page": 30,
+            "score": 0.6658983199999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "8961324c49f1af2a2fd6451728381569aa358495a4cec3561a4a4dfe54f5cc71",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.7",
+            "page": 14,
+            "score": 0.6595696200000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "c20c03e61f696dbe582b58dfe3d69c47ea337ea9aab516ff6be46a6c7af08954",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.12",
+            "page": 8,
+            "score": 0.6592666,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "4f229f293dc14f5785fcf93598cd5575"
+      },
+      "latency_ms": 4354.754599999069,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q27",
+      "response": {
+        "request_id": "e1647dac46bd4c878ba73d7d4702a808",
+        "answer": "The minimum duration of a bachelor's degree is 6 years, and the maximum duration is 8 years.",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 4
+          },
+          {
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Terms",
+            "page": 7
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.68946302,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "ee2a8f7cb0d4416e24135f47a35b05ee8bd8dc24dd14f4bfcc0b8f4e09c3de27",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "220 Prospectus 2026",
+            "page": 5,
+            "score": 0.6871123299999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "0a5a49c846ef073464c6cf8cc05312b1252fd090d70659a44e163d75c6096180",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Terms",
+            "page": 7,
+            "score": 0.67693824,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.67548394,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "924bc85f4b1e6a61b4a9f95b4c193995d0533371b742b7585103a023cc05d08c",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 4,
+            "score": 0.65870637,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "db4b0b3fca8f4b9ca3dcb2795e79f67f"
+      },
+      "latency_ms": 144383.2027999997,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q28",
+      "response": {
+        "request_id": "3047e3856b0a4c3680bb6fbc0221a8f2",
+        "answer": "After earning at least C grade in the relevant courses taught at FAST-NUCES within the last five years.",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "25. Closure of Admission 30. Admission with Credit Transfer",
+            "page": 4
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Degree Program",
+            "page": 4
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "1aa7d195a33fc566307bbcfcf54348575df1145ed9caad70b2df0b11dc82a82a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "25. Closure of Admission 30. Admission with Credit Transfer",
+            "page": 4,
+            "score": 0.69789118,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "6cbc868118c828ff465cac014bdc6720d89fe0b0fbd1b58943718d7fe0a99e00",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Degree Program",
+            "page": 4,
+            "score": 0.69544435,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "261e08a8e8b07724f871cffe4ea77f4292072cfd3cd3a17c044f6ec4b8051aa7",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "24. Restoration of Suspended 29. Readmission of Current Student",
+            "page": 4,
+            "score": 0.69013715,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.66835964,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "924bc85f4b1e6a61b4a9f95b4c193995d0533371b742b7585103a023cc05d08c",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 4,
+            "score": 0.6678723,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "dc61f2502cf94d34b73308a880e86a54"
+      },
+      "latency_ms": 565244.4662000017,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q29",
+      "response": {
+        "request_id": "33a3f6eb67434d2c9c175ebfadd4b8d6",
+        "answer": "The policy states:\n\nWarning\non the degree issued to such high first semester.\na) Must register for all such courses,\nachievers. b) Application for withdrawal from\nin which the grade was F or U.\ncourse(s) must be countersigned\nCGPA 3.90 to 4.00 Summa Cum Laude b) Should register for all such\nby the parent or the guardian of\nCGPA 3.75 to 3.89 M agna Cum Laude courses, in which the grade was D,\nthe student.\nCGPA 3.60 to 3.74 Cum Laude D+ or C-.\nc) Request for withdrawal must be\nc) Should not register for more than\nsubmitted to the Head of\n11. Academic Warning/Probation five courses.\nDepartment (HOD) before the last\na) At the end of every semester d) Students with warning count = 2\nday of classes.\n(including summer semester), MUST not register for a new\nd) Request to withdraw from a\nwarning is issued if the CGPA of a course.\ncourse requires approval of the\nstudent is less than the minimum e) Parents/guardians are called to\nHOD.\nrequired for graduation. the campus for a consultative\ne) For courses having an associated\nMinimum CGPA required to avoid meeting with the HOD.\nlab, withdrawal is always from\nacademic warning: f) Must obtain written approval\nboth theory and lab portions of\nBS/BBA programs 2.00 from their Head of Department\nthe course.\nMS/MBA programs 2.50 for each course that they register,\nf) Fee is not refunded for withdrawn\nPhD programs 3.00 add, drop or withdraw.\ncourse.\ng) Students studying under",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.7258740699999999,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.7224170599999999,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "46dca4985c7594e7dc22d6ee346824eed16778282db5397864d0968df27ee817",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Clause 3.99",
+            "page": 2,
+            "score": 0.7116538299999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b66b7a99e396047904d608650a547dcb201909e02e9f297de06beac443cb8951",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "12. Semester Registration Director of the campus can allow",
+            "page": 2,
+            "score": 0.68736535,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.6864292000000001,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "548b857fbaa64a47822b91b302ac5365"
+      },
+      "latency_ms": 9565.190100000109,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q30",
+      "response": {
+        "request_id": "0520cdcb618948b29e7abe2c7c5d9bac",
+        "answer": "No",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "24. Restoration of Suspended 29. Readmission of Current Student",
+            "page": 4
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "196b896dcc0c29a89bf6a84593e4e524248addf133163002ae84c4f9fa38f0c0",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "13. Registration of Students under",
+            "page": 2,
+            "score": 0.69142836,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "e202a2c1f66314a6cd4ce44c8450b72ca34861fd6bbd7db7b615e83d8da9a354",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 9.10",
+            "page": 3,
+            "score": 0.65943146,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "1aa7d195a33fc566307bbcfcf54348575df1145ed9caad70b2df0b11dc82a82a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "25. Closure of Admission 30. Admission with Credit Transfer",
+            "page": 4,
+            "score": 0.64612818,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.6403985,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "261e08a8e8b07724f871cffe4ea77f4292072cfd3cd3a17c044f6ec4b8051aa7",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "24. Restoration of Suspended 29. Readmission of Current Student",
+            "page": 4,
+            "score": 0.64015877,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "c53d2a149d684ea5b8d76fa1cf9a0dd3"
+      },
+      "latency_ms": 12934.11180000112,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q31",
+      "response": {
+        "request_id": "4d29428cbc7b4f868c2f9567c003b274",
+        "answer": "The lab, because it was passed.",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.7600397999999999,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "5e9f04fe4c0349b2c00ac9c887848fc43d7019a6f731f2295eb12b1234d299ba",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.69369435,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.65980858,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          },
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.65360832,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b18fe6d19f70e342b2585b1fc348a2d37602edd6d91d06583dd1bb00916b8662",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.63118684,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "453ca898c76d4eae9ae6caea6b08aa77"
+      },
+      "latency_ms": 5014.128400000118,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q32",
+      "response": {
+        "request_id": "c231952dfba14bfa9933fd66fbbfc958",
+        "answer": "The lab",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.76393461,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "5e9f04fe4c0349b2c00ac9c887848fc43d7019a6f731f2295eb12b1234d299ba",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.6819104,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.6586448,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.6582948,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          },
+          {
+            "chunk_id": "9fbfcd8d78be3063b67184bed173254cd1bfb1a547e0152c9ddf0f7ffcf46e11",
+            "source": "grading-page.html",
+            "section": "Academic Grading",
+            "page": 1,
+            "score": 0.6247549,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "83d7e5dc2ee041abacad87c3b990b9c7"
+      },
+      "latency_ms": 11993.332500000179,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q33",
+      "response": {
+        "request_id": "3911d75c945f4217be5e76f1a795a726",
+        "answer": "The final-year project is first offered in the Fall semester and spans two semesters.",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "12. Semester Registration Director of the campus can allow",
+            "page": 2
+          },
+          {
+            "source": "annual-report-2023-24.pdf",
+            "section": "10. Exams Assessment Superintendent and Head Trice a semester (for",
+            "page": 73
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "e8302c847d983a558a36cdc4f94877f3473913d62bb66f5edf6ca3e59b0d7fa1",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 4.2",
+            "page": 1,
+            "score": 0.6522079700000001,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "b66b7a99e396047904d608650a547dcb201909e02e9f297de06beac443cb8951",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "12. Semester Registration Director of the campus can allow",
+            "page": 2,
+            "score": 0.64258343,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "8e8103f7800acb1b0d0a26a0801b6599603c86ba48079a9f0fc018eebe5d4892",
+            "source": "annual-report-2023-24.pdf",
+            "section": "10. Exams Assessment Superintendent and Head Trice a semester (for",
+            "page": 73,
+            "score": 0.63659924,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "96e5f53d3ebca9b08f7ecb91768d46bc303e905bd2bf83a85d8c6d6c04ff7c11",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Chapter-1 Programs Offered and Campuses",
+            "page": 11,
+            "score": 0.62794375,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.62632942,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "30d20bac971e41078a8e8b6326ed013a"
+      },
+      "latency_ms": 9836.477900000318,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q34",
+      "response": {
+        "request_id": "0fc147703331482f9862ca682b03a98e",
+        "answer": "I could not produce a verified answer from the retrieved policy evidence. Please consult the source documents.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.6694616,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          },
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.66389662,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b66b7a99e396047904d608650a547dcb201909e02e9f297de06beac443cb8951",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "12. Semester Registration Director of the campus can allow",
+            "page": 2,
+            "score": 0.6413253,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "9fbfcd8d78be3063b67184bed173254cd1bfb1a547e0152c9ddf0f7ffcf46e11",
+            "source": "grading-page.html",
+            "section": "Academic Grading",
+            "page": 1,
+            "score": 0.6412319,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "6fbb094da0bd6d934bb6be458dc1d04133746230766c288bb63dbd996474ec37",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 2,
+            "score": 0.6379678200000001,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "68d68628bc9e45378e238b178e6fd54a"
+      },
+      "latency_ms": 22698.587900000348,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q35",
+      "response": {
+        "request_id": "598873d0f0e74ebf9f58e2c6e41e4e3f",
+        "answer": "SGPA and CGPA are the weighted averages of grade points earned in a semester and all the courses taken so far, respectively. Grades of a course impact both, with repeat courses indicated on the transcript and only the most recent grade points used in CGPA calculation.",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1
+          },
+          {
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.73767114,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "94f798a6cae29b08d61a91bd813c38bd918cb57e192f0455402291b34cde52f9",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 1,
+            "score": 0.6449432399999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "998151e0c16de939bee019a2949a4bc9f490f3a6e0e6f952d113ffde1c6a20cf",
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1,
+            "score": 0.6217546,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.59462517,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "6fbb094da0bd6d934bb6be458dc1d04133746230766c288bb63dbd996474ec37",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Document",
+            "page": 2,
+            "score": 0.5919615,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "ad9ab3a580194694b790196a36a099f0"
+      },
+      "latency_ms": 10589.907200001107,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q36",
+      "response": {
+        "request_id": "381f99e569c84675b68cdb5eb1382b6a",
+        "answer": "The policy states:\n\nWarning\non the degree issued to such high first semester.\na) Must register for all such courses,\nachievers. b) Application for withdrawal from\nin which the grade was F or U.\ncourse(s) must be countersigned\nCGPA 3.90 to 4.00 Summa Cum Laude b) Should register for all such\nby the parent or the guardian of\nCGPA 3.75 to 3.89 M agna Cum Laude courses, in which the grade was D,\nthe student.\nCGPA 3.60 to 3.74 Cum Laude D+ or C-.\nc) Request for withdrawal must be\nc) Should not register for more than\nsubmitted to the Head of\n11. Academic Warning/Probation five courses.\nDepartment (HOD) before the last\na) At the end of every semester d) Students with warning count = 2\nday of classes.\n(including summer semester), MUST not register for a new\nd) Request to withdraw from a\nwarning is issued if the CGPA of a course.\ncourse requires approval of the\nstudent is less than the minimum e) Parents/guardians are called to\nHOD.\nrequired for graduation. the campus for a consultative\ne) For courses having an associated\nMinimum CGPA required to avoid meeting with the HOD.\nlab, withdrawal is always from\nacademic warning: f) Must obtain written approval\nboth theory and lab portions of\nBS/BBA programs 2.00 from their Head of Department\nthe course.\nMS/MBA programs 2.50 for each course that they register,\nf) Fee is not refunded for withdrawn\nPhD programs 3.00 add, drop or withdraw.\ncourse.\ng) Students studying under",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "196b896dcc0c29a89bf6a84593e4e524248addf133163002ae84c4f9fa38f0c0",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "13. Registration of Students under",
+            "page": 2,
+            "score": 0.67330605,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.62826574,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.62699753,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "1aa7d195a33fc566307bbcfcf54348575df1145ed9caad70b2df0b11dc82a82a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "25. Closure of Admission 30. Admission with Credit Transfer",
+            "page": 4,
+            "score": 0.62524956,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.59781134,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "60e470a4561542ca8fe555c6362b25e1"
+      },
+      "latency_ms": 15260.523700000704,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q37",
+      "response": {
+        "request_id": "2cbdcd3a41d74be288c5b578180eb274",
+        "answer": "No",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "13. Registration of Students under",
+            "page": 2
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "25. Closure of Admission 30. Admission with Credit Transfer",
+            "page": 4
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "196b896dcc0c29a89bf6a84593e4e524248addf133163002ae84c4f9fa38f0c0",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "13. Registration of Students under",
+            "page": 2,
+            "score": 0.70908153,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "1aa7d195a33fc566307bbcfcf54348575df1145ed9caad70b2df0b11dc82a82a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "25. Closure of Admission 30. Admission with Credit Transfer",
+            "page": 4,
+            "score": 0.6822831,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "34557928f0bf1f6584f1c1ad4f8cf4b4c3f199cdd2a300786edb23eebc3fe06a",
+            "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+            "section": "Clause 9.3",
+            "page": 3,
+            "score": 0.68129587,
+            "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+            "document_version": "2022-05"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.6805216000000001,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "6cbc868118c828ff465cac014bdc6720d89fe0b0fbd1b58943718d7fe0a99e00",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Degree Program",
+            "page": 4,
+            "score": 0.67216885,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "35b358eddd2f4450952c32677ecadb3f"
+      },
+      "latency_ms": 5134.362900000269,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q38",
+      "response": {
+        "request_id": "44085f6499e94cb7b0da1b98e3d76546",
+        "answer": "No, students must repeat all failed courses, including core courses.",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.58362544,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.5826422,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b66b7a99e396047904d608650a547dcb201909e02e9f297de06beac443cb8951",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "12. Semester Registration Director of the campus can allow",
+            "page": 2,
+            "score": 0.57505417,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "a7145e294f24e2d0ce96e2f16d8b9f910741e7b488e25bace50b504f836b9101",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Objectives of QEC",
+            "page": 69,
+            "score": 0.57119924,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "5e9f04fe4c0349b2c00ac9c887848fc43d7019a6f731f2295eb12b1234d299ba",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.5646538,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "eae1b1c3362e4244809616f83dc06385"
+      },
+      "latency_ms": 5029.320999999982,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q39",
+      "response": {
+        "request_id": "3436fb62d98c44099c7aadf37d9f8195",
+        "answer": "The policy states:\n\nWarning\non the degree issued to such high first semester.\na) Must register for all such courses,\nachievers. b) Application for withdrawal from\nin which the grade was F or U.\ncourse(s) must be countersigned\nCGPA 3.90 to 4.00 Summa Cum Laude b) Should register for all such\nby the parent or the guardian of\nCGPA 3.75 to 3.89 M agna Cum Laude courses, in which the grade was D,\nthe student.\nCGPA 3.60 to 3.74 Cum Laude D+ or C-.\nc) Request for withdrawal must be\nc) Should not register for more than\nsubmitted to the Head of\n11. Academic Warning/Probation five courses.\nDepartment (HOD) before the last\na) At the end of every semester d) Students with warning count = 2\nday of classes.\n(including summer semester), MUST not register for a new\nd) Request to withdraw from a\nwarning is issued if the CGPA of a course.\ncourse requires approval of the\nstudent is less than the minimum e) Parents/guardians are called to\nHOD.\nrequired for graduation. the campus for a consultative\ne) For courses having an associated\nMinimum CGPA required to avoid meeting with the HOD.\nlab, withdrawal is always from\nacademic warning: f) Must obtain written approval\nboth theory and lab portions of\nBS/BBA programs 2.00 from their Head of Department\nthe course.\nMS/MBA programs 2.50 for each course that they register,\nf) Fee is not refunded for withdrawn\nPhD programs 3.00 add, drop or withdraw.\ncourse.\ng) Students studying under",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.70046043,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.6852115999999999,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "5e9f04fe4c0349b2c00ac9c887848fc43d7019a6f731f2295eb12b1234d299ba",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.6368127,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.62634778,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "a8265c2e231d4002d281f92db88b1ad472beb53e67c4c7f07fcf1d3172d6041a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.6237124199999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "1267b6dafc034e8f851dfe5dde3a9187"
+      },
+      "latency_ms": 8101.71629999968,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q40",
+      "response": {
+        "request_id": "2d92761040134198a73b5ac91ee2d36d",
+        "answer": "The policy states:\n\nWarning\non the degree issued to such high first semester.\na) Must register for all such courses,\nachievers. b) Application for withdrawal from\nin which the grade was F or U.\ncourse(s) must be countersigned\nCGPA 3.90 to 4.00 Summa Cum Laude b) Should register for all such\nby the parent or the guardian of\nCGPA 3.75 to 3.89 M agna Cum Laude courses, in which the grade was D,\nthe student.\nCGPA 3.60 to 3.74 Cum Laude D+ or C-.\nc) Request for withdrawal must be\nc) Should not register for more than\nsubmitted to the Head of\n11. Academic Warning/Probation five courses.\nDepartment (HOD) before the last\na) At the end of every semester d) Students with warning count = 2\nday of classes.\n(including summer semester), MUST not register for a new\nd) Request to withdraw from a\nwarning is issued if the CGPA of a course.\ncourse requires approval of the\nstudent is less than the minimum e) Parents/guardians are called to\nHOD.\nrequired for graduation. the campus for a consultative\ne) For courses having an associated\nMinimum CGPA required to avoid meeting with the HOD.\nlab, withdrawal is always from\nacademic warning: f) Must obtain written approval\nboth theory and lab portions of\nBS/BBA programs 2.00 from their Head of Department\nthe course.\nMS/MBA programs 2.50 for each course that they register,\nf) Fee is not refunded for withdrawn\nPhD programs 3.00 add, drop or withdraw.\ncourse.\ng) Students studying under",
+        "citations": [
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.7539537000000001,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.72922993,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "46dca4985c7594e7dc22d6ee346824eed16778282db5397864d0968df27ee817",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Clause 3.99",
+            "page": 2,
+            "score": 0.6770699,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.66489702,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "924bc85f4b1e6a61b4a9f95b4c193995d0533371b742b7585103a023cc05d08c",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 4,
+            "score": 0.63727862,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "d5c015f3620d4e7292092bce1560d7c4"
+      },
+      "latency_ms": 6201.632599999357,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q41",
+      "response": {
+        "request_id": "afb1c85ccf4a4bc8acc8eaf8c82e1e46",
+        "answer": "For the first scenario, where the student repeats the failed course, the grade from the repeated course will be counted towards the CGPA. For the second scenario, where the student takes a new course instead of repeating the failed one, the grade from the new course will also be counted towards the CGPA.",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.76682872,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "5e9f04fe4c0349b2c00ac9c887848fc43d7019a6f731f2295eb12b1234d299ba",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.67814493,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "261e08a8e8b07724f871cffe4ea77f4292072cfd3cd3a17c044f6ec4b8051aa7",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "24. Restoration of Suspended 29. Readmission of Current Student",
+            "page": 4,
+            "score": 0.64618307,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "1aa7d195a33fc566307bbcfcf54348575df1145ed9caad70b2df0b11dc82a82a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "25. Closure of Admission 30. Admission with Credit Transfer",
+            "page": 4,
+            "score": 0.6343151300000001,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "a8265c2e231d4002d281f92db88b1ad472beb53e67c4c7f07fcf1d3172d6041a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.6224911200000001,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "3216cbfc06b245c89fc13ad3c4c659ab"
+      },
+      "latency_ms": 12448.03150000007,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q42",
+      "response": {
+        "request_id": "675479d31a404fee87a1e4a0256eda77",
+        "answer": "Request an extension in the final examination for genuine reasons.",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1
+          },
+          {
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1
+          },
+          {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "e3c7e7cb9bc3cf46daed32f38ab353af8e9efcb1ea2994c9ba173aa910089b9e",
+            "source": "grading-page.html",
+            "section": "Incomplete Course",
+            "page": 1,
+            "score": 0.60397995,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "1b44c5236099cc11cefe12ed3488768b2f540147d706cc03db604ab20912b5a2",
+            "source": "06-academic-rules.md",
+            "section": "Document",
+            "page": 1,
+            "score": 0.5899943000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-11"
+          },
+          {
+            "chunk_id": "a8265c2e231d4002d281f92db88b1ad472beb53e67c4c7f07fcf1d3172d6041a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.5612419799999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "5e9f04fe4c0349b2c00ac9c887848fc43d7019a6f731f2295eb12b1234d299ba",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "218 Prospectus 2026",
+            "page": 3,
+            "score": 0.55268508,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "261e08a8e8b07724f871cffe4ea77f4292072cfd3cd3a17c044f6ec4b8051aa7",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "24. Restoration of Suspended 29. Readmission of Current Student",
+            "page": 4,
+            "score": 0.55221564,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "184b8acca7994f94b21f04aa0a1b993e"
+      },
+      "latency_ms": 5138.187700000344,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    }
+  ]
+}

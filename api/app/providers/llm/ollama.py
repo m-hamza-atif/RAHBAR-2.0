@@ -14,10 +14,10 @@ class OllamaProvider:
 
     def generate(self, question: str, passages: list[Passage],
                  validation_error: str = '') -> Generation:
-        prompt = messages(question, passages)
-        if validation_error:
-            prompt.append({'role': 'system', 'content': 'Previous output failed validation: '
-                           + validation_error + '. Return valid JSON and only evidence citations.'})
+        prompt = messages(question, passages, validation_error)
+        options = {'temperature': self.settings.temperature, 'num_ctx': 8192, 'num_predict': 512}
+        if self.settings.generation_seed is not None:
+            options['seed'] = self.settings.generation_seed
         urls = [self.settings.ollama_url]
         if self.settings.ollama_url == 'http://host.minikube.internal:11434':
             urls.append('http://localhost:11434')
@@ -27,8 +27,7 @@ class OllamaProvider:
                     response = client.post(url+'/api/chat', json={
                         'model': self.settings.llm_model, 'messages': prompt,
                         'format': Answer.model_json_schema(), 'stream': False,
-                        'options': {'temperature': self.settings.temperature,
-                                    'num_ctx': 8192, 'num_predict': 512}})
+                        'options': options})
                     response.raise_for_status()
                     data = response.json()
                     text = data['message']['content']

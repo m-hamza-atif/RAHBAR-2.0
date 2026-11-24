@@ -49,6 +49,9 @@ class Settings:
     relevance_floor: float = 0.35
     cache_threshold: float = 0.90
     cache_ttl: int = 3600
+    embed_version: str = ""
+    trace_dir: str = "./traces"
+    generation_seed: int | None = None
 
 
 def get_settings() -> Settings:
@@ -78,6 +81,9 @@ def get_settings() -> Settings:
         relevance_floor=_float("RELEVANCE_FLOOR", .35),
         cache_threshold=_float("CACHE_THRESHOLD", .90),
         cache_ttl=_int("CACHE_TTL", 3600),
+        embed_version=os.getenv("EMBED_VERSION", ""),
+        trace_dir=os.getenv("TRACE_DIR", "./traces"),
+        generation_seed=int(seed) if (seed := os.getenv("GENERATION_SEED")) else None,
     )
     if not (0 <= settings.relevance_floor <= 1 and 0 <= settings.cache_threshold <= 1):
         raise ValueError("similarity thresholds must be between zero and one")
