@@ -1,0 +1,76 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rahbar-eval
+  namespace: rahbar
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 21600
+  template:
+    metadata:
+      labels:
+        app: eval
+    spec:
+      automountServiceAccountToken: false
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: eval
+        image: rahbar-eval:asg3
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 384Mi
+        env:
+        - name: EVAL_RESULTS_DIR
+          value: /data/eval-results
+        - name: STABLE_API
+          value: http://rahbar-api:8000
+        - name: CANDIDATE_API
+          value: http://rahbar-api-candidate:8000
+        - name: GATE_CONFIG_PATH
+          value: /etc/rahbar/gate/gate_config.yaml
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: eval-results
+          mountPath: /data/eval-results
+          readOnly: false
+        - name: gate
+          mountPath: /etc/rahbar/gate
+          readOnly: true
+        envFrom:
+        - configMapRef:
+            name: rahbar-config
+        command:
+        - python
+        - eval/cluster_job.py
+      volumes:
+      - name: tmp
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: eval-results
+        persistentVolumeClaim:
+          claimName: eval-results
+      - name: gate
+        configMap:
+          name: rahbar-gate-config
+      terminationGracePeriodSeconds: 30
+      enableServiceLinks: false

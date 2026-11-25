@@ -72,3 +72,13 @@ eval-fixtures: ## score a fixture-indexed API on localhost:8000 (stub embeddings
 
 check: ## run the submission checker
 	$(PY) scripts/check_submission.py
+
+.PHONY: ragops-eval ragops-promote ragops-rollback-demo
+ragops-eval: ## run a new in-cluster comparison and gate
+	$(PY) scripts/ragops_cluster.py eval
+
+ragops-promote: ## repeat the gate and roll out its evaluated candidate on success
+	$(PY) scripts/ragops_cluster.py promote
+
+ragops-rollback-demo: ## run the isolated bad-release exercise and verify restoration
+	$(PY) scripts/ragops_cluster.py bad-release-demo

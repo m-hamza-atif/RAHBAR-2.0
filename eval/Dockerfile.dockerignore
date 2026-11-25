@@ -1,0 +1,13 @@
+**
+!eval/
+eval/**
+!eval/*.py
+!eval/golden.jsonl
+!eval/embedding_pairs.jsonl
+!eval/model-manifest.json
+!eval/live_queries.jsonl
+!scripts/
+scripts/**
+!scripts/inspect_trace.py
+!scripts/summarize_traces.py
+!scripts/trace_records.py

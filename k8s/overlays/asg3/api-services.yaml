@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rahbar-api
+  namespace: rahbar
+spec:
+  type: ClusterIP
+  selector:
+    app: api
+    lane: stable
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rahbar-api-candidate
+  namespace: rahbar
+spec:
+  type: ClusterIP
+  selector:
+    app: api
+    lane: candidate
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000

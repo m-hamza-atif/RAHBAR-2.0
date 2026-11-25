@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ragops-inspect
+  namespace: rahbar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: inspection
+  template:
+    metadata:
+      labels:
+        app: eval
+        role: inspection
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: inspect
+        image: rahbar-eval:asg3
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 384Mi
+        env:
+        - name: EVAL_RESULTS_DIR
+          value: /data/eval-results
+        - name: STABLE_API
+          value: http://rahbar-api:8000
+        - name: CANDIDATE_API
+          value: http://rahbar-api-candidate:8000
+        - name: GATE_CONFIG_PATH
+          value: /etc/rahbar/gate/gate_config.yaml
+        - name: TRACE_DIR
+          value: /data/traces
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: eval-results
+          mountPath: /data/eval-results
+          readOnly: true
+        - name: gate
+          mountPath: /etc/rahbar/gate
+          readOnly: true
+        - name: traces
+          mountPath: /data/traces
+          readOnly: true
+        envFrom:
+        - configMapRef:
+            name: rahbar-config
+        command:
+        - sleep
+        - infinity
+      volumes:
+      - name: tmp
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: eval-results
+        persistentVolumeClaim:
+          claimName: eval-results
+      - name: gate
+        configMap:
+          name: rahbar-gate-config
+      - name: traces
+        persistentVolumeClaim:
+          claimName: traces
+      terminationGracePeriodSeconds: 30
+      enableServiceLinks: false

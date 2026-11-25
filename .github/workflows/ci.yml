@@ -3,7 +3,7 @@ on:
   push:
     branches: [dev]
   pull_request:
-    branches: [main]
+    branches: [main, dev]
 permissions:
   contents: read
 env:
@@ -56,15 +56,16 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Build all three images and transfer exact images to downstream jobs
+      - name: Build all four images and transfer exact images to downstream jobs
         env:
           TAG: ${{ github.sha }}
         run: |
           docker build --provenance=false -t "rahbar-api:$TAG" api
           docker build --provenance=false -f indexer/Dockerfile -t "rahbar-indexer:$TAG" .
           docker build --provenance=false -t "rahbar-ui:$TAG" ui
+          docker build --provenance=false -f eval/Dockerfile -t "rahbar-eval:$TAG" .
           mkdir -p .artifacts
-          docker save --platform linux/amd64 -o .artifacts/images.tar "rahbar-api:$TAG" "rahbar-indexer:$TAG" "rahbar-ui:$TAG"
+          docker save --platform linux/amd64 -o .artifacts/images.tar "rahbar-api:$TAG" "rahbar-indexer:$TAG" "rahbar-ui:$TAG" "rahbar-eval:$TAG"
       - uses: actions/upload-artifact@v4
         with:
           name: images
@@ -88,7 +89,7 @@ jobs:
       - env:
           TAG: ${{ github.sha }}
         run: |
-          for image in api indexer ui; do
+          for image in api indexer ui eval; do
             trivy image --scanners vuln --ignore-unfixed --severity HIGH,CRITICAL --exit-code 1 "rahbar-$image:$TAG"
           done
   e2e-eval:
