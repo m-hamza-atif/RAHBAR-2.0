@@ -6,12 +6,14 @@ from uuid import uuid4
 
 import yaml
 
-from ragops_cluster import INSPECT, OVERLAY, apply, k, new_job, ready, seed, writer
+from ragops_cluster import INSPECT, OVERLAY, apply, export_reports, k, new_job, ready, seed, writer
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--source", type=Path, default=Path("corpus/raw"))
+    p.add_argument("--archive-only", action="store_true",
+                   help="verify the ingestion and archive cycle without the two drift quality evaluations")
     args = p.parse_args()
     name = "drift-" + uuid4().hex[:10]
     print("Isolated experiment", name, flush=True)
@@ -30,21 +32,6 @@ def main():
             item["value"] = collection
     new_job(job)
     new_job(job)
-    api = yaml.safe_load((OVERLAY / "stable.yaml").read_text())
-    api["metadata"]["name"] = name
-    api["spec"]["replicas"] = 1
-    api["spec"]["template"]["metadata"]["labels"]["lane"] = name
-    api["spec"]["selector"]["matchLabels"]["lane"] = name
-    for item in api["spec"]["template"]["spec"]["containers"][0]["env"]:
-        if item["name"] == "CHROMA_COLLECTION":
-            item["value"] = collection
-    service = next(yaml.safe_load_all((OVERLAY / "api-services.yaml").read_text()))
-    service["metadata"]["name"] = name
-    service["spec"]["selector"]["lane"] = name
-    apply(service)
-    apply(api)
-    ready("deployment/" + name)
-
     def score(stage):
         result = name + "-" + stage + ".json"
         evaluation = yaml.safe_load(Path("k8s/eval-job.yaml").read_text())
@@ -57,7 +44,22 @@ def main():
         Path("eval/results", result).write_text(k("exec", INSPECT, "--", "cat", "/data/eval-results/" + result),
                                                encoding="utf-8")
 
-    score("before")
+    if not args.archive_only:
+        api = yaml.safe_load((OVERLAY / "stable.yaml").read_text())
+        api["metadata"]["name"] = name
+        api["spec"]["replicas"] = 1
+        api["spec"]["template"]["metadata"]["labels"]["lane"] = name
+        api["spec"]["selector"]["matchLabels"]["lane"] = name
+        for item in api["spec"]["template"]["spec"]["containers"][0]["env"]:
+            if item["name"] == "CHROMA_COLLECTION":
+                item["value"] = collection
+        service = next(yaml.safe_load_all((OVERLAY / "api-services.yaml").read_text()))
+        service["metadata"]["name"] = name
+        service["spec"]["selector"]["lane"] = name
+        apply(service)
+        apply(api)
+        ready("deployment/" + name)
+        score("before")
     batch = {p.name: p.read_text(encoding="utf-8") for p in Path("corpus/batch_b").glob("*.md")
              if p.name != "README.md"}
     apply({"apiVersion": "v1", "kind": "ConfigMap", "metadata": {"name": name}, "data": batch})
@@ -67,14 +69,20 @@ def main():
     container["command"] = ["sh", "-ec"]
     container["args"] = ["cp /batch/*.md /data/lake/ && exec python /app/entrypoint.py --incremental"]
     job["metadata"]["name"] = name + "-batch"
-    logs = new_job(job)
-    print(logs)
-    score("after")
+    new_job(job)
+    if not args.archive_only:
+        score("after")
     container["command"] = ["python", "/app/entrypoint.py"]
     container["args"] = ["--rollback-doc", "academic-rules", "--to-version", "2026-06"]
     job["metadata"]["name"] = name + "-restore"
     new_job(job)
-    print(k("get", "svc/" + name, "-o", "name"))
+    export_reports(name)
+    reports = sorted(Path("eval/results", name).glob("verification_*.json"))
+    batch_report, restored_report = [json.loads(path.read_text(encoding="utf-8")) for path in reports[-2:]]
+    for report, state in ((batch_report, "archive"), (restored_report, "active")):
+        handbook = next(doc for doc in report["documents"] if doc["file"] == "academic-rules-handbook-jun-2026.pdf")
+        if handbook["disposition"] != state:
+            raise RuntimeError(f"June handbook expected {state}, found {handbook['disposition']}")
     print("Restored the June edition in the experiment collection", json.dumps(collection))
 
 

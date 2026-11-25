@@ -159,6 +159,37 @@ def deploy(lane):
                      "import httpx,os; print(httpx.get(os.environ['OLLAMA_BASE_URL']+'/api/tags').raise_for_status().json())"))
 
 
+def export_reports(claim):
+    """Read writer evidence on a fresh pod without granting the inspector access to lake contents."""
+    spec = writer("stable")["spec"]["template"]["spec"]
+    spec.pop("serviceAccountName")
+    spec["restartPolicy"] = "Never"
+    spec["volumes"] = [{"name": "state", "persistentVolumeClaim": {"claimName": claim, "readOnly": True}}]
+    container = spec["containers"][0]
+    container.update(image="rahbar-eval:asg3", command=["python", "-c"],
+                     args=["from pathlib import Path; import json; p=Path('/data/reports'); "
+                           "print(json.dumps({f.name: json.loads(f.read_text()) for f in p.glob('verification_*.json')}))"],
+                     volumeMounts=[{"name": "state", "mountPath": "/data", "readOnly": True}])
+    name = "read-reports-" + uuid4().hex[:10]
+    pod = {"apiVersion": "v1", "kind": "Pod", "metadata": {"name": name}, "spec": spec}
+    print(k("create", "-f", "-", data=json.dumps(pod)))
+    try:
+        k("wait", "--for=jsonpath={.status.phase}=Succeeded", "pod/" + name, "--timeout=180s")
+        reports = json.loads(k("logs", name))
+        if not reports:
+            raise ValueError(f"No ingestion verification reports on {claim}")
+        folder = Path("eval/results") / claim
+        folder.mkdir(exist_ok=True, parents=True)
+        for filename, report in sorted(reports.items()):
+            if not re.fullmatch(r"verification_[\w-]+\.json", filename):
+                raise ValueError(f"Unexpected verification filename: {filename}")
+            path = folder / filename
+            path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+            print(path, report["counts"])
+    finally:
+        k("delete", "pod", name)
+
+
 def endpoint(resource):
     url = "http://" + resource.split("/")[1] + ":8000/readyz"
     return json.loads(pod_python(INSPECT, "import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text)", url))
@@ -176,7 +207,7 @@ def api_image(deployment):
     return images.pop()
 
 
-def evaluate(promote):
+def evaluate(promote, official_job=False):
     for resource in (LIVE, CANDIDATE):
         ready(resource)
     deployments = [read(r) for r in (LIVE, CANDIDATE)]
@@ -187,7 +218,16 @@ def evaluate(promote):
     before = [endpoint(r) for r in (LIVE, CANDIDATE)]
     if before[0]["configuration"]["collection"] == before[1]["configuration"]["collection"]:
         raise ValueError("Comparison requires independent collection revisions")
-    logs = new_job(yaml.safe_load(Path("k8s/eval-job.yaml").read_text()))
+    if official_job:
+        if k("get", "job/rahbar-eval", "--ignore-not-found", "-o", "name").strip():
+            raise ValueError("The fixed-name Job already exists. Omit --official-job for a new run.")
+        result = k("apply", "-f", "k8s/eval-job.yaml")
+        print(result, end="")
+        if not result.strip().endswith(" created"):
+            raise RuntimeError("The comparison must use a newly created Job")
+        logs = wait_job("rahbar-eval")
+    else:
+        logs = new_job(yaml.safe_load(Path("k8s/eval-job.yaml").read_text()))
     directory = re.search(r"^RESULT_DIR=(/data/eval-results/[\w-]+)$", logs, re.M)[1]
     for name, dep, resource, initial, image in zip(("baseline", "candidate"), deployments,
                                                    (LIVE, CANDIDATE), before, images, strict=True):
@@ -245,9 +285,12 @@ def main():
     p.add_parser("infra").add_argument("--model-ip", required=True)
     s = p.add_parser("seed")
     s.add_argument("--source", type=Path, default=Path("corpus/raw"))
-    for command in (s, p.add_parser("index"), p.add_parser("deploy")):
+    for command in (s, p.add_parser("index"), p.add_parser("deploy"), p.add_parser("reports")):
         command.add_argument("lane", choices=("stable", "candidate"))
-    for name in ("eval", "promote", "trace", "bad-release-demo", "sync-cron"):
+    for name in ("eval", "promote"):
+        p.add_parser(name).add_argument("--official-job", action="store_true",
+                                        help="use kubectl apply -f k8s/eval-job.yaml for the first run")
+    for name in ("trace", "bad-release-demo", "sync-cron"):
         p.add_parser(name)
     args = parser.parse_args()
     if args.action == "infra":
@@ -258,6 +301,8 @@ def main():
         new_job(writer(args.lane))
     elif args.action == "deploy":
         deploy(args.lane)
+    elif args.action == "reports":
+        export_reports("state-" + args.lane)
     elif args.action == "trace":
         trace()
     elif args.action == "bad-release-demo":
@@ -281,7 +326,7 @@ def main():
         cron["spec"]["suspend"] = False
         apply(cron)
     else:
-        evaluate(args.action == "promote")
+        evaluate(args.action == "promote", args.official_job)
 
 
 if __name__ == "__main__":

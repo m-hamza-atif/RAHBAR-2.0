@@ -1,5 +1,6 @@
 from copy import deepcopy
 import importlib.util
+import json
 from pathlib import Path
 import subprocess
 import sys
@@ -63,3 +64,56 @@ def test_failed_evaluation_prevents_live_patch(monkeypatch):
     monkeypatch.setattr(release, "patch_live", lambda patch: pytest.fail("rejected candidate reached rollout"))
     with pytest.raises(RuntimeError, match="evaluation job failed"):
         release.evaluate(promote=True)
+
+
+def test_official_job_promotes_only_the_evaluated_pod_spec(monkeypatch):
+    release = module(ROOT / "scripts/ragops_cluster.py")
+    lanes = (release.LIVE, release.CANDIDATE)
+    deployments = {lane: {"metadata": {"resourceVersion": "12"},
+                         "spec": {"template": {"metadata": {"labels": {"lane": lane}},
+                                               "spec": {"containers": [{"name": "api", "image": lane}]}}}}
+                   for lane in lanes}
+    profiles = {lane: {"configuration": {"collection": lane}, "index_revision": lane} for lane in lanes}
+    gate = {"metadata": {"resourceVersion": "21"}}
+
+    def read(resource):
+        if resource == "cronjob/ragops-reindex":
+            return {"spec": {"suspend": True}}
+        return deployments.get(resource, gate)
+
+    commands = []
+
+    def kubectl(*args):
+        commands.append(args)
+        if args[0] == "get":
+            return ""
+        if args[0] == "apply":
+            return "job.batch/rahbar-eval created"
+        assert args[:4] == ("exec", release.INSPECT, "--", "cat")
+        lane = release.LIVE if args[-1].endswith("baseline.json") else release.CANDIDATE
+        return json.dumps(profiles[lane])
+
+    def patch(operations):
+        template = deployments[release.LIVE]["spec"]["template"]
+        assert operations[:2] == [
+            {"op": "test", "path": "/metadata/resourceVersion", "value": "12"},
+            {"op": "test", "path": "/spec/template", "value": template}]
+        replacement = operations[2]
+        assert replacement == {"op": "replace", "path": "/spec/template/spec",
+                               "value": deployments[release.CANDIDATE]["spec"]["template"]["spec"]}
+        template["spec"] = replacement["value"]
+        profiles[release.LIVE] = profiles[release.CANDIDATE]
+
+    monkeypatch.setattr(release, "k", kubectl)
+    monkeypatch.setattr(release, "ready", lambda resource: None)
+    monkeypatch.setattr(release, "read", read)
+    monkeypatch.setattr(release, "api_image", lambda dep: dep["spec"]["template"]["spec"]["containers"][0]["image"])
+    monkeypatch.setattr(release, "endpoint", profiles.__getitem__)
+    monkeypatch.setattr(release, "wait_job", lambda name: "RESULT_DIR=/data/eval-results/fresh-run\n")
+    monkeypatch.setattr(release, "patch_live", patch)
+    verified = []
+    monkeypatch.setattr(release, "trace", lambda: verified.append(profiles[release.LIVE]))
+    release.evaluate(promote=True, official_job=True)
+    assert ("apply", "-f", "k8s/eval-job.yaml") in commands
+    assert verified == [profiles[release.CANDIDATE]]
+    assert deployments[release.LIVE]["spec"]["template"]["metadata"]["labels"]["lane"] == release.LIVE

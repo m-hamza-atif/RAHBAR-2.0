@@ -51,6 +51,8 @@ spec:
           value: /etc/rahbar/gate/gate_config.yaml
         - name: TRACE_DIR
           value: /data/traces
+        - name: EMBED_VERSION
+          value: 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
         volumeMounts:
         - name: tmp
           mountPath: /tmp
