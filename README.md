@@ -224,13 +224,13 @@ python scripts/check_submission.py
 
 ## CI/CD and human release
 
-CI on dev pushes/main PRs independently runs lint, offline coverage, strict
-manifests, three-image build and artifact transfer. Trivy scans those exact images;
+CI on dev pushes and PRs targeting dev or main independently runs lint, offline coverage, strict
+manifests, four-image build and artifact transfer. Trivy scans those exact images;
 only then does Calico-backed fixture e2e run against its original baseline. No
 required gate uses continue-on-error. UI is static HTML and has no Node build.
 
-CD runs only on main pushes: tests/manifests -> build/scan/push three github.sha
-tags -> pull those exact published images into ephemeral kind -> index fixtures
+CD runs only on main pushes: tests/manifests -> build/scan/push four github.sha
+tags -> pull the three Assignment 02 runtime images into ephemeral kind -> index fixtures
 and evaluate through Ingress. This proves a fixture deployment, not a persistent
 real-model cloud deployment. No latest tags or locally substituted dev images.
 
@@ -239,3 +239,27 @@ CI and one approval, manually push dev, open/review/merge dev -> main, and recor
 real Actions/image/PR links. Capture branch-protection and failed-gate/blocked-merge
 screenshots, then green fixed checks. Never alter baselines to hide a regression.
 AI assistance and verification limits are disclosed in [AI-USAGE](docs/AI-USAGE.md).
+
+## Assignment 03 · RAGOps
+
+Use Python 3.12 and the isolated Kind cluster. The fresh-cluster instructions cover the image builds, model pins, private networking, source hashes and independent lake initialization. [Kubernetes runbook](k8s/README.md)
+
+Run the following from the repository root with the dedicated kubeconfig and the schedule suspended during comparisons.
+
+| Part | Command | Evidence |
+|---|---|---|
+| A · verify and update | Run `python scripts/ragops_cluster.py index stable` twice. Run `python -m pytest -q indexer/tests/test_incremental.py` for document-specific changes/deletions. The isolated Part E command also exercises archive restoration. | Writer counters and per-document JSON under `/data/reports`. |
+| B · three levels and seed | `kubectl apply -f k8s/eval-job.yaml` then `kubectl -n rahbar logs job/rahbar-eval` after termination. For repeat runs use `python scripts/ragops_cluster.py eval`. | Paired reports include noise and the full repeated suite. |
+| C · release and rollback | `python scripts/gate_threshold_demo.py`, `python scripts/ragops_cluster.py promote`, then `python scripts/ragops_cluster.py bad-release-demo`. | Job status, Deployment history, fresh trace. |
+| D · observability | `python scripts/ragops_cluster.py trace` and `kubectl -n rahbar exec deploy/ragops-inspect -- python scripts/summarize_traces.py --minutes 60`. | `traces/asg3-*.jsonl`, stdout and metrics. |
+| E · drift and coverage | `python scripts/ragops_drift.py --source .artifacts/public/raw` creates a third collection and PVC, scores identical data before/after Batch B and restores June there. Run both coverage commands below. | `eval/results/drift-*-{before,after}.json` and Job logs. |
+| F · deployment and resources | `kubectl get all,pvc,configmap,cronjob,job -n rahbar` and `python scripts/measure_k8s_resources.py evaluation` during the comparison. | Phase-tagged usage and configured bounds. |
+
+```bash
+POD=$(kubectl -n rahbar get pod -l role=inspection -o jsonpath='{.items[0].metadata.name}')
+kubectl -n rahbar cp eval/results/coverage-before-golden.jsonl "$POD:/tmp/before.jsonl"
+kubectl -n rahbar exec deploy/ragops-inspect -- python eval/check_coverage.py --live eval/live_queries.jsonl --golden /tmp/before.jsonl --similarity-threshold 0.78
+kubectl -n rahbar exec deploy/ragops-inspect -- python eval/check_coverage.py --live eval/live_queries.jsonl --golden eval/golden.jsonl --similarity-threshold 0.78
+```
+
+Assignment 02 retains its default evaluator and deployment profiles. The Assignment 03 evaluator is applied separately after both indexes are ready. [Report draft](docs/REPORT_ASG3.md) · [Verification matrix](CODEX_PHASE_REPORT.md)
