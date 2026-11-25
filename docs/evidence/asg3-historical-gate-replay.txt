@@ -1,0 +1,122 @@
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+pod/replay-upload created
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar wait --for=condition=Ready pod/replay-upload --timeout=120s
+pod/replay-upload condition met
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec replay-upload -- mkdir -p /data/eval-results/archived-local-20261124-180937
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar cp eval\results\annotated-baseline-20261124-180937.json replay-upload:/data/eval-results/archived-local-20261124-180937/baseline.json
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar cp eval\results\annotated-candidate-20261124-180937.json replay-upload:/data/eval-results/archived-local-20261124-180937/candidate.json
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar cp eval\results\annotated-degraded-20261124-180937.json replay-upload:/data/eval-results/archived-local-20261124-180937/degraded.json
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar delete pod replay-upload
+pod "replay-upload" deleted from rahbar namespace
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get configmap/rahbar-gate-config -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/archived-gate-original created
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-original -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-original -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-original -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/archived-gate-original
+PASS  max_recall5_drop             0.0000 <= 0.0200
+PASS  min_faithfulness             0.7027 >= 0.7000
+PASS  max_p95_latency_ms           10848.5605 <= 20000.0000
+PASS  min_abstention_correctness   1.0000 >= 0.8000
+Release gate: PASS
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pod -l job-name=archived-gate-original -o json
+HISTORICAL INPUTS; gate process ran in Kubernetes: archived-gate-original sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar patch configmap/rahbar-gate-config --type=merge --patch-file C:\Users\Muhammad\AppData\Local\Temp\tmpx3retf6n\threshold.json
+configmap/rahbar-gate-config patched
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get configmap/rahbar-gate-config -o yaml
+apiVersion: v1
+data:
+  gate_config.yaml: |
+    max_p95_latency_ms: 0
+    max_recall5_drop: 0.02
+    min_abstention_correctness: 0.8
+    min_faithfulness: 0.7
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"gate_config.yaml":"max_recall5_drop: 0.02\nmin_faithfulness: 0.70\nmax_p95_latency_ms: 20000\nmin_abstention_correctness: 0.80\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"rahbar-gate-config","namespace":"rahbar"}}
+  creationTimestamp: "2026-11-25T20:42:31Z"
+  name: rahbar-gate-config
+  namespace: rahbar
+  resourceVersion: "3099"
+  uid: 4e2bebd1-4826-40ba-b63e-bd1cc118d091
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/archived-gate-strict created
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-strict -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-strict -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-strict -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/archived-gate-strict
+PASS  max_recall5_drop             0.0000 <= 0.0200
+PASS  min_faithfulness             0.7027 >= 0.7000
+FAIL  max_p95_latency_ms           10848.5605 <= 0.0000
+PASS  min_abstention_correctness   1.0000 >= 0.8000
+Release gate: FAIL
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/archived-gate-strict
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pod -l job-name=archived-gate-strict -o json
+HISTORICAL INPUTS; gate process ran in Kubernetes: archived-gate-strict sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9 1
+$ kubectl --context kind-rahbar-asg3 -n rahbar patch configmap/rahbar-gate-config --type=merge --patch-file C:\Users\Muhammad\AppData\Local\Temp\tmpxdwd5jln\threshold.json
+configmap/rahbar-gate-config patched
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get configmap/rahbar-gate-config -o yaml
+apiVersion: v1
+data:
+  gate_config.yaml: |
+    max_recall5_drop: 0.02
+    min_faithfulness: 0.70
+    max_p95_latency_ms: 20000
+    min_abstention_correctness: 0.80
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"gate_config.yaml":"max_recall5_drop: 0.02\nmin_faithfulness: 0.70\nmax_p95_latency_ms: 20000\nmin_abstention_correctness: 0.80\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"rahbar-gate-config","namespace":"rahbar"}}
+  creationTimestamp: "2026-11-25T20:42:31Z"
+  name: rahbar-gate-config
+  namespace: rahbar
+  resourceVersion: "3140"
+  uid: 4e2bebd1-4826-40ba-b63e-bd1cc118d091
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/archived-gate-restored created
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-restored -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-restored -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/archived-gate-restored
+PASS  max_recall5_drop             0.0000 <= 0.0200
+PASS  min_faithfulness             0.7027 >= 0.7000
+PASS  max_p95_latency_ms           10848.5605 <= 20000.0000
+PASS  min_abstention_correctness   1.0000 >= 0.8000
+Release gate: PASS
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pod -l job-name=archived-gate-restored -o json
+HISTORICAL INPUTS; gate process ran in Kubernetes: archived-gate-restored sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/archived-gate-degraded created
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-degraded -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/archived-gate-degraded -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/archived-gate-degraded
+FAIL  max_recall5_drop             1.0000 <= 0.0200
+FAIL  min_faithfulness             0.0000 >= 0.7000
+PASS  max_p95_latency_ms           330.4128 <= 20000.0000
+PASS  min_abstention_correctness   1.0000 >= 0.8000
+Release gate: FAIL
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/archived-gate-degraded
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pod -l job-name=archived-gate-degraded -o json
+HISTORICAL INPUTS; gate process ran in Kubernetes: archived-gate-degraded sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9 1

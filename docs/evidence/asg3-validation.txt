@@ -1,0 +1,20 @@
+$ .venv/Scripts/ruff check api indexer eval corpus scripts
+All checks passed!
+exit 0
+$ .tools/actionlint/actionlint.exe
+exit 0
+$ .venv/Scripts/python scripts/validate_manifests.py --kubeconform .tools/kubeconform/kubeconform.exe
+Summary: 30 resources found in 1 file - Valid: 30, Invalid: 0, Errors: 0, Skipped: 0
+Summary: 30 resources found in 1 file - Valid: 30, Invalid: 0, Errors: 0, Skipped: 0
+Summary: 30 resources found in 1 file - Valid: 30, Invalid: 0, Errors: 0, Skipped: 0
+Summary: 30 resources found in 1 file - Valid: 30, Invalid: 0, Errors: 0, Skipped: 0
+Summary: 39 resources found in 3 files - Valid: 39, Invalid: 0, Errors: 0, Skipped: 0
+base: invariants and strict schema PASS
+dev: invariants and strict schema PASS
+prod: invariants and strict schema PASS
+ci: invariants and strict schema PASS
+asg3: invariants and strict schema PASS
+exit 0
+$ kubectl apply --dry-run=server -f k8s/eval-job.yaml
+job.batch/rahbar-eval created (server dry run)
+exit 0

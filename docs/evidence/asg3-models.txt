@@ -1,0 +1,7 @@
+{'models': [{'name': 'llama3.2:3b', 'model': 'llama3.2:3b', 'modified_at': '2026-11-25T21:03:58.350284167Z', 'size': 2019393189, 'digest': 'a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72', 'details': {'parent_model': '', 'format': 'gguf', 'family': 'llama', 'families': ['llama'], 'parameter_size': '3.2B', 'quantization_level': 'Q4_K_M', 'context_length': 131072, 'embedding_length': 3072, 'runner': 'ggml'}, 'capabilities': ['completion', 'tools']}, {'name': 'nomic-embed-text:latest', 'model': 'nomic-embed-text:latest', 'modified_at': '2026-11-25T21:03:09.097024376Z', 'size': 274302450, 'digest': '0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f', 'details': {'parent_model': '', 'format': 'gguf', 'family': 'nomic-bert', 'families': ['nomic-bert'], 'parameter_size': '137M', 'quantization_level': 'F16', 'context_length': 2048, 'embedding_length': 768, 'runner': 'ggml'}, 'capabilities': ['embedding']}]}
+Both model digests match eval/model-manifest.json
+rahbar-api:asg3 sha256:1a19533e71229212cca03f2e7dda89b4bd60ac7af5612590d1b98dd36950ca93
+rahbar-indexer:asg3 sha256:4cd2f2ea17c9142141d4805b11a1756f7a6ba00115206adba2e6db28afe2d72f
+rahbar-eval:asg3 sha256:9453d83d77a8f833ebab06bc0fb9aebc422c2507c1b00977f5acfa17d9fb9708
+ollama/ollama:0.40.15 sha256:0e59999e0e8f9fd4e704bd788a89b7e4cad399367fb1365f8c102ac662288761
+rahbar-ui:asg3 sha256:91b9e3a53da4d6d48337a4beeff9e0752c927e05fce3a36907714b75cd0dfe49

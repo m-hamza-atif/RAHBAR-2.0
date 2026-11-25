@@ -1,0 +1,190 @@
+{
+  "counts": {
+    "scanned": 7,
+    "quarantined": 0,
+    "unchanged": 7,
+    "updated": 0,
+    "deleted": 0,
+    "chunks_embedded": 0,
+    "orphan_chunks": 0
+  },
+  "chunks_by_document": {
+    "academic-rules": 405,
+    "annual-report-2019-20": 109,
+    "annual-report-2023-24": 258,
+    "faculty-entrepreneurship-and-technical-start-ups-policy": 71,
+    "fee-structure-page": 8,
+    "grading-page": 6,
+    "prospectus-2026-academic-rules-and-regulations": 18
+  },
+  "documents": [
+    {
+      "file": "academic-rules-handbook-jun-2026.pdf",
+      "document_id": "academic-rules",
+      "key": "[\"academic-rules\", \"2026-06\"]",
+      "disposition": "active",
+      "checks": {
+        "completeness": {
+          "reason": "required metadata and expected extent match",
+          "status": "pass"
+        },
+        "quality": {
+          "reason": "readable extracted text",
+          "status": "pass"
+        },
+        "recency": {
+          "status": "pass",
+          "reason": "active version selected"
+        },
+        "uniqueness": {
+          "reason": "no duplicate found",
+          "status": "pass"
+        }
+      }
+    },
+    {
+      "file": "annual-report-2019-20.pdf",
+      "document_id": "annual-report-2019-20",
+      "key": "[\"annual-report-2019-20\", \"2019-20\"]",
+      "disposition": "active",
+      "checks": {
+        "completeness": {
+          "reason": "required metadata and expected extent match",
+          "status": "pass"
+        },
+        "quality": {
+          "reason": "readable extracted text",
+          "status": "pass"
+        },
+        "recency": {
+          "status": "pass",
+          "reason": "active version selected"
+        },
+        "uniqueness": {
+          "reason": "no duplicate found",
+          "status": "pass"
+        }
+      }
+    },
+    {
+      "file": "annual-report-2023-24.pdf",
+      "document_id": "annual-report-2023-24",
+      "key": "[\"annual-report-2023-24\", \"2023-24\"]",
+      "disposition": "active",
+      "checks": {
+        "completeness": {
+          "reason": "required metadata and expected extent match",
+          "status": "pass"
+        },
+        "quality": {
+          "reason": "readable extracted text",
+          "status": "pass"
+        },
+        "recency": {
+          "status": "pass",
+          "reason": "active version selected"
+        },
+        "uniqueness": {
+          "reason": "no duplicate found",
+          "status": "pass"
+        }
+      }
+    },
+    {
+      "file": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+      "document_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+      "key": "[\"faculty-entrepreneurship-and-technical-start-ups-policy\", \"2022-05\"]",
+      "disposition": "active",
+      "checks": {
+        "completeness": {
+          "reason": "required metadata and expected extent match",
+          "status": "pass"
+        },
+        "quality": {
+          "reason": "readable extracted text",
+          "status": "pass"
+        },
+        "recency": {
+          "status": "pass",
+          "reason": "active version selected"
+        },
+        "uniqueness": {
+          "reason": "no duplicate found",
+          "status": "pass"
+        }
+      }
+    },
+    {
+      "file": "fee-structure-page.html",
+      "document_id": "fee-structure-page",
+      "key": "[\"fee-structure-page\", \"2026-27\"]",
+      "disposition": "active",
+      "checks": {
+        "completeness": {
+          "reason": "required metadata and expected extent match",
+          "status": "pass"
+        },
+        "quality": {
+          "reason": "readable extracted text",
+          "status": "pass"
+        },
+        "recency": {
+          "status": "pass",
+          "reason": "active version selected"
+        },
+        "uniqueness": {
+          "reason": "no duplicate found",
+          "status": "pass"
+        }
+      }
+    },
+    {
+      "file": "grading-page.html",
+      "document_id": "grading-page",
+      "key": "[\"grading-page\", \"2026\"]",
+      "disposition": "active",
+      "checks": {
+        "completeness": {
+          "reason": "required metadata and expected extent match",
+          "status": "pass"
+        },
+        "quality": {
+          "reason": "readable extracted text",
+          "status": "pass"
+        },
+        "recency": {
+          "status": "pass",
+          "reason": "active version selected"
+        },
+        "uniqueness": {
+          "reason": "no duplicate found",
+          "status": "pass"
+        }
+      }
+    },
+    {
+      "file": "prospectus-2026-academic-rules-and-regulations.pdf",
+      "document_id": "prospectus-2026-academic-rules-and-regulations",
+      "key": "[\"prospectus-2026-academic-rules-and-regulations\", \"2026\"]",
+      "disposition": "active",
+      "checks": {
+        "completeness": {
+          "reason": "required metadata and expected extent match",
+          "status": "pass"
+        },
+        "quality": {
+          "reason": "readable extracted text",
+          "status": "pass"
+        },
+        "recency": {
+          "status": "pass",
+          "reason": "active version selected"
+        },
+        "uniqueness": {
+          "reason": "no duplicate found",
+          "status": "pass"
+        }
+      }
+    }
+  ]
+}

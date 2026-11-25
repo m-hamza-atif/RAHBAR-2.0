@@ -1,0 +1,66 @@
+{"ts": "2026-11-25T21:03:24Z", "logger": "rahbar.indexer", "msg": "indexer starting", "dummy": false, "embed_model": "nomic-embed-text", "collection": "rahbar_policies", "chroma": "chroma:8000", "pod": "ragops-indexer-d260aa9640-wrvzr"}
+{"ts": "2026-11-25T21:03:33Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "academic-rules-handbook-jun-2026.pdf", "page": 1, "chars": 156}
+{"ts": "2026-11-25T21:03:33Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "academic-rules-handbook-jun-2026.pdf", "page": 2, "chars": 0}
+{"ts": "2026-11-25T21:03:43Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "academic-rules-handbook-jun-2026.pdf", "page": 56, "chars": 0}
+{"ts": "2026-11-25T21:03:43Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "academic-rules-handbook-jun-2026.pdf", "page": 57, "chars": 0}
+{"ts": "2026-11-25T21:03:51Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "academic-rules-handbook-jun-2026.pdf", "page": 58, "chars": 777}
+{"ts": "2026-11-25T21:03:59Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:03:59Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "academic-rules-handbook-jun-2026.pdf", "chunks": 225, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:04:18Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:04:18Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "annual-report-2019-20.pdf", "chunks": 109, "storage_amplification": 1.012609595113782, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:05:58Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:05:58Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "annual-report-2023-24.pdf", "chunks": 258, "storage_amplification": 1.0155113911778963, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:06:26Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "page": 1, "chars": 2783}
+{"ts": "2026-11-25T21:06:36Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "page": 2, "chars": 2651}
+{"ts": "2026-11-25T21:06:40Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "page": 3, "chars": 1785}
+{"ts": "2026-11-25T21:06:43Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "page": 4, "chars": 788}
+{"ts": "2026-11-25T21:06:46Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "page": 5, "chars": 1062}
+{"ts": "2026-11-25T21:06:50Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "page": 6, "chars": 1742}
+{"ts": "2026-11-25T21:06:52Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "page": 7, "chars": 526}
+{"ts": "2026-11-25T21:06:53Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "page": 8, "chars": 375}
+{"ts": "2026-11-25T21:06:55Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:06:55Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf", "chunks": 71, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:06:56Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:06:56Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "fee-structure-page.html", "chunks": 8, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:06:57Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:06:57Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "grading-page.html", "chunks": 6, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:07:01Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:07:01Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "prospectus-2026-academic-rules-and-regulations.pdf", "chunks": 18, "storage_amplification": 1.0539780714084903, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:07:03Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 2, "chars": 257}
+{"ts": "2026-11-25T21:07:03Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 3, "chars": 0}
+{"ts": "2026-11-25T21:07:11Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 4, "chars": 2210}
+{"ts": "2026-11-25T21:07:15Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 5, "chars": 1408}
+{"ts": "2026-11-25T21:07:20Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 6, "chars": 1490}
+{"ts": "2026-11-25T21:07:25Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 7, "chars": 1876}
+{"ts": "2026-11-25T21:07:29Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 8, "chars": 996}
+{"ts": "2026-11-25T21:07:34Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 9, "chars": 727}
+{"ts": "2026-11-25T21:07:39Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 10, "chars": 1206}
+{"ts": "2026-11-25T21:07:46Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 11, "chars": 1858}
+{"ts": "2026-11-25T21:07:53Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 12, "chars": 1862}
+{"ts": "2026-11-25T21:07:56Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 13, "chars": 917}
+{"ts": "2026-11-25T21:08:03Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 14, "chars": 1718}
+{"ts": "2026-11-25T21:08:09Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 15, "chars": 1791}
+{"ts": "2026-11-25T21:08:27Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 16, "chars": 1648}
+{"ts": "2026-11-25T21:09:09Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 17, "chars": 1677}
+{"ts": "2026-11-25T21:09:16Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 18, "chars": 1783}
+{"ts": "2026-11-25T21:09:22Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 19, "chars": 1073}
+{"ts": "2026-11-25T21:09:29Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 20, "chars": 1794}
+{"ts": "2026-11-25T21:09:36Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 21, "chars": 1666}
+{"ts": "2026-11-25T21:09:41Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 22, "chars": 923}
+{"ts": "2026-11-25T21:09:50Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 23, "chars": 1863}
+{"ts": "2026-11-25T21:09:59Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 24, "chars": 1850}
+{"ts": "2026-11-25T21:10:03Z", "logger": "rahbar.indexer", "msg": "ocr_page", "source": "undergraduate-academic-rules-aug-2023.pdf", "page": 25, "chars": 527}
+{"ts": "2026-11-25T21:10:04Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:10:05Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "undergraduate-academic-rules-aug-2023.pdf", "chunks": 180, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:15:39Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 875}
+Document                                                Disposition  Quality Completeness Recency Uniqueness
+academic-rules-handbook-jun-2026.pdf                    active       pass    pass         pass    pass
+annual-report-2019-20.pdf                               active       pass    pass         pass    pass
+annual-report-2023-24.pdf                               active       pass    pass         pass    pass
+faculty-entrepreneurship-and-technical-start-ups-policy.pdf active       pass    pass         pass    pass
+fee-structure-page.html                                 active       pass    pass         pass    pass
+grading-page.html                                       active       pass    pass         pass    pass
+prospectus-2026-academic-rules-and-regulations.pdf      active       pass    pass         pass    pass
+undergraduate-academic-rules-aug-2023.pdf               archive      pass    pass         fail    pass
+scanned=8 quarantined=0 unchanged=0 updated=8 deleted=0 chunks_embedded=875 orphan_chunks=0
+{"ts": "2026-11-25T21:15:46Z", "logger": "rahbar.indexer", "msg": "indexer finished", "chunks": 875, "seconds": 741.8}
