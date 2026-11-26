@@ -27,7 +27,7 @@ The shared cluster helper enables Calico, metrics-server and a local ingress con
 When a reachable Ollama service already has both pinned model digests, use its trusted private IPv4 address as `MODEL_IP`. The following starts a dedicated service on the Kind network with a named model volume. It publishes no host ports.
 
 ```bash
-docker run -d --name rahbar-asg3-model --network kind -v rahbar-asg3-models:/root/.ollama ollama/ollama:0.40.15
+docker run -d --restart unless-stopped --name rahbar-asg3-model --network kind -v rahbar-asg3-models:/root/.ollama ollama/ollama:0.40.15
 docker exec rahbar-asg3-model ollama pull nomic-embed-text
 docker exec rahbar-asg3-model ollama pull llama3.2:3b
 MODEL_IP=$(docker inspect --format '{{(index .NetworkSettings.Networks "kind").IPAddress}}' rahbar-asg3-model)
@@ -94,6 +94,8 @@ kubectl rollout status deployment/rahbar-api -n rahbar
 ```
 
 The threshold demonstration starts with an actual pass, patches `max_p95_latency_ms` to zero, checks for that failed rule and restores the original YAML in a finally block. A third full Job must pass, with the same evaluator image ID throughout. If the original candidate fails the real quality budget, record the rejection and diagnose the candidate. The deployment remains on its previous revision.
+
+If Docker shuts down during evaluation, first check `kubectl -n rahbar get job,pod`, `kubectl -n rahbar logs job/JOB_NAME` and the Job’s results directory on the inspection volume. A terminated evaluator can leave only its threshold snapshot. Keep that Job and its logs. After both Deployments are Ready and the inspector verifies both model digests, run `python scripts/ragops_cluster.py promote` for a new, independently gated comparison.
 
 ## Rollback, traces and measurements (C3, D, F3–F5)
 
