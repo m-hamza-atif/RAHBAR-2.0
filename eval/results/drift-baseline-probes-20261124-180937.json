@@ -1,0 +1,120 @@
+[
+    {
+        "request_id":  "58b135347d9c40e48bd105b5a00a1ed6",
+        "answer":  "I could not produce a verified answer from the retrieved policy evidence. Please consult the source documents.",
+        "citations":  [
+
+                      ],
+        "answered_from_context":  false,
+        "confidence":  "low",
+        "retrieved":  [
+                          {
+                              "chunk_id":  "1a3a9f311dd67b932027e1239d9c72fa973ae4cc74245701ed1a5e6b562177c9",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 5.12",
+                              "page":  25,
+                              "score":  0.72844452,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 1.22",
+                              "page":  10,
+                              "score":  0.72206295,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 6.7",
+                              "page":  28,
+                              "score":  0.7163762499999999,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "ab0dc7e6478c0d06d7042eb7d9c42874beca8f3dbd730e35811c4f57b4313169",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 1.21",
+                              "page":  10,
+                              "score":  0.70837432,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "8e405695e081083032dd29d39897f8611f30f001d57fd91ad70297030fe63b6a",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Notes:",
+                              "page":  38,
+                              "score":  0.70366043,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          }
+                      ],
+        "provider":  "ollama",
+        "cached":  false,
+        "trace_id":  "fff4b7eeadd14ae6b302b1fa098565fe"
+    },
+    {
+        "request_id":  "a0e26827882c438b8760b1497dc8d3db",
+        "answer":  "The available corpus does not cover the requested information.",
+        "citations":  [
+
+                      ],
+        "answered_from_context":  false,
+        "confidence":  "low",
+        "retrieved":  [
+                          {
+                              "chunk_id":  "0313238c09f941d4cfaf4cacdd26a5d045032d71eab178329b58769285cd3eb0",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 3.33",
+                              "page":  18,
+                              "score":  0.66091454,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "a765e38fbfcd023b6b51574c05a492242dc6088866a8755979a516c84f5f865c",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 4.17",
+                              "page":  21,
+                              "score":  0.6514446700000001,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "4fd84330400759b0aefb25a9217e5a4960c7fe683ecc910d595b0afaed36bbc4",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 4.19",
+                              "page":  22,
+                              "score":  0.6500896199999999,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "4225eecdad608516cf5468eb8b67ec70b5c5fbb6d92b0c8113e7517780c700d3",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Notes:",
+                              "page":  39,
+                              "score":  0.64726174,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          },
+                          {
+                              "chunk_id":  "d4e58adf684aaee4f3bcddb49672aea3f7a7e00b8936d8e2c8b6ce0da4fad0e8",
+                              "source":  "academic-rules-handbook-jun-2026.pdf",
+                              "section":  "Clause 2.10",
+                              "page":  13,
+                              "score":  0.6360656,
+                              "document_id":  "academic-rules",
+                              "document_version":  "2026-06"
+                          }
+                      ],
+        "provider":  "ollama",
+        "cached":  false,
+        "trace_id":  "909646b701ed436db023e69e3ec128bb"
+    }
+]

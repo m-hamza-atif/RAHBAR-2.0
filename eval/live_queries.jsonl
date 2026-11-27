@@ -1,0 +1,40 @@
+{"id":"live01","question":"What is the usual weighting of semester work and the final exam in the final grade?","topic":"assessment","cohort":"in_domain"}
+{"id":"live02","question":"Who approves changes to the normal 50/50 semester-work and final-exam split?","topic":"assessment","cohort":"in_domain"}
+{"id":"live03","question":"What minimum CGPA does an undergraduate need to avoid an academic warning?","topic":"academic-warning","cohort":"in_domain"}
+{"id":"live04","question":"What happens after three straight semesters with CGPA below 2.00?","topic":"academic-warning","cohort":"in_domain"}
+{"id":"live05","question":"Does the warning count reset if my CGPA reaches 2.00 after the second academic warning?","topic":"academic-warning","cohort":"in_domain"}
+{"id":"live06","question":"When can someone on a second academic warning sign up for a new course?","topic":"registration","cohort":"in_domain"}
+{"id":"live07","question":"Which students are allowed to register for a sixth course under the June 2026 rules?","topic":"registration","cohort":"in_domain"}
+{"id":"live08","question":"Can a core course be replaced with another course?","topic":"registration","cohort":"in_domain"}
+{"id":"live09","question":"How much attendance is required, and what percentage of absence can the HoD excuse?","topic":"attendance","cohort":"in_domain"}
+{"id":"live10","question":"What happens if a student doesn't meet the attendance requirement for a course?","topic":"attendance","cohort":"in_domain"}
+{"id":"live11","question":"What attendance does clause 1.21 require?","topic":"attendance","cohort":"in_domain"}
+{"id":"live12","question":"What CGPA do I need to graduate as an undergraduate?","topic":"degree","cohort":"in_domain"}
+{"id":"live13","question":"How long does a bachelor’s degree take at minimum, and what is the maximum with an approved extension?","topic":"degree","cohort":"in_domain"}
+{"id":"live14","question":"For a readmitted student keeping old credits, when does the degree-completion clock start?","topic":"degree","cohort":"in_domain"}
+{"id":"live15","question":"How much is BBA or BS tuition per credit hour in 2026–27?","topic":"fees","cohort":"in_domain"}
+{"id":"live16","question":"What percentage of tuition is refunded by the tenth day after classes start?","topic":"fees","cohort":"in_domain"}
+{"id":"live17","question":"How many grade points is an A+ worth for a BBA or BS student?","topic":"grades","cohort":"in_domain"}
+{"id":"live18","question":"What is the difference between SGPA and CGPA and how are course grades used?","topic":"grades","cohort":"in_domain"}
+{"id":"live19","question":"Which grades count toward CGPA if I repeat a failed course versus taking another course instead?","topic":"grades","cohort":"in_domain"}
+{"id":"live20","question":"May I enter confidential personal data in unsupported generative AI tools?","topic":"privacy","cohort":"in_domain"}
+{"id":"live21","question":"What is the final day for withdrawing from a course?","topic":"withdrawal","cohort":"in_domain"}
+{"id":"live22","question":"Can students on university financial support withdraw from a course?","topic":"withdrawal","cohort":"in_domain"}
+{"id":"live23","question":"If I pass the lab but fail theory, which parts of the course do I repeat?","topic":"labs","cohort":"in_domain"}
+{"id":"live24","question":"If I pass theory but fail the lab, which part do I have to repeat?","topic":"labs","cohort":"in_domain"}
+{"id":"live25","question":"Under clause 4.6 can I drop only the lab and stay enrolled in theory?","topic":"labs","cohort":"in_domain"}
+{"id":"live26","question":"In which semester does the final-year project start and how long does it run?","topic":"final-year-project","cohort":"in_domain"}
+{"id":"live27","question":"How can I request a late exam after missing it due to an unavoidable emergency?","topic":"exams","cohort":"in_domain"}
+{"id":"live28","question":"What registration limits apply to students on academic warning under clause 4.4?","topic":"academic-warning","cohort":"in_domain"}
+{"id":"live29","question":"How do students book the campus table tennis room after classes?","topic":"sports bookings","cohort":"coverage_gap"}
+{"id":"live30","question":"Can I reserve a table tennis slot on campus in the evening?","topic":"sports bookings","cohort":"coverage_gap"}
+{"id":"live31","question":"What is the refundable deposit for borrowing a guitar from the university music club?","topic":"music equipment","cohort":"coverage_gap"}
+{"id":"live32","question":"How much guitar deposit do I pay when I borrow from the campus music club?","topic":"music equipment","cohort":"coverage_gap"}
+{"id":"live33","question":"How much does the university charge visitors for overnight campus parking?","topic":"visitor parking","cohort":"coverage_gap"}
+{"id":"live34","question":"What is the overnight parking fee for a visitor’s car on campus?","topic":"visitor parking","cohort":"coverage_gap"}
+{"id":"live35","question":"What is the campus library’s price per page for colour printing?","topic":"library printing","cohort":"coverage_gap"}
+{"id":"live36","question":"How much does the library charge students to print one colour page?","topic":"library printing","cohort":"coverage_gap"}
+{"id":"live37","question":"How long does the university lost-and-found keep an unclaimed item?","topic":"lost property","cohort":"coverage_gap"}
+{"id":"live38","question":"When does the campus lost property office dispose of unclaimed belongings?","topic":"lost property","cohort":"coverage_gap"}
+{"id":"live39","question":"Which hours is the campus prayer room open on Saturdays?","topic":"prayer room","cohort":"coverage_gap"}
+{"id":"live40","question":"What time does the campus prayer room open and close on Saturday?","topic":"prayer room","cohort":"coverage_gap"}

@@ -1,0 +1,225 @@
+Pod rahbar-eval-resume-cf08356c2e-mrwt9
+RESULT_DIR=/data/eval-results/5df892be-9cef-4988-934a-0be12c072f24
+Resuming baseline.initial.progress.json: 48 questions, 3 noise probes
+Resuming baseline.repeat.progress.json: 6 questions, 0 noise probes
+  q07           57124.7 ms
+  q08           69195.5 ms
+  q09           47708.6 ms
+  q10           49320.8 ms
+  q11           48489.8 ms
+  q12           38345.9 ms
+  q13           34622.3 ms
+  q14           37345.2 ms
+  q15           41895.5 ms
+  q16           82190.5 ms
+  q17           57039.6 ms
+  q18           26709.3 ms
+  q19           54127.1 ms
+  q20           43706.1 ms
+  q21           40819.1 ms
+  q22           83156.0 ms
+  q23           82673.1 ms
+  q24           38126.1 ms
+  q25           36527.0 ms
+  q26           38349.1 ms
+  q27           51350.8 ms
+  q28           46273.1 ms
+  q29           44485.6 ms
+  q30           37012.7 ms
+  q31           26031.3 ms
+  q32           32956.3 ms
+  q33           26102.3 ms
+  q34           52367.1 ms
+  q35           61192.7 ms
+  q36           24108.0 ms
+  q37           27388.3 ms
+  q38           26600.5 ms
+  q39           30681.3 ms
+  q40           33993.1 ms
+  q41           40106.7 ms
+  q42           29296.1 ms
+  q43          129460.3 ms
+  q44           31515.1 ms
+  q45           40517.6 ms
+  q46           67320.8 ms
+  q47           47198.3 ms
+  q48           60559.4 ms
+
+Level          Metric                              Value
+embedding      paraphrase_mean_cosine                 0.6983
+embedding      unrelated_mean_cosine                  0.4111
+embedding      separation_gap                         0.2873
+embedding      mean_embedding_ms                    288.5146
+embedding      max_absolute_repeat_difference         0.0000
+retrieval      recall_at_3                            1.0000
+retrieval      recall_at_5                            1.0000
+retrieval      mrr                                    0.9685
+retrieval      ndcg_at_5                              0.9743
+end_to_end     faithfulness                           0.7297
+end_to_end     citation_validity                      1.0000
+end_to_end     citation_count                        58.0000
+end_to_end     abstention_correctness                 1.0000
+end_to_end     p50_latency_ms                     30811.8641
+end_to_end     p95_latency_ms                     102195.8418
+
+Repeat minus original
+embedding      paraphrase_mean_cosine                +0.0000
+embedding      unrelated_mean_cosine                 +0.0000
+embedding      separation_gap                        +0.0000
+embedding      mean_embedding_ms                   -215.1812
+embedding      max_absolute_repeat_difference        +0.0000
+retrieval      recall_at_3                           +0.0000
+retrieval      recall_at_5                           +0.0000
+retrieval      mrr                                   +0.0000
+retrieval      ndcg_at_5                             +0.0000
+end_to_end     faithfulness                          +0.0000
+end_to_end     citation_validity                     +0.0000
+end_to_end     citation_count                        +0.0000
+end_to_end     abstention_correctness                +0.0000
+end_to_end     p50_latency_ms                     +8416.0259
+end_to_end     p95_latency_ms                     -19522.7342
+noise_mean_delta recall_at_3                           +0.0000
+noise_mean_delta recall_at_5                           +0.0000
+noise_mean_delta mrr                                   +0.0000
+noise_mean_delta ndcg_at_5                             +0.0000
+Report written to /data/eval-results/5df892be-9cef-4988-934a-0be12c072f24/baseline.json
+  q01           21941.7 ms
+  q02           30585.0 ms
+  q03           25200.2 ms
+  q04           17543.9 ms
+  q05           18525.6 ms
+  q06           17540.3 ms
+  q07           11098.4 ms
+  q08           12022.4 ms
+  q09           12762.4 ms
+  q10           14508.6 ms
+  q11           22699.4 ms
+  q12           16214.4 ms
+  q13           18418.2 ms
+  q14           31352.6 ms
+  q15           16890.0 ms
+  q16           37840.8 ms
+  q17           46473.0 ms
+  q18           15915.0 ms
+  q19           43279.1 ms
+  q20           29421.6 ms
+  q21           26726.0 ms
+  q22           48404.2 ms
+  q23           28826.1 ms
+  q24           38246.2 ms
+  q25           33062.8 ms
+  q26           31392.8 ms
+  q27           32631.3 ms
+  q28           34598.7 ms
+  q29           29228.3 ms
+  q30           34898.4 ms
+  q31           36344.3 ms
+  q32           26669.3 ms
+  q33           30288.4 ms
+  q34           44100.2 ms
+  q35           53299.4 ms
+  q36           21671.9 ms
+  q37           23025.4 ms
+  q38           29376.5 ms
+  q39           23702.9 ms
+  q40           41646.7 ms
+  q41           45145.5 ms
+  q42           25110.1 ms
+  q43           51070.2 ms
+  q44           27979.1 ms
+  q45           14064.2 ms
+  q46           31593.0 ms
+  q47           48661.2 ms
+  q48           43440.8 ms
+  q01           25735.6 ms
+  q02           29367.7 ms
+  q03           34835.4 ms
+  q04           27059.5 ms
+  q05           34655.7 ms
+  q06           34115.4 ms
+  q07           23055.1 ms
+  q08           25821.8 ms
+  q09           18884.0 ms
+  q10           28473.7 ms
+  q11           48781.7 ms
+  q12           41525.0 ms
+  q13           29925.2 ms
+  q14           33435.7 ms
+  q15           36877.9 ms
+  q16           54511.2 ms
+  q17           44647.8 ms
+  q18           28242.1 ms
+  q19           38945.8 ms
+  q20           28485.5 ms
+  q21           25979.0 ms
+  q22           43764.4 ms
+  q23           53279.6 ms
+  q24           39186.6 ms
+  q25           30630.1 ms
+  q26           30690.2 ms
+  q27           32380.9 ms
+  q28           39732.3 ms
+  q29           40856.5 ms
+  q30           38444.3 ms
+  q31           32331.5 ms
+  q32           26419.9 ms
+  q33           30929.2 ms
+  q34           44454.1 ms
+  q35           51670.1 ms
+  q36           19741.0 ms
+  q37           24201.8 ms
+  q38           39481.4 ms
+  q39           24797.8 ms
+  q40           41156.4 ms
+  q41           53466.3 ms
+  q42           33839.0 ms
+  q43           69433.3 ms
+  q44           33566.6 ms
+  q45           15598.6 ms
+  q46           37643.2 ms
+  q47           47669.1 ms
+  q48           46260.2 ms
+
+Level          Metric                              Value
+embedding      paraphrase_mean_cosine                 0.6983
+embedding      unrelated_mean_cosine                  0.4111
+embedding      separation_gap                         0.2873
+embedding      mean_embedding_ms                     84.0519
+embedding      max_absolute_repeat_difference         0.0000
+retrieval      recall_at_3                            1.0000
+retrieval      recall_at_5                            1.0000
+retrieval      mrr                                    0.9685
+retrieval      ndcg_at_5                              0.9743
+end_to_end     faithfulness                           0.7027
+end_to_end     citation_validity                      1.0000
+end_to_end     citation_count                        84.0000
+end_to_end     abstention_correctness                 0.9091
+end_to_end     p50_latency_ms                     29302.3958
+end_to_end     p95_latency_ms                     48661.2355
+
+Repeat minus original
+embedding      paraphrase_mean_cosine                +0.0000
+embedding      unrelated_mean_cosine                 +0.0000
+embedding      separation_gap                        +0.0000
+embedding      mean_embedding_ms                    -13.6876
+embedding      max_absolute_repeat_difference        +0.0000
+retrieval      recall_at_3                           +0.0000
+retrieval      recall_at_5                           +0.0000
+retrieval      mrr                                   +0.0000
+retrieval      ndcg_at_5                             +0.0000
+end_to_end     faithfulness                          +0.0000
+end_to_end     citation_validity                     +0.0000
+end_to_end     citation_count                        +0.0000
+end_to_end     abstention_correctness                +0.0000
+end_to_end     p50_latency_ms                     +4674.8033
+end_to_end     p95_latency_ms                     +4805.0468
+noise_mean_delta recall_at_3                           +0.0000
+noise_mean_delta recall_at_5                           +0.0000
+noise_mean_delta mrr                                   +0.0000
+noise_mean_delta ndcg_at_5                             +0.0000
+Report written to /data/eval-results/5df892be-9cef-4988-934a-0be12c072f24/candidate.json
+PASS  max_recall5_drop             0.0000 <= 0.0200
+PASS  min_faithfulness             0.7027 >= 0.7000
+FAIL  max_p95_latency_ms           48661.2355 <= 20000.0000
+PASS  min_abstention_correctness   0.9091 >= 0.8000
+Release gate: FAIL

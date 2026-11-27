@@ -1,0 +1,3295 @@
+{
+  "schema": "ragops-v1",
+  "configuration": {
+    "retriever": "chroma",
+    "llm_provider": "ollama-host",
+    "llm_model": "llama3.2:3b",
+    "embed_model": "nomic-embed-text",
+    "embed_dim": 768,
+    "collection": "ragops-phase3",
+    "top_k": 5,
+    "relevance_floor": 0.42,
+    "cache_threshold": 0.9,
+    "embed_version": "sha256:0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "temperature": 0.1,
+    "generation_seed": 42
+  },
+  "index_revision": "1b00d39fa3f64b17a508110be55d33cf",
+  "golden_sha256": "2a19cfeb6c9b8781b71b97076ef036dc6fe1d0b4d32271a046c4356710b1b14f",
+  "pairs_sha256": "4d8199ced9bd45334d340d4d8d4fed7bb854d5a21518e6e30499a6ac432b6976",
+  "cache_bypass": true,
+  "annotation_status": {
+    "human_written": 8,
+    "synthetic_reviewed": 0
+  },
+  "embedding": {
+    "paraphrase_mean_cosine": 0.6985103147421976,
+    "unrelated_mean_cosine": 0.41136108624206846,
+    "separation_gap": 0.28714922850012914,
+    "mean_embedding_ms": 112.11321555537224,
+    "max_absolute_repeat_difference": 0.0,
+    "pair_counts": {
+      "paraphrase": 15,
+      "unrelated": 15
+    }
+  },
+  "retrieval": {
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "mrr": 0.9684684684684685,
+    "ndcg_at_5": 0.9743419065599904
+  },
+  "noise": {
+    "rows": [
+      {
+        "id": "q01",
+        "question": "What mniimum CGPA must an undergraduate maintain to avoid academic warning?",
+        "clean": {
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0
+        },
+        "noisy": {
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      },
+      {
+        "id": "q06",
+        "question": "What is the tiution fee per credit hour for BBA and BS in academic year 2026-27?",
+        "clean": {
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0
+        },
+        "noisy": {
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      },
+      {
+        "id": "q12",
+        "question": "What does Caluse 1.21 require about attendance?",
+        "clean": {
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0
+        },
+        "noisy": {
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      }
+    ],
+    "mean_delta": {
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_5": 0.0
+    }
+  },
+  "end_to_end": {
+    "faithfulness": 0.7027027027027027,
+    "faithfulness_method": "reference_facts_and_gold_page_citation",
+    "citation_validity": 1.0,
+    "citation_count": 61,
+    "abstention_correctness": 1,
+    "p50_latency_ms": 5010.163449999709,
+    "p95_latency_ms": 10848.560499998712
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "response": {
+        "request_id": "a3b4b8502fe34925acf60a3f12f384e5",
+        "answer": "2.00",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.4",
+            "page": 24
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "67e31c0dbe4d3574b6da2ef721bc16669b2fa8df9e6ed16021efab3a2be979bd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.4",
+            "page": 24,
+            "score": 0.87678754,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "91e87ddba3290e98530d390ce08a6e02279040b3093bc2f30b2005c02f6b2813",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10,
+            "score": 0.82351875,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "7fd6e3bb398c714142e26848e2589215ffd89b3e7d8caa9d1c84636372f0b0be",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.6",
+            "page": 24,
+            "score": 0.81307828,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.80033171,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "9a079c713131dcf9fa920a22b11fe93f0ad171574fa0b47817f369ec497e9854",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.28",
+            "page": 17,
+            "score": 0.7970089300000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "39e1d6f476c3482b96b7a28808cbd695"
+      },
+      "latency_ms": 12871.78639999911,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q02",
+      "response": {
+        "request_id": "801bf62622fe48cb97b5d5b67dfa71dc",
+        "answer": "2.00",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "91e87ddba3290e98530d390ce08a6e02279040b3093bc2f30b2005c02f6b2813",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10,
+            "score": 0.88415253,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "4a7c31f938286160cfd10dc510b3824f08c0e74387cbd43468d2d9bb9992ec3d",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.1",
+            "page": 11,
+            "score": 0.74664485,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.7419986700000001,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "ef89a5a779970835cbd9fb1762d412e5b32b652df9ce64ac4fa4afe53381970c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 7.1",
+            "page": 30,
+            "score": 0.7418392300000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "faea13a400d358249f7ea9565c1bb47895bc5bae117e5f1349526d857e580096",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.6",
+            "page": 12,
+            "score": 0.73673117,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "85215feaa7c64857aed51f4642a89bbb"
+      },
+      "latency_ms": 3397.4115000000893,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q03",
+      "response": {
+        "request_id": "18016d15956046e3a51b36483ffa97e6",
+        "answer": "100% attendance is required, and the HoD can condone up to 20% absence.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.14",
+            "page": 8
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab0dc7e6478c0d06d7042eb7d9c42874beca8f3dbd730e35811c4f57b4313169",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10,
+            "score": 0.82697535,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9d072595541f9649461ab9f6fca6943ec15a185e7d3660716d7f44450a2232ae",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.13",
+            "page": 25,
+            "score": 0.7241248,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10,
+            "score": 0.6772857299999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "aeb8853b4587f77c00a9e93c507fdab071508ddf02b3bb2effb6af6d228651cd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.14",
+            "page": 8,
+            "score": 0.6602202699999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "4225eecdad608516cf5468eb8b67ec70b5c5fbb6d92b0c8113e7517780c700d3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 39,
+            "score": 0.6577113299999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "2910e3ed45254c3ca7a1826a539d6dfd"
+      },
+      "latency_ms": 8041.3122000009025,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q04",
+      "response": {
+        "request_id": "dafc3f3c3162427984a58414cf7ee95d",
+        "answer": "Student will be ineligible to appear in the final examination and assigned F/A grade.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10,
+            "score": 0.8755331040000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ab0dc7e6478c0d06d7042eb7d9c42874beca8f3dbd730e35811c4f57b4313169",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10,
+            "score": 0.78714144,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "442d8b125a1edd2a52c650ae41b3c43a49c0138d940325dde69814d36d02cbcb",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.8",
+            "page": 25,
+            "score": 0.74875247,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.7",
+            "page": 28,
+            "score": 0.7173673,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.71254492,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "47b04ad750db43fb813cdf9bf8797626"
+      },
+      "latency_ms": 10848.560499998712,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q05",
+      "response": {
+        "request_id": "8c0b1eb989b64ea29912cb3793317cc6",
+        "answer": "The semester work and the final examination are normally weighted at 50% each towards the final grade.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.2",
+            "page": 24
+          },
+          {
+            "source": "grading-page.html",
+            "section": "Academic Grading",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "dfdb0804246f975625eeb3c6754b1a1115748d803f1602310e52caeb1358d7d3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.2",
+            "page": 24,
+            "score": 0.8117376000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9fbfcd8d78be3063b67184bed173254cd1bfb1a547e0152c9ddf0f7ffcf46e11",
+            "source": "grading-page.html",
+            "section": "Academic Grading",
+            "page": 1,
+            "score": 0.69977784,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.67318594,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "82ed469f437c130d6c1d85ab539375fae996811a89846ccb8fa07176dde8ba07",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.14",
+            "page": 26,
+            "score": 0.67158026,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "4a7c31f938286160cfd10dc510b3824f08c0e74387cbd43468d2d9bb9992ec3d",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.1",
+            "page": 11,
+            "score": 0.66513485,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "0fb68af54137440a8b8d501c63c8e34a"
+      },
+      "latency_ms": 8207.50290000069,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q06",
+      "response": {
+        "request_id": "774e6de27ac240519aaaf4fbd44ca673",
+        "answer": "Rs. 12,000",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.25",
+            "page": 27
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.85517764,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "8961324c49f1af2a2fd6451728381569aa358495a4cec3561a4a4dfe54f5cc71",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.7",
+            "page": 14,
+            "score": 0.6777591700000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "09f1f773de44fcf24bd7a222fbd6875fab2f374b5e20550f4610389ed5305812",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 7.3",
+            "page": 30,
+            "score": 0.6715093999999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "08c4112b9320c913bf8afd55d083ee73c8b0017cba00ab5e732974dddddd13bf",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.25",
+            "page": 27,
+            "score": 0.6508839,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.7",
+            "page": 28,
+            "score": 0.64905685,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "d22ab4563a1640a2a937a0826f1c6c4c"
+      },
+      "latency_ms": 9584.06549999927,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q07",
+      "response": {
+        "request_id": "f0a407487c904a02838dc52672627a0c",
+        "answer": "100%",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.745835,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.6615222700000001,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "e72ec1dbcb547821c01372420c8db1c930769b3e584d03b9882c6dfb4516d5d4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.8",
+            "page": 29,
+            "score": 0.64421058,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "c48fbc4b2cdec35be60bdf038ebe194ace48c5fa6bd56cc72ededfb4ea5c029e",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.25",
+            "page": 23,
+            "score": 0.6295483,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "08c4112b9320c913bf8afd55d083ee73c8b0017cba00ab5e732974dddddd13bf",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.25",
+            "page": 27,
+            "score": 0.6236657999999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "db0ea15080284295a78df915392771a5"
+      },
+      "latency_ms": 3977.722999999969,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q08",
+      "response": {
+        "request_id": "18689ba131dc4e438094d7e610686dab",
+        "answer": "4.00",
+        "citations": [
+          {
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "998151e0c16de939bee019a2949a4bc9f490f3a6e0e6f952d113ffde1c6a20cf",
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1,
+            "score": 0.7403444,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "4a7c31f938286160cfd10dc510b3824f08c0e74387cbd43468d2d9bb9992ec3d",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.1",
+            "page": 11,
+            "score": 0.73560214,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "a2359e07749a0884268045330ae10a2dbca6394b26cd3f77c92f6816977d59bd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.3",
+            "page": 12,
+            "score": 0.73163342,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.719877,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "1eb9538f376cb836b556d1d4c48fb6ea89a02bfccf3de8536a1db2f5d9452ce4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "2. Grading and GPA Calculations 5",
+            "page": 5,
+            "score": 0.7147365800000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "906f485b09db4dcca20e98a5461bda42"
+      },
+      "latency_ms": 6384.782199998881,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q09",
+      "response": {
+        "request_id": "fb8fdf44ab0d4c3c89d7abbf2d9b6650",
+        "answer": "False",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "9. Privacy & Data Security",
+            "page": 53
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "b148a96aa3a66b53222ad39d6096dc907724df4011c2250e7d3b4738d8ace310",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "9. Privacy & Data Security",
+            "page": 53,
+            "score": 0.76157409,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "5324e9e6deccd5dc876001f54c0404f7bb42e58c60124d18c89d1430ed273459",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "3. Guidelines for Use",
+            "page": 42,
+            "score": 0.75380808,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "26ec7fcc7b613f93c4a03acf3590192592d875878fd777673344a91865fe4650",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "1. Introduction",
+            "page": 41,
+            "score": 0.74870622,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "920c9ffbec88221366f7efb8bbff62afda1578b88b5cf4d366d043336a71f6ad",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "5. Unacceptable Uses of Generative AI Tools",
+            "page": 45,
+            "score": 0.7480811,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f084a0310af73eb3b6e6f12a4e75c20ee9894ef0cec43eebaea32dc1e41989b5",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "4. Acceptable Uses of Generative AI Tools",
+            "page": 43,
+            "score": 0.73448044,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "63170171b1ca441f9c020473dab0a771"
+      },
+      "latency_ms": 7657.7490999989095,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q10",
+      "response": {
+        "request_id": "fd5b37fcbf034b9284c7a6609021b6a9",
+        "answer": "Yes",
+        "citations": [
+          {
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 4.3",
+            "page": 14
+          },
+          {
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 1.19",
+            "page": 7
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "b4652d78997fc8a74305d2dac6ecbb48f6486e9b7001e94b13b88a94e7fd419c",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 4.3",
+            "page": 14,
+            "score": 0.79756486,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "b94bac7683604cd5aeab3a97a7c60413efdc547ba4067449db82deecbd1ba5b0",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 1.19",
+            "page": 7,
+            "score": 0.7712536999999999,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "ab1d9c22bf541f3e92e0052deafc4eb62e5700c40ca5dd8613f6fbfa19e27702",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "44 Astudent under academic warning or probation:",
+            "page": 14,
+            "score": 0.76977205,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "3ef86058e6a83a3f9c23b29ab5bf314a46827fb8c031f419e4b615eb327cd49f",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 6.4",
+            "page": 20,
+            "score": 0.76886475,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "8f9a1e4dea1c89bf48b2c2681adbe17070d709733eb31fd4ca80be8a6d4d72f8",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 1.20",
+            "page": 7,
+            "score": 0.7552129,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "e89eedfe65284de6a8f68a1b0a94b5c8"
+      },
+      "latency_ms": 6704.635699999926,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q11",
+      "response": {
+        "request_id": "8f9d1a83f5d749cdb62e7c823e62e7eb",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "64466cd0f13fdf3d819322d44355c1728afc2529675845222b5b5609f7f8fa76",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.20",
+            "page": 9,
+            "score": 0.77053934,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "8e405695e081083032dd29d39897f8611f30f001d57fd91ad70297030fe63b6a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 38,
+            "score": 0.7625230000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f8e1e3ee00465fd7df9e55ccbb54ff40d5825a0473cdc34dc88ffdedac5b1749",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 19,
+            "score": 0.7492333,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f741da096cef0bfce4104cdd38ac469b9b19ccfc96e67a73437d7beb3835cb7b",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.19",
+            "page": 9,
+            "score": 0.7264725000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "74a7102cde54a78fc4ef00dbe99a554dfb0c48b4440d6b67c60674d0351701b9",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.28",
+            "page": 23,
+            "score": 0.7261655300000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "a9db8bd0b5f94a2dabb8e0be8283fb60"
+      },
+      "latency_ms": 6993.05110000023,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_5": 0.5
+      },
+      "faithful": false
+    },
+    {
+      "id": "q12",
+      "response": {
+        "request_id": "e454b6361db9484bba08c11701637535",
+        "answer": "100% attendance is required",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab0dc7e6478c0d06d7042eb7d9c42874beca8f3dbd730e35811c4f57b4313169",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10,
+            "score": 0.7310899,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.7",
+            "page": 28,
+            "score": 0.6921603700000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10,
+            "score": 0.6650233999999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "8e405695e081083032dd29d39897f8611f30f001d57fd91ad70297030fe63b6a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 38,
+            "score": 0.62844968,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "b8cb120f335a218f6ddecb5a014aacc08f5477d8f7485e5f41226b85729ae217",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 8.10",
+            "page": 34,
+            "score": 0.6219277999999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "d41c49888cab4c2485385ad360af6ed9"
+      },
+      "latency_ms": 7223.128999999972,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q13",
+      "response": {
+        "request_id": "b8306de44b1444e8a38c1145d0fee7f5",
+        "answer": "Yes",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "91e87ddba3290e98530d390ce08a6e02279040b3093bc2f30b2005c02f6b2813",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10,
+            "score": 0.87245208,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "67e31c0dbe4d3574b6da2ef721bc16669b2fa8df9e6ed16021efab3a2be979bd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.4",
+            "page": 24,
+            "score": 0.7446326,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.73037,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "7f490513b1b973f1eb8f22348f86f8ec4dc2f4ac2c772a0cb62e8f398c7e426f",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 7.2",
+            "page": 30,
+            "score": 0.72689688,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9a079c713131dcf9fa920a22b11fe93f0ad171574fa0b47817f369ec497e9854",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.28",
+            "page": 17,
+            "score": 0.7234742599999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "afac63b218f943919e5ed7ec8059358f"
+      },
+      "latency_ms": 5986.679800000275,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q14",
+      "response": {
+        "request_id": "9bd1d6beff5f484bbb355282a53f0a79",
+        "answer": "Rs. 12,000",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1
+          },
+          {
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.8176928800000001,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "8961324c49f1af2a2fd6451728381569aa358495a4cec3561a4a4dfe54f5cc71",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.7",
+            "page": 14,
+            "score": 0.6558764,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "09f1f773de44fcf24bd7a222fbd6875fab2f374b5e20550f4610389ed5305812",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 7.3",
+            "page": 30,
+            "score": 0.65113372,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.7",
+            "page": 28,
+            "score": 0.63890475,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.63639104,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "52969557c7e8436b87441c14d8149b54"
+      },
+      "latency_ms": 5516.77539999946,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q15",
+      "response": {
+        "request_id": "9a8c27eed7fa4d1ebe15b2d0aec2b432",
+        "answer": "The policy states:\n\nRegistration of Students under Academic Warning\n\n4.4 A student under academic warning or probation:\na) Must register for all such courses, in which the grade\nwas F, provided these courses are being offered.\nb) Should register for all such courses, in which the grade\nwas D, D+ or C-, provided these courses are being\noffered.\nc) Should not register for more than five courses.\nd) Parents/guardian will be called to the campus for a\nmeeting with the HoD for sharing the unsatisfactory\nUndergraduate Academic Rules and Regulations 2026 13\n\nacademic performance of the student.\ne) Students on 2nd academic warning must NOT register\nfor a new course, unless recommended by the HoD\nand approved by Controller of Examinations.\nRegistration of courses with Theory and associated Lab:",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 19
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 20
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "f8e1e3ee00465fd7df9e55ccbb54ff40d5825a0473cdc34dc88ffdedac5b1749",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 19,
+            "score": 0.83734167,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "881ed2ef8859ddad313e06db3c13f757897aa9df8d823b5dd05a3a703a31deb2",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 20,
+            "score": 0.76968145,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "2631c0ddf298e53ec1df9fde394c30220d0f80b2670bb450b9e8b3bdf806db87",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "4. Registration 13",
+            "page": 5,
+            "score": 0.76399761,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ae80159b798aadffe24ffe1fcf461c7e7e391d12ef1815f870214aadfc990a80",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.17",
+            "page": 15,
+            "score": 0.74583417,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "7fd6e3bb398c714142e26848e2589215ffd89b3e7d8caa9d1c84636372f0b0be",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.6",
+            "page": 24,
+            "score": 0.7264212400000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "4cff5c685c384c09904ed8e45c13f204"
+      },
+      "latency_ms": 7137.195299999803,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q16",
+      "response": {
+        "request_id": "cf327936bfd04c77b698f03f37e4437a",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "d18943b1bc610ff77fa72f7b76a2e2c2b24b85fef6b9ff8716f6af51b8090bdb",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.13",
+            "page": 8,
+            "score": 0.5925846,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f3a858f65a4e1fe5f20041fda4170d4f4318b091a7eba4c7fc1bbe0ba5e86f10",
+            "source": "annual-report-2023-24.pdf",
+            "section": "In-house Medical Center",
+            "page": 85,
+            "score": 0.5867262,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "8961324c49f1af2a2fd6451728381569aa358495a4cec3561a4a4dfe54f5cc71",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.7",
+            "page": 14,
+            "score": 0.57494026,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "3be206bf4a17477316eea216c20aa8286c5a14825eca3b112499e2763cd6d8b3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.31",
+            "page": 17,
+            "score": 0.57483006,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ae80159b798aadffe24ffe1fcf461c7e7e391d12ef1815f870214aadfc990a80",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.17",
+            "page": 15,
+            "score": 0.5717448,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "1f20399f049047daaf77df7cade5e894"
+      },
+      "latency_ms": 6410.0409999991825,
+      "correct_abstention": true
+    },
+    {
+      "id": "q17",
+      "response": {
+        "request_id": "1c836d319ab34fb0baf6fc34c0e76154",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "6acf7cb4bfe1a4011c02bcf110a66380e14421a71d0e567df48c3477f34a2232",
+            "source": "fee-structure-page.html",
+            "section": "Fee Refund Policy",
+            "page": 1,
+            "score": 0.67111266,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "4a80439475860dd5e5271bf5c4ca02f88f95aadcfa066164462aee07ba656af7",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.22",
+            "page": 22,
+            "score": 0.6259336,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "476c4ff3cd8611cef05696aa91a1bcb36508f15bff97db064043fe68f607dd04",
+            "source": "fee-structure-page.html",
+            "section": "Security Deposit",
+            "page": 1,
+            "score": 0.5981114000000001,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "c306135a357470675b567a0a38d3b2224c56d59691e6d09502aa522e82d9038e",
+            "source": "fee-structure-page.html",
+            "section": "Miscellaneous Fees",
+            "page": 1,
+            "score": 0.5899114599999999,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "f1c8a491c456c5cbbd05e22f53f747156cd66445fd088e350530dbad505da12e",
+            "source": "fee-structure-page.html",
+            "section": "Admission Fee",
+            "page": 1,
+            "score": 0.5764908799999999,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "0a138bccfeec4941ba5da59d2928decb"
+      },
+      "latency_ms": 6281.832799999393,
+      "correct_abstention": true
+    },
+    {
+      "id": "q18",
+      "response": {
+        "request_id": "05f096509d3c4fe39e5de532d7778bc8",
+        "answer": "100%",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab0dc7e6478c0d06d7042eb7d9c42874beca8f3dbd730e35811c4f57b4313169",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10,
+            "score": 0.75468051,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "64b5fe06507247ff524118c822faf39aa04588ba35d92e0d4d7cf9a3cff643e4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.7",
+            "page": 28,
+            "score": 0.6923778,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10,
+            "score": 0.67895794,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "8e405695e081083032dd29d39897f8611f30f001d57fd91ad70297030fe63b6a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 38,
+            "score": 0.63081282,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "b8cb120f335a218f6ddecb5a014aacc08f5477d8f7485e5f41226b85729ae217",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 8.10",
+            "page": 34,
+            "score": 0.6246388,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "bee189f727ee4390a893c020f3689b30"
+      },
+      "latency_ms": 3377.0910000002914,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q19",
+      "response": {
+        "request_id": "0cb8c6bc6d0c4f8a9aae1cb9566087c8",
+        "answer": "Students must maintain 100% attendance. The HoD may excuse up to 20% absence for genuine reasons such as illness. Failure to meet the requirement renders the student ineligible for the final examination.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.13",
+            "page": 25
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "ab0dc7e6478c0d06d7042eb7d9c42874beca8f3dbd730e35811c4f57b4313169",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.21",
+            "page": 10,
+            "score": 0.81212759,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9d072595541f9649461ab9f6fca6943ec15a185e7d3660716d7f44450a2232ae",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.13",
+            "page": 25,
+            "score": 0.74049997,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10,
+            "score": 0.72645402,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "8e405695e081083032dd29d39897f8611f30f001d57fd91ad70297030fe63b6a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 38,
+            "score": 0.7139672,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "4225eecdad608516cf5468eb8b67ec70b5c5fbb6d92b0c8113e7517780c700d3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Notes:",
+            "page": 39,
+            "score": 0.7092780000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "ee0b1ffc648e421388a3ca558c5aab0a"
+      },
+      "latency_ms": 6571.26099999914,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q20",
+      "response": {
+        "request_id": "dcad24559766468f8225cdd0942d892a",
+        "answer": "Final year students",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.3",
+            "page": 19
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.9",
+            "page": 20
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "a348b4e81a79accbe0318034b5a783a4072b6042ccfac7de450f26d9efa25f5c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.3",
+            "page": 19,
+            "score": 0.7302223400000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "78354c1bd77e5077d021ff3a8d0c84927869167908daff22aef03bf9f4f03dc6",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.6",
+            "page": 28,
+            "score": 0.7042942,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "96821226abb3f8ae8e54af4a8380e82983c6d2a9a17850b50dfa2135477cdfe4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.9",
+            "page": 20,
+            "score": 0.6937595,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "312caf949cf68689a6652e9115ccc5042eac2cf0c2eb1af68a75c8cf86664d92",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.2",
+            "page": 28,
+            "score": 0.6842398599999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9a9495e896bff32d7bcb46d4ea0e1a68987e7af0214c202ef5068f8776eb0237",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.3",
+            "page": 28,
+            "score": 0.6836198600000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "6b1f3a0cb69d470ba1139c46bc7c4620"
+      },
+      "latency_ms": 4093.981200001508,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q21",
+      "response": {
+        "request_id": "182d3dc9af4f4664bd04fc19a9a43e97",
+        "answer": "2.00",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.4",
+            "page": 24
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "91e87ddba3290e98530d390ce08a6e02279040b3093bc2f30b2005c02f6b2813",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.25",
+            "page": 10,
+            "score": 0.84172064,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "67e31c0dbe4d3574b6da2ef721bc16669b2fa8df9e6ed16021efab3a2be979bd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.4",
+            "page": 24,
+            "score": 0.82445073,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "72033120b0bd8730c38dc4e3855ba8c103ba1cd184341c99d10d0e4179dfe01b",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 5.4",
+            "page": 17,
+            "score": 0.82445073,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "672dd4b93cb495eb14cdcb9dedb3cb6213d6486c3411b6fa41e30403753c6a14",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "Clause 1.26",
+            "page": 8,
+            "score": 0.8150509,
+            "document_id": "academic-rules",
+            "document_version": "2023-08"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.80682594,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "21a097ae8b9d42eeb8a843b302282ce4"
+      },
+      "latency_ms": 4368.740199999593,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q22",
+      "response": {
+        "request_id": "f064fabdf19a41e094151d8c10fd4c70",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "171255cb8736d3ca0056ba083b6f18a985492212e8a6ce0e931f26f93c516b7e",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Peshawar Campus",
+            "page": 78,
+            "score": 0.6074805999999999,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "f8c9b1a34ad48f0cc401c7bcef2841c8b5d4250e877ac540d7d3446f75f5e737",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Peshawar Campus",
+            "page": 32,
+            "score": 0.6032245199999999,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "d18943b1bc610ff77fa72f7b76a2e2c2b24b85fef6b9ff8716f6af51b8090bdb",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.13",
+            "page": 8,
+            "score": 0.6011127199999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "3966bd5ce13716c748ed3ab9303667c56bd990bf41bc6d8a7c0c16076c2b5131",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.15",
+            "page": 9,
+            "score": 0.5890029,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f641a2d44706ad859937521d0df7798833f56dd48ea0287d4e814bdbbdc2fe9a",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Islamabad Campus",
+            "page": 78,
+            "score": 0.5863967,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "5aceb32b923048c1a0c9e9882a93c2c5"
+      },
+      "latency_ms": 12773.212199999762,
+      "correct_abstention": true
+    },
+    {
+      "id": "q23",
+      "response": {
+        "request_id": "aa97a59c7ea84b808d4ee6e3a8984e76",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "f3a858f65a4e1fe5f20041fda4170d4f4318b091a7eba4c7fc1bbe0ba5e86f10",
+            "source": "annual-report-2023-24.pdf",
+            "section": "In-house Medical Center",
+            "page": 85,
+            "score": 0.52281272,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.51600528,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "686ea691fa80614d1441a8a703f3ae4af4979febb350e40994bad6f56c285b87",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "3. Admission Policy 8",
+            "page": 5,
+            "score": 0.50952935,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "d752772b3ddd280b586e16fddca9eb330e02f284cfaabb1904a5edd6c29fbe69",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Indoor Hospitalization Insurance",
+            "page": 84,
+            "score": 0.5077814,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          },
+          {
+            "chunk_id": "476c4ff3cd8611cef05696aa91a1bcb36508f15bff97db064043fe68f607dd04",
+            "source": "fee-structure-page.html",
+            "section": "Security Deposit",
+            "page": 1,
+            "score": 0.50300956,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "2b97a92159dc459baef0c849d3e91029"
+      },
+      "latency_ms": 8563.682899999549,
+      "correct_abstention": true
+    },
+    {
+      "id": "q24",
+      "response": {
+        "request_id": "79407d5bfe434ba7b98164689f7f86cc",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "f1c8a491c456c5cbbd05e22f53f747156cd66445fd088e350530dbad505da12e",
+            "source": "fee-structure-page.html",
+            "section": "Admission Fee",
+            "page": 1,
+            "score": 0.56674695,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.5649737,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "476c4ff3cd8611cef05696aa91a1bcb36508f15bff97db064043fe68f607dd04",
+            "source": "fee-structure-page.html",
+            "section": "Security Deposit",
+            "page": 1,
+            "score": 0.53944695,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "74a35f04ea93134a03b9ea1939aa72e79921af94565d2660bd8fbe3c6b0c1c4c",
+            "source": "annual-report-2019-20.pdf",
+            "section": "Karachi Campus",
+            "page": 32,
+            "score": 0.51965934,
+            "document_id": "annual-report-2019-20",
+            "document_version": "2019-20"
+          },
+          {
+            "chunk_id": "fc2bcafa9fdf18f43bc9efe08c2b6d4dfabe063f12aa9462f81da3abea890745",
+            "source": "annual-report-2023-24.pdf",
+            "section": "Karachi Campus",
+            "page": 78,
+            "score": 0.5179305000000001,
+            "document_id": "annual-report-2023-24",
+            "document_version": "2023-24"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "24e276a77e6148f9a466e4ccc4c641e0"
+      },
+      "latency_ms": 4457.730100000845,
+      "correct_abstention": true
+    },
+    {
+      "id": "q25",
+      "response": {
+        "request_id": "b7e4db65471143c397d3d8552ceb9e74",
+        "answer": "4.00",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.1",
+            "page": 11
+          },
+          {
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "4a7c31f938286160cfd10dc510b3824f08c0e74387cbd43468d2d9bb9992ec3d",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.1",
+            "page": 11,
+            "score": 0.70977157,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "998151e0c16de939bee019a2949a4bc9f490f3a6e0e6f952d113ffde1c6a20cf",
+            "source": "grading-page.html",
+            "section": "Letter Code Interpretation",
+            "page": 1,
+            "score": 0.70937335,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "a2359e07749a0884268045330ae10a2dbca6394b26cd3f77c92f6816977d59bd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.3",
+            "page": 12,
+            "score": 0.6947401799999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "1eb9538f376cb836b556d1d4c48fb6ea89a02bfccf3de8536a1db2f5d9452ce4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "2. Grading and GPA Calculations 5",
+            "page": 5,
+            "score": 0.69345748,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.68575418,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "b42240bf07374cc5bcfdca0ef336a55f"
+      },
+      "latency_ms": 4343.646299999818,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 0.5,
+        "ndcg_at_5": 0.6309297535714575
+      },
+      "faithful": true
+    },
+    {
+      "id": "q26",
+      "response": {
+        "request_id": "abe9f3068ea045c79a642d5e5b7a9deb",
+        "answer": "Rs. 12,000",
+        "citations": [
+          {
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.7",
+            "page": 7
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.12",
+            "page": 8
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "935bf6ddedbbb637ce2e15408b0e0a41d623ff7f55ff61a9eeb499a2f1f8accc",
+            "source": "fee-structure-page.html",
+            "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+            "page": 1,
+            "score": 0.79838711,
+            "document_id": "fee-structure-page",
+            "document_version": "2026-27"
+          },
+          {
+            "chunk_id": "12864b50fe4ed1d4b7b7535d973e9f66355de961e989acaa59cf4310303a759f",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.7",
+            "page": 7,
+            "score": 0.66747493,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "09f1f773de44fcf24bd7a222fbd6875fab2f374b5e20550f4610389ed5305812",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 7.3",
+            "page": 30,
+            "score": 0.6658983199999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "8961324c49f1af2a2fd6451728381569aa358495a4cec3561a4a4dfe54f5cc71",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.7",
+            "page": 14,
+            "score": 0.6595696200000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "c20c03e61f696dbe582b58dfe3d69c47ea337ea9aab516ff6be46a6c7af08954",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.12",
+            "page": 8,
+            "score": 0.6592666,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "ff52f57329424ccfa332ebd5cde60950"
+      },
+      "latency_ms": 4385.605599998598,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q27",
+      "response": {
+        "request_id": "50de7b851d4a4c259b59c08f4a3e5860",
+        "answer": "Four academic years (8 regular semesters) and 6 years with an approved extension",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.23",
+            "page": 10
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.29",
+            "page": 17
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "2b6dcddaa1fe50b382ec336aa96b201c79dbfa4fa1b570ee36ef5763081d25b6",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.23",
+            "page": 10,
+            "score": 0.882529795,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "85cb975cfc886b4c1c987ad33480592ed96148c6c0b1424caf8aa6bc202f993c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.29",
+            "page": 17,
+            "score": 0.82258219,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "1f6d6dc83fceab8fdf5a4a3abc77ed4c6b59e45f64ef391e1f39636bfe88e7a3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.24",
+            "page": 10,
+            "score": 0.75657505,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.68946302,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "ee2a8f7cb0d4416e24135f47a35b05ee8bd8dc24dd14f4bfcc0b8f4e09c3de27",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "220 Prospectus 2026",
+            "page": 5,
+            "score": 0.6871123299999999,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "024100e6acbc4a288c1b51ab5389851f"
+      },
+      "latency_ms": 4503.551499999958,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q28",
+      "response": {
+        "request_id": "a0d637d86273462c868586849d7f2004",
+        "answer": "The completion time limit for a readmitted student starts from the date of first admission.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.24",
+            "page": 10
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "1f6d6dc83fceab8fdf5a4a3abc77ed4c6b59e45f64ef391e1f39636bfe88e7a3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.24",
+            "page": 10,
+            "score": 0.83039188,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ae80159b798aadffe24ffe1fcf461c7e7e391d12ef1815f870214aadfc990a80",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.17",
+            "page": 15,
+            "score": 0.73170316,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "85cb975cfc886b4c1c987ad33480592ed96148c6c0b1424caf8aa6bc202f993c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.29",
+            "page": 17,
+            "score": 0.72240072,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "5c2becdddc4df53b7bffa0ddbec272f28905668397e806692116a8a0f955916f",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.3",
+            "page": 14,
+            "score": 0.69799185,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "1aa7d195a33fc566307bbcfcf54348575df1145ed9caad70b2df0b11dc82a82a",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "25. Closure of Admission 30. Admission with Credit Transfer",
+            "page": 4,
+            "score": 0.69789118,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "dc38839706de4db0b7a24f7bc9da7eb7"
+      },
+      "latency_ms": 4043.994299998303,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q29",
+      "response": {
+        "request_id": "f5ff72dcf1d04699abd994e7ae5c76ee",
+        "answer": "The policy states:\n\nRegistration of Students under Academic Warning\n\n4.4 A student under academic warning or probation:\na) Must register for all such courses, in which the grade\nwas F, provided these courses are being offered.\nb) Should register for all such courses, in which the grade\nwas D, D+ or C-, provided these courses are being\noffered.\nc) Should not register for more than five courses.\nd) Parents/guardian will be called to the campus for a\nmeeting with the HoD for sharing the unsatisfactory\nUndergraduate Academic Rules and Regulations 2026 13\n\nacademic performance of the student.\ne) Students on 2nd academic warning must NOT register\nfor a new course, unless recommended by the HoD\nand approved by Controller of Examinations.\nRegistration of courses with Theory and associated Lab:",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 19
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 20
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "881ed2ef8859ddad313e06db3c13f757897aa9df8d823b5dd05a3a703a31deb2",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 20,
+            "score": 0.85271686,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f8e1e3ee00465fd7df9e55ccbb54ff40d5825a0473cdc34dc88ffdedac5b1749",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.4",
+            "page": 19,
+            "score": 0.79204798,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ae80159b798aadffe24ffe1fcf461c7e7e391d12ef1815f870214aadfc990a80",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.17",
+            "page": 15,
+            "score": 0.77682567,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "6cfdc07483b19d0a9651e3bf8afde4f190036a48227f506a800163fee7a5a60a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.7",
+            "page": 25,
+            "score": 0.76007998,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.7258740699999999,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "ed6a953dac5b4484bd9ed00a89bf8fbd"
+      },
+      "latency_ms": 4166.893600000549,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q30",
+      "response": {
+        "request_id": "bd3eac102a0641b4bf44dc3ec3275bdc",
+        "answer": "No",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.6",
+            "page": 20
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.7",
+            "page": 20
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "4106521223e53ceb4ef13837a0f74a5a967ceafd48e6a6150c6754fdeb0574bb",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.6",
+            "page": 20,
+            "score": 0.89267969,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9885c73b86385b6ec99cfb4658015b77e8ae31aaf324ebd38536e59ade5fdc28",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.8",
+            "page": 20,
+            "score": 0.82635915,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "0d19ff4c2a7a6b9df499e10867eab012ba073b8232cea44341f1d139cce7ecb4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.24",
+            "page": 22,
+            "score": 0.75854373,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "32c9086a26be539fec0cafaf9f88321cf55349a98acca08b9d24b7cd6ab844c0",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.7",
+            "page": 20,
+            "score": 0.75203496,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "0313238c09f941d4cfaf4cacdd26a5d045032d71eab178329b58769285cd3eb0",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.33",
+            "page": 18,
+            "score": 0.7371502999999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "45216188307c4dc99f47cf8a799de1c6"
+      },
+      "latency_ms": 3720.555500000046,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q31",
+      "response": {
+        "request_id": "4a6c1c783d0e4f8d9c04c25637b03e32",
+        "answer": "both theory and lab",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.7",
+            "page": 20
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "32c9086a26be539fec0cafaf9f88321cf55349a98acca08b9d24b7cd6ab844c0",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.7",
+            "page": 20,
+            "score": 0.937707067,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9885c73b86385b6ec99cfb4658015b77e8ae31aaf324ebd38536e59ade5fdc28",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.8",
+            "page": 20,
+            "score": 0.9035002,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "4b2b0dbc556fce696dea1b0b3793b7f2216acdbb72a672c333a5c95ede3cc5f8",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.5",
+            "page": 20,
+            "score": 0.76711428,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "4106521223e53ceb4ef13837a0f74a5a967ceafd48e6a6150c6754fdeb0574bb",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.6",
+            "page": 20,
+            "score": 0.76150215,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.7600397999999999,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "9b8b2518b9514f119f317ea3f5778fb2"
+      },
+      "latency_ms": 3136.538799999471,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q32",
+      "response": {
+        "request_id": "8f3b41c10dd346a6bb57d7b7f23de6e5",
+        "answer": "Lab",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.8",
+            "page": 20
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.6",
+            "page": 20
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "32c9086a26be539fec0cafaf9f88321cf55349a98acca08b9d24b7cd6ab844c0",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.7",
+            "page": 20,
+            "score": 0.944028974,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9885c73b86385b6ec99cfb4658015b77e8ae31aaf324ebd38536e59ade5fdc28",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.8",
+            "page": 20,
+            "score": 0.92613703,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.76393461,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "4b2b0dbc556fce696dea1b0b3793b7f2216acdbb72a672c333a5c95ede3cc5f8",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.5",
+            "page": 20,
+            "score": 0.7571392,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "4106521223e53ceb4ef13837a0f74a5a967ceafd48e6a6150c6754fdeb0574bb",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.6",
+            "page": 20,
+            "score": 0.75480771,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "bb397b0d6fb942b08571a93ae88619f1"
+      },
+      "latency_ms": 3748.7197000009473,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q33",
+      "response": {
+        "request_id": "1a4563ac0ecb4e0d82a377735043ed6b",
+        "answer": "The final year project is first offered in the second last regular semester, which spans over two semesters.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.10",
+            "page": 20
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "fcb4120f684c75e2c5b414bcaee7c0e57503a18ff1878f60ac842fbf9b573721",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.10",
+            "page": 20,
+            "score": 0.77670348,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "a348b4e81a79accbe0318034b5a783a4072b6042ccfac7de450f26d9efa25f5c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.3",
+            "page": 19,
+            "score": 0.7449261,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "c8eac31a8d8be232ab46b619dde9ec11b79de3b1ea76604b0ae51a68cc32b0c3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.4",
+            "page": 7,
+            "score": 0.71111524,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ea93f35e2e13bc05329ca166798a5bc8c81d50d521b0bff9ae21e653ff0099e5",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.5",
+            "page": 7,
+            "score": 0.7037642,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "15eb95c13d8f894b17fecfb9d6f25531711364b52c439045a2b4246a3546d16e",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.3",
+            "page": 7,
+            "score": 0.7036450000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "03de2e3331f04c588ec2ff5566de00fd"
+      },
+      "latency_ms": 3220.388699999603,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q34",
+      "response": {
+        "request_id": "75832266d31c4037bc0015442532026a",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [
+          {
+            "chunk_id": "dfdb0804246f975625eeb3c6754b1a1115748d803f1602310e52caeb1358d7d3",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.2",
+            "page": 24,
+            "score": 0.74382293,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "82ed469f437c130d6c1d85ab539375fae996811a89846ccb8fa07176dde8ba07",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.14",
+            "page": 26,
+            "score": 0.6840975300000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "1a3a9f311dd67b932027e1239d9c72fa973ae4cc74245701ed1a5e6b562177c9",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.12",
+            "page": 25,
+            "score": 0.68291897,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "c78160ddfce632be6b9cfd27feb695f4c5019840b95670014b101366acee12a7",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.17",
+            "page": 26,
+            "score": 0.6672937999999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "cd63a12c32598951677e3a88cd119e982914aa7888552cf58670d241dfa0257c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.24",
+            "page": 27,
+            "score": 0.66536677,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "7958b10a48cb46b1b16b3782a178c55e"
+      },
+      "latency_ms": 5997.9719999992085,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q35",
+      "response": {
+        "request_id": "7aa9210d6a2a4365a8974fa9571fda25",
+        "answer": "SGPA and CGPA are the weighted averages of grade points earned in a semester and all the courses taken so far, respectively. Grades of a course impact both by affecting the grade points used in the calculation.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.1",
+            "page": 11
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.6",
+            "page": 12
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.9",
+            "page": 25
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "4a7c31f938286160cfd10dc510b3824f08c0e74387cbd43468d2d9bb9992ec3d",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.1",
+            "page": 11,
+            "score": 0.78735763,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "66f2f79b65deaaae3193d604786682cd408f8486aa107139bffbf47c2a9d9447",
+            "source": "grading-page.html",
+            "section": "Description of Grades",
+            "page": 1,
+            "score": 0.73767114,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "33c552ca9e695654d1bae0b7b4b27c7a3f53d2209e1b3da7be3e6461ea9e5dd5",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.4",
+            "page": 12,
+            "score": 0.7166139,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "faea13a400d358249f7ea9565c1bb47895bc5bae117e5f1349526d857e580096",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 2.6",
+            "page": 12,
+            "score": 0.68151373,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "dbab23b023d62bf6c4483884637ba5d5e89b8c3b4e983f7afbb714c56ddd5f5a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.9",
+            "page": 25,
+            "score": 0.6621952,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "16958943eeab4e9fac387d3b42d2b69e"
+      },
+      "latency_ms": 6500.759000000471,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 0.9197207891481876
+      },
+      "faithful": false
+    },
+    {
+      "id": "q36",
+      "response": {
+        "request_id": "b76f20598e974e3dbbddc998c7611940",
+        "answer": "The last day of the makeup week of every semester",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.25",
+            "page": 23
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "c48fbc4b2cdec35be60bdf038ebe194ace48c5fa6bd56cc72ededfb4ea5c029e",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.25",
+            "page": 23,
+            "score": 0.82311481,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "e72ec1dbcb547821c01372420c8db1c930769b3e584d03b9882c6dfb4516d5d4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.8",
+            "page": 29,
+            "score": 0.7954045,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "d2cdd23eb4813d14dd96e1db3f36cfcbbf33faa1ab9b70b497ae69afad3f1757",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.21",
+            "page": 22,
+            "score": 0.7389254599999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "1c8bbde64304ec5e69c84145195a4f4f1c3e85d315ed6a532b5e10ab8542a362",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.23",
+            "page": 22,
+            "score": 0.72538155,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "01456ea3db4d1c94fa435097d5f6c28b53597d2483f5e80d679cdc5409f2a5e6",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.26",
+            "page": 23,
+            "score": 0.69776762,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "ecb129af2f6d4203aa999a79359eef1f"
+      },
+      "latency_ms": 2901.4553999986674,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q37",
+      "response": {
+        "request_id": "ccfcdc16060e47658c8cab21b4b95f4c",
+        "answer": "No",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.26",
+            "page": 23
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.24",
+            "page": 22
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "01456ea3db4d1c94fa435097d5f6c28b53597d2483f5e80d679cdc5409f2a5e6",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.26",
+            "page": 23,
+            "score": 0.84294188,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "0d19ff4c2a7a6b9df499e10867eab012ba073b8232cea44341f1d139cce7ecb4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.24",
+            "page": 22,
+            "score": 0.76472735,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "e72ec1dbcb547821c01372420c8db1c930769b3e584d03b9882c6dfb4516d5d4",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.8",
+            "page": 29,
+            "score": 0.75151414,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "d2cdd23eb4813d14dd96e1db3f36cfcbbf33faa1ab9b70b497ae69afad3f1757",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.21",
+            "page": 22,
+            "score": 0.7396376,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "1c8bbde64304ec5e69c84145195a4f4f1c3e85d315ed6a532b5e10ab8542a362",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.23",
+            "page": 22,
+            "score": 0.73710912,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "a9a49e9aeddb4ebb91c7a2dc6ff232c3"
+      },
+      "latency_ms": 3333.912699999928,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q38",
+      "response": {
+        "request_id": "a9d7151b945b4847ab5b1e92737a8988",
+        "answer": "No, we need to select all core courses.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.28",
+            "page": 23
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "74a7102cde54a78fc4ef00dbe99a554dfb0c48b4440d6b67c60674d0351701b9",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.28",
+            "page": 23,
+            "score": 0.72769165,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "312caf949cf68689a6652e9115ccc5042eac2cf0c2eb1af68a75c8cf86664d92",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.2",
+            "page": 28,
+            "score": 0.6655051000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9318aa74f5879163155446d8cb87ae174f8169a20c1b2c1e1279d59190810ae9",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.6",
+            "page": 14,
+            "score": 0.641289,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "78354c1bd77e5077d021ff3a8d0c84927869167908daff22aef03bf9f4f03dc6",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 6.6",
+            "page": 28,
+            "score": 0.6380650400000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "a348b4e81a79accbe0318034b5a783a4072b6042ccfac7de450f26d9efa25f5c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 4.3",
+            "page": 19,
+            "score": 0.6347959599999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "5aa0f1d0fd574d849e4e3d0cb64e69b6"
+      },
+      "latency_ms": 3167.2003000003315,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q39",
+      "response": {
+        "request_id": "6a7865317e464fa49344a2e31da8b45c",
+        "answer": "If your CGPA goes below 2.00 and stays there for 3 consecutive semesters, your admission will be automatically closed.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.6",
+            "page": 24
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "10d6b7185d9493fda7317790bdc22902cf919f97c724be8ecc490a4021f6e299",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.5",
+            "page": 24,
+            "score": 0.788917,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "7fd6e3bb398c714142e26848e2589215ffd89b3e7d8caa9d1c84636372f0b0be",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.6",
+            "page": 24,
+            "score": 0.737814,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "9a079c713131dcf9fa920a22b11fe93f0ad171574fa0b47817f369ec497e9854",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 3.28",
+            "page": 17,
+            "score": 0.7226501000000001,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "6cfdc07483b19d0a9651e3bf8afde4f190036a48227f506a800163fee7a5a60a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.7",
+            "page": 25,
+            "score": 0.70859098,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.70046043,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "d7581b8b98d0420fa36e8a9413e4fd87"
+      },
+      "latency_ms": 3416.647699999885,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q40",
+      "response": {
+        "request_id": "465c0216c60d4144baed2c8f1f095ec0",
+        "answer": "The academic warnings can be removed or reset if the CGPA equals or exceeds 2.00 after the 1st or 2nd academic warning.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.7",
+            "page": 25
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "6cfdc07483b19d0a9651e3bf8afde4f190036a48227f506a800163fee7a5a60a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.7",
+            "page": 25,
+            "score": 0.79538202,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "10d6b7185d9493fda7317790bdc22902cf919f97c724be8ecc490a4021f6e299",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.5",
+            "page": 24,
+            "score": 0.77145457,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "67e31c0dbe4d3574b6da2ef721bc16669b2fa8df9e6ed16021efab3a2be979bd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.4",
+            "page": 24,
+            "score": 0.77091193,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "f9472d1348c4d055282cb5a9db6532574ad77752493ef4c966fec14c155d82bc",
+            "source": "grading-page.html",
+            "section": "Warning/Probation",
+            "page": 1,
+            "score": 0.7539537000000001,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "b35d90e2f87e874b100d6d8d92c1d1d8e1b40ddab9f9b5e26bcd94e1fefc8307",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "Warning",
+            "page": 2,
+            "score": 0.72922993,
+            "document_id": "prospectus-2026-academic-rules-and-regulations",
+            "document_version": "2026"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "e253e2b86e3b49b49eed4797cd1b9e63"
+      },
+      "latency_ms": 4338.96040000036,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q41",
+      "response": {
+        "request_id": "6078bcc0ab5b4966978ce6781d8f68e8",
+        "answer": "In the scenario where a student repeats the failed course, the new grade will be used for CGPA calculation. In the scenario where a student takes a new course instead of repeating the failed one, both the grades will be used for CGPA calculation.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.11",
+            "page": 25
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.9",
+            "page": 25
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "d8cfefb65f02db5e419f925d20f6d8f0142b91bd91d77c6e26dc278b03d819b1",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.11",
+            "page": 25,
+            "score": 0.83214402,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "ab9f119eb32a7f370099e2cf6897942ea4a462766c6d3d84d6a771b61208c787",
+            "source": "grading-page.html",
+            "section": "Repeating a Course",
+            "page": 1,
+            "score": 0.76682872,
+            "document_id": "grading-page",
+            "document_version": "2026"
+          },
+          {
+            "chunk_id": "dbab23b023d62bf6c4483884637ba5d5e89b8c3b4e983f7afbb714c56ddd5f5a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.9",
+            "page": 25,
+            "score": 0.73455662,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "96f7cfdde8bcc850ccd5f2dfcc451558f28d70c5b0ed4697a177027a61c69274",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.10",
+            "page": 25,
+            "score": 0.7095743999999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "6cfdc07483b19d0a9651e3bf8afde4f190036a48227f506a800163fee7a5a60a",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.7",
+            "page": 25,
+            "score": 0.69958615,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "0fea73d9ec694e53a2f82c601240307e"
+      },
+      "latency_ms": 5829.124599998977,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": true
+    },
+    {
+      "id": "q42",
+      "response": {
+        "request_id": "b2bc700374d548ad86a109ef1e4145b7",
+        "answer": "Submit documentary evidence to request permission to appear for the exam.",
+        "citations": [
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.13",
+            "page": 25
+          },
+          {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.14",
+            "page": 8
+          }
+        ],
+        "answered_from_context": true,
+        "confidence": "high",
+        "retrieved": [
+          {
+            "chunk_id": "9d072595541f9649461ab9f6fca6943ec15a185e7d3660716d7f44450a2232ae",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.13",
+            "page": 25,
+            "score": 0.6820054,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "e12e14db0d2987777c474bfda512435bf94e23ff4476a3c64303cef75ed79a69",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.22",
+            "page": 10,
+            "score": 0.63171738,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "aeb8853b4587f77c00a9e93c507fdab071508ddf02b3bb2effb6af6d228651cd",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 1.14",
+            "page": 8,
+            "score": 0.62799132,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "44d2e14b68a5370326c730052227aa90ffa693ca4eb9c0caf6a9e8622706439c",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.15",
+            "page": 26,
+            "score": 0.62225997,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          },
+          {
+            "chunk_id": "442d8b125a1edd2a52c650ae41b3c43a49c0138d940325dde69814d36d02cbcb",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "Clause 5.8",
+            "page": 25,
+            "score": 0.6175996699999999,
+            "document_id": "academic-rules",
+            "document_version": "2026-06"
+          }
+        ],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "e327f7e4acfe4599ad8645121db2fd0a"
+      },
+      "latency_ms": 3678.8018999995984,
+      "retrieval": {
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "mrr": 1.0,
+        "ndcg_at_5": 1.0
+      },
+      "faithful": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{"ts": "2026-11-25T21:15:58Z", "logger": "rahbar.indexer", "msg": "indexer starting", "dummy": false, "embed_model": "nomic-embed-text", "collection": "rahbar_policies", "chroma": "chroma:8000", "pod": "ragops-indexer-c1bac11558-rbrss"}
+Document                                                Disposition  Quality Completeness Recency Uniqueness
+academic-rules-handbook-jun-2026.pdf                    active       pass    pass         pass    pass
+annual-report-2019-20.pdf                               active       pass    pass         pass    pass
+annual-report-2023-24.pdf                               active       pass    pass         pass    pass
+faculty-entrepreneurship-and-technical-start-ups-policy.pdf active       pass    pass         pass    pass
+fee-structure-page.html                                 active       pass    pass         pass    pass
+grading-page.html                                       active       pass    pass         pass    pass
+prospectus-2026-academic-rules-and-regulations.pdf      active       pass    pass         pass    pass
+scanned=7 quarantined=0 unchanged=7 updated=0 deleted=0 chunks_embedded=0 orphan_chunks=0
+{"ts": "2026-11-25T21:16:02Z", "logger": "rahbar.indexer", "msg": "indexer finished", "chunks": 875, "seconds": 3.3}

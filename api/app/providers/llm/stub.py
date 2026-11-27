@@ -1,17 +1,10 @@
 """Deterministic extractive synthesis for offline tests, never a real model."""
 import re
 from ...schemas import Answer, Citation, Passage
+from ...services.prompt import legitimate
 
 STOP = set('what when how is are the a an to of for in on at do does can i my me '
            'please tell about say says now much minimum requirement required'.split())
-POISON = re.compile(r'ignore.{0,30}(instructions|rules)|system prompt|you are now|'
-                    r'state that|disregard.{0,30}(instructions|rules)', re.I)
-
-
-def legitimate(text: str) -> str:
-    return '\n'.join(part for part in re.split(r'\n|(?<=[.!?])\s+', text) if not POISON.search(part))
-
-
 def abstention() -> Answer:
     return Answer(reasoning='Insufficient policy evidence.',
                   answer='The available corpus does not cover the requested information.',

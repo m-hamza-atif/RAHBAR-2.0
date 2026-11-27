@@ -1,0 +1,6 @@
+$ kubectl --context kind-rahbar-asg3 -n rahbar get deployment/rahbar-api -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get deployment/rahbar-api-candidate -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar patch deployment/rahbar-api --type=json --patch-file .artifacts\guarded-dry-run.json --dry-run=server -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get deployment/rahbar-api -o json
+Server accepted both preconditions and the candidate Pod spec in a dry-run. Stable serving labels: {'app': 'api', 'lane': 'stable'}
+Unchanged live generation: 6

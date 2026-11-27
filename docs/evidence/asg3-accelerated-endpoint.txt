@@ -1,0 +1,46 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u .artifacts/use_native_model.py
+$ kubectl --context kind-rahbar-asg3 -n rahbar get configmap/rahbar-config -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get jobs -o json
+{"version":"0.40.15"}
+$ kubectl --context kind-rahbar-asg3 -n rahbar apply -f -
+networkpolicy.networking.k8s.io/asg3-native-model-egress created
+$ kubectl --context kind-rahbar-asg3 -n rahbar patch configmap/rahbar-config --type=merge --patch-file .artifacts\model-endpoint-patch.json
+configmap/rahbar-config patched
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar set env deployment/ragops-inspect OLLAMA_BASE_URL=http://192.168.65.254:11434
+deployment.apps/ragops-inspect env updated
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar set env deployment/rahbar-api OLLAMA_BASE_URL=http://192.168.65.254:11434
+deployment.apps/rahbar-api env updated
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar set env deployment/rahbar-api-candidate OLLAMA_BASE_URL=http://192.168.65.254:11434
+deployment.apps/rahbar-api-candidate env updated
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/ragops-inspect --timeout=600s
+Waiting for deployment "ragops-inspect" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "ragops-inspect" rollout to finish: 1 old replicas are pending termination...
+deployment "ragops-inspect" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/rahbar-api --timeout=600s
+Waiting for deployment "rahbar-api" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "rahbar-api" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "rahbar-api" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "rahbar-api" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "rahbar-api" rollout to finish: 1 old replicas are pending termination...
+deployment "rahbar-api" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/rahbar-api-candidate --timeout=600s
+deployment "rahbar-api-candidate" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c from eval.cluster_job import check_models; check_models(); print("Both pinned model digests verified from inside Kubernetes")
+Both pinned model digests verified from inside Kubernetes
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+deployment/rahbar-api {"status": "ready", "checks": {"chroma": "ok", "redis": "ok"}, "index_revision": "dcfb2a4cde934baaaf968a2085aefa62", "configuration": {"retriever": "chroma", "llm_provider": "ollama-host", "llm_model": "llama3.2:3b", "embed_model": "nomic-embed-text", "embed_dim": 768, "collection": "rahbar_policies", "top_k": 5, "relevance_floor": 0.35, "cache_threshold": 0.9, "embed_version": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f", "temperature": 0.1, "generation_seed": 42}}
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/rahbar-api -- python -c import httpx,os; print(httpx.get(os.environ['OLLAMA_BASE_URL']+'/api/version').raise_for_status().text)
+{"version":"0.40.15"}
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api-candidate:8000/readyz
+deployment/rahbar-api-candidate {"status": "ready", "checks": {"chroma": "ok", "redis": "ok"}, "index_revision": "7903cb132cb44d44a4785a99b8d9bb15", "configuration": {"retriever": "chroma", "llm_provider": "ollama-host", "llm_model": "llama3.2:3b", "embed_model": "nomic-embed-text", "embed_dim": 768, "collection": "rahbar_policies_candidate", "top_k": 3, "relevance_floor": 0.35, "cache_threshold": 0.9, "embed_version": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f", "temperature": 0.1, "generation_seed": 42}}
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/rahbar-api-candidate -- python -c import httpx,os; print(httpx.get(os.environ['OLLAMA_BASE_URL']+'/api/version').raise_for_status().text)
+{"version":"0.40.15"}
+
+Both independently indexed lanes now use the same loopback-only Vulkan model server.
+exit 0

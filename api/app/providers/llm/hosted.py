@@ -16,10 +16,7 @@ class HostedProvider:
                  validation_error: str = '') -> Generation:
         if not self.settings.llm_api_key or not self.settings.hosted_base_url:
             raise RuntimeError('hosted mode requires LLM_API_KEY and HOSTED_BASE_URL')
-        prompt = messages(question, passages)
-        if validation_error:
-            prompt.append({'role': 'system', 'content': 'Previous output failed validation: '
-                           + validation_error + '. Return valid JSON and only evidence citations.'})
+        prompt = messages(question, passages, validation_error)
         # Groq, OpenRouter and Gemini OpenAI-compatible URLs are selected by configuration.
         with httpx.Client(timeout=120) as client:
             response = client.post(self.settings.hosted_base_url.rstrip('/')+'/chat/completions',

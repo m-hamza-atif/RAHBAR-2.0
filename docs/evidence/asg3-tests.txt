@@ -1,0 +1,47 @@
+........................................................................ [ 53%]
+.................................................ssssssss......          [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\scd a03\RAHBAR-2.0\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.14-final-0 _______________
+
+Name                                Stmts   Miss  Cover
+-------------------------------------------------------
+api\app\__init__.py                     0      0   100%
+api\app\config.py                      44      2    95%
+api\app\embeddings.py                  36      5    86%
+api\app\logjson.py                     25      1    96%
+api\app\main.py                        56      1    98%
+api\app\providers\__init__.py           0      0   100%
+api\app\providers\llm\__init__.py      15      7    53%
+api\app\providers\llm\base.py          13      0   100%
+api\app\providers\llm\hosted.py        20      0   100%
+api\app\providers\llm\ollama.py        29      5    83%
+api\app\providers\llm\stub.py          27      2    93%
+api\app\retrieval\__init__.py          11      4    64%
+api\app\retrieval\base.py               7      0   100%
+api\app\retrieval\chroma.py            60      3    95%
+api\app\retrieval\stub.py               9      0   100%
+api\app\routes\__init__.py              0      0   100%
+api\app\routes\ask.py                   9      0   100%
+api\app\routes\health.py               15      0   100%
+api\app\routes\metrics.py              50      0   100%
+api\app\schemas.py                     54      0   100%
+api\app\services\__init__.py            0      0   100%
+api\app\services\answer.py            148     10    93%
+api\app\services\cache.py              96     25    74%
+api\app\services\grounding.py          28      1    96%
+api\app\services\prompt.py             18      0   100%
+api\app\services\readiness.py          20      1    95%
+api\app\services\trace.py              75      7    91%
+-------------------------------------------------------
+TOTAL                                 865     74    91%
+Required test coverage of 60% reached. Total coverage: 91.45%
+=========================== short test summary info ===========================
+SKIPPED [3] scripts\tests\test_ci_tool_install.py:15: CI installer runs under Linux/bash
+SKIPPED [5] scripts\tests\test_ci_tool_install.py:73: CI installer runs under Linux/bash
+127 passed, 8 skipped, 1 warning in 198.55s (0:03:18)

@@ -1,0 +1,20 @@
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/rahbar-eval -o wide
+NAME          STATUS   COMPLETIONS   DURATION   AGE   CONTAINERS   IMAGES             SELECTOR
+rahbar-eval   Failed   0/1           9h         9h    eval         rahbar-eval:asg3   batch.kubernetes.io/controller-uid=1f3535c0-a4f0-46a1-9c9f-20a1fc342f83
+exit 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/rahbar-eval
+Results: /data/eval-results/20261125T215608Z-e5b77d428f66
+Traceback (most recent call last):
+  File "/app/eval/cluster_job.py", line 44, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/app/eval/cluster_job.py", line 30, in main
+    subprocess.run([sys.executable, "eval/run_eval.py", "--suite", "ragops", "--api",
+  File "/usr/local/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/local/bin/python', 'eval/run_eval.py', '--suite', 'ragops', '--api', 'http://rahbar-api:8000', '--golden', 'eval/golden.jsonl', '--embedding-pairs', 'eval/embedding_pairs.jsonl', '--stochasticity-check', '--out', '/data/eval-results/20261125T215608Z-e5b77d428f66/baseline.json']' died with <Signals.SIGTERM: 15>.
+exit 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deploy/ragops-inspect -- ls -l /data/eval-results/20261125T215608Z-e5b77d428f66
+total 4
+-rw-r--r-- 1 10001 10001 105 Nov 25 21:56 gate_config.yaml
+exit 0

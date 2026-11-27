@@ -6,6 +6,7 @@ from typing import Any
 from ..config import Settings
 from ..embeddings import backend, embed_query
 from ..schemas import Passage
+from ..services.trace import record_retrieval_filter
 
 log = logging.getLogger("rahbar.retrieval")
 
@@ -49,10 +50,14 @@ class ChromaRetriever:
             "collection_embed_dim": meta.get("embed_dim"),
             "api_embedding_backend": backend(self.settings),
             "collection_embedding_backend": meta.get("embedding_backend"),
+            "api_embed_version": self.settings.embed_version,
+            "collection_embed_version": meta.get("embed_version"),
         }
         if (meta.get("embed_model") != self.settings.embed_model
                 or meta.get("embed_dim") != self.settings.embed_dim
-                or meta.get("embedding_backend") != backend(self.settings)):
+                or meta.get("embedding_backend") != backend(self.settings)
+                or (self.settings.embed_version and
+                    meta.get("embed_version") != self.settings.embed_version)):
             log.error("embedding_pin_mismatch", extra=conflicts)
             raise RuntimeError("embedding pin mismatch: " + str(conflicts))
         if meta.get("index_state") != "ready" or not meta.get("index_revision"):
@@ -70,9 +75,11 @@ class ChromaRetriever:
             # Metadata editions can be YYYY, YYYY-MM, or a report period.
             versions = {m["doc_version"] for m in collection.get(include=["metadatas"])["metadatas"]
                         if str(m.get("doc_version", "")).startswith(scope)}
-            if not versions:
-                return []
             where = {"doc_version": {"$in": sorted(versions)}}
+            if not versions:
+                record_retrieval_filter(scope, where)
+                return []
+        record_retrieval_filter(scope, where)
         result = collection.query(query_embeddings=[embedding or embed_query(question, self.settings)],
             n_results=min(k, collection.count()), where=where,
             include=["documents", "metadatas", "distances"])
@@ -81,5 +88,7 @@ class ChromaRetriever:
                                             result["metadatas"][0], result["distances"][0]):
             score = max(0.0, min(1.0, 1-float(distance)))
             passages.append(Passage(chunk_id=key, text=text, source=meta["source"],
-                                    section=meta["section"], page=int(meta["page"]), score=score))
+                                    section=meta["section"], page=int(meta["page"]), score=score,
+                                    document_id=meta.get("document_id") or meta["source"],
+                                    document_version=meta.get("doc_version")))
         return passages

@@ -90,8 +90,14 @@ def run_pipeline(settings: IndexerSettings) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build the RAHBAR index, then exit.")
-    parser.add_argument("--dummy", action="store_true", help="write three fake chunks")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--dummy", action="store_true", help="write three fake chunks")
+    mode.add_argument("--incremental", action="store_true")
+    mode.add_argument("--rollback-doc")
+    parser.add_argument("--to-version")
     args = parser.parse_args()
+    if (args.rollback_doc is None) != (args.to_version is None):
+        parser.error("--rollback-doc and --to-version must be supplied together")
     configure_logging()
     try:
         settings = get_settings()
@@ -109,6 +115,10 @@ def main() -> int:
             from .dummy import DUMMY_CHUNKS, fake_vector
             from .store import store
             count = store(DUMMY_CHUNKS, [fake_vector(c.text) for c in DUMMY_CHUNKS], settings)
+        elif args.incremental or args.rollback_doc:
+            from .incremental import update
+            rollback = (args.rollback_doc, args.to_version) if args.rollback_doc else None
+            count = update(settings, rollback)
         else:
             count = run_pipeline(settings)
     except Exception as exc:

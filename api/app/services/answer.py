@@ -14,7 +14,9 @@ from ..routes import metrics
 from ..schemas import Answer, AskResponse, RetrievedRef, Passage
 from .cache import SemanticCache, follow_up
 from .readiness import check
-from .grounding import preserve_obligations
+from .grounding import preserve_obligations, protect_evidence
+from .prompt import POISON
+from .trace import CURRENT_TRACE, QueryTrace
 
 log = logging.getLogger('rahbar.answer')
 
@@ -39,43 +41,73 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
     passages: list[Passage] = []
     cached = False
     abstained = True
+    trace = QueryTrace(question, settings, provider.name)
+    trace.filters["retriever"] = retriever.name
+    trace_token = CURRENT_TRACE.set(trace)
+    status = 503
+    response: AskResponse | None = None
     try:
         checks, revision = check(retriever, cache)
         if not revision:
             raise HTTPException(503, detail={'checks': checks})
+        trace.record["index_revision"] = revision
         followup = bypass_cache or follow_up(question, history)
         # History is untrusted context, never system instructions; it is never cached.
         search_question = question
         if history:
             previous = [m['content'] for m in history if m.get('role') == 'user']
             search_question = (' '.join(previous[-2:])+' '+question).strip()
-        vector = embed_query(search_question, settings)
+        trace.record["rewritten_query"] = search_question
+        if POISON.search(search_question):
+            trace.actions.append({"action": "query_instruction_flagged", "source": "query"})
+            followup = True
+        with trace.stage("embed"):
+            vector = embed_query(search_question, settings)
         if not followup:
-            hit = cache.find(question, vector, revision)
+            with trace.stage("cache"):
+                hit = cache.find(question, vector, revision)
             if hit and retriever.snapshot() == revision:
                 cached = True
                 abstained = False
                 metrics.CACHE_HITS.inc()
                 metrics.update_cache_ratio()
                 passages = [Passage(**r.model_dump(), text='') for r in hit.retrieved]
-                return hit.model_copy(update={'request_id': request_id_var.get(), 'cached': True})
+                trace.record.update(cache_source_trace_id=hit.trace_id, generation_status="cache_hit",
+                                    generation_skip_reason="cached_response")
+                response = hit.model_copy(update={'request_id': request_id_var.get(), 'cached': True,
+                                                  'trace_id': trace.trace_id})
+                status = 200
+                return response
         metrics.CACHE_MISSES.inc()
         metrics.update_cache_ratio()
-        with metrics.RETRIEVAL.time():
-            passages = [p for p in retriever.retrieve(question, settings.top_k, vector)
-                        if p.score >= settings.relevance_floor]
+        with metrics.RETRIEVAL.time(), trace.stage("retrieve"):
+            retrieved = retriever.retrieve(question, settings.top_k, vector)
+        trace.record["retrieved_chunks"] = [
+            p.model_dump(exclude={"text"}) for p in retrieved]
+        trace.record["top1_similarity"] = max((p.score for p in retrieved), default=None)
+        with trace.stage("rerank"):
+            passages, actions = protect_evidence(
+                [p for p in retrieved if p.score >= settings.relevance_floor])
+        trace.actions.extend(actions)
+        trace.record["reranked_order"] = [p.chunk_id for p in passages]
+        trace.record["context_passages"] = [p.model_dump() for p in passages]
+        if not passages:
+            trace.record["generation_skip_reason"] = (
+                "guardrail_removed_all_context" if actions else
+                "below_relevance_floor" if retrieved else "no_retrieved_passages")
         if retriever.snapshot() != revision:
             raise HTTPException(503, detail='Index changed during retrieval; retry the question.')
         answer = abstention()
         validated = False
         if passages:
             error = ''
+            prompt_question = question
+            if history:
+                prompt_question += '\nUntrusted conversation context: '+json.dumps(history)
+            trace.record.update(generation_question=prompt_question, generation_status="failed")
             for attempt in range(2):
                 try:
-                    prompt_question = question
-                    if history:
-                        prompt_question += '\nUntrusted conversation context: '+json.dumps(history)
-                    with metrics.GENERATION.time():
+                    with metrics.GENERATION.time(), trace.stage("generate"):
                         generated = provider.generate(prompt_question, passages, error)
                     if isinstance(generated, Generation):
                         metrics.PROMPT_TOKENS.inc(max(0, generated.prompt_tokens))
@@ -88,6 +120,7 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
                             raw.model_dump_json() if isinstance(raw, Answer) else raw))
                     answer = validate_answer(raw, passages)
                     answer = validate_answer(preserve_obligations(answer, passages), passages)
+                    trace.record["generation_status"] = "completed"
                     validated = attempt == 0  # responses requiring correction are never cached
                     break
                 except Exception as exc:
@@ -102,6 +135,8 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
                         feedback = str(exc)
                     error = ('Output must match the Answer JSON schema and cite only supplied evidence. '
                              + feedback)
+                    trace.actions.append({"action": "generation_validation_failed",
+                                          "error_type": type(exc).__name__, "attempt": attempt + 1})
                     log.warning('generation_validation_failed', extra={'attempt': attempt+1,
                                                                      'error_type': type(exc).__name__})
                     if attempt == 1:
@@ -119,19 +154,35 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
         response = AskResponse(request_id=request_id_var.get(), answer=answer.answer,
             citations=answer.citations, answered_from_context=answer.answered_from_context,
             confidence=answer.confidence, retrieved=[RetrievedRef(**p.model_dump()) for p in passages],
-            provider=provider.name, cached=False)
-        # Never-cache rule: follow-ups, correction retries, and ungrounded answers are never cached
+            provider=provider.name, cached=False, trace_id=trace.trace_id)
+        # Only an already-sanitized, first-attempt grounded response is eligible.
         never_cache = followup or not validated or not answer.answered_from_context
         if not never_cache:
-            cache.put(question, vector, revision, response)
+            with trace.stage("cache"):
+                cache.put(question, vector, revision, response)
+        status = 200
         return response
-    except HTTPException:
+    except HTTPException as exc:
+        status = exc.status_code
+        trace.record["error"] = exc.detail
         raise
     except Exception as exc:
         log.error('query_dependency_failed', extra={'error_type': type(exc).__name__})
+        trace.record["error"] = type(exc).__name__
         raise HTTPException(503, detail='Query dependency unavailable; check /readyz.') from None
     finally:
+        CURRENT_TRACE.reset(trace_token)
+        trace.finish()
+        trace.record.update(status=status, cache_hit=cached)
+        if response is not None and status == 200:
+            trace.record.update(response=response.answer,
+                                citations=[citation.model_dump() for citation in response.citations],
+                                abstained=abstained)
+        metrics.observe_query_trace(trace.record)
+        if not trace.emit(settings.trace_dir):
+            metrics.TRACE_WRITE_FAILURES.inc()
         log.info('query_summary', extra={'top_k': settings.top_k,
+            'trace_id': trace.trace_id,
             'retrieved_chunk_ids': [p.chunk_id for p in passages],
             'similarity_scores': [round(p.score, 4) for p in passages],
             'cache_hit': cached, 'abstained': abstained})

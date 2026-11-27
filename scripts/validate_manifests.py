@@ -5,6 +5,8 @@ from pathlib import Path
 
 import yaml
 
+from validate_asg3 import check as validate_asg3
+
 
 def validate(docs, profile):
     by = {(d['kind'], d['metadata']['name']): d for d in docs}
@@ -96,6 +98,8 @@ def main():
         subprocess.run([args.kubeconform, '-strict', '-summary', '-kubernetes-version',
                         '1.32.0', str(output)], check=True)
         print(profile+': invariants and strict schema PASS')
+
+    validate_asg3(args.kubeconform)
 
 
 if __name__ == '__main__':

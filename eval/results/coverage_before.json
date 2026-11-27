@@ -1,0 +1,386 @@
+{
+  "golden_sha256": "2a19cfeb6c9b8781b71b97076ef036dc6fe1d0b4d32271a046c4356710b1b14f",
+  "live_sha256": "572100ddab4ae92ffe796153c85f346d336a0e8e3e865516536bf3baafad7e7d",
+  "embedding": {
+    "embed_model": "nomic-embed-text",
+    "llm_provider": "ollama-host",
+    "embed_dim": 768
+  },
+  "embedding_version": "sha256:0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+  "similarity_threshold": 0.78,
+  "coverage_threshold": 0.85,
+  "total": 40,
+  "covered": 28,
+  "coverage": 0.7,
+  "passed": false,
+  "uncovered_by_topic": {
+    "library printing": 2,
+    "lost property": 2,
+    "music equipment": 2,
+    "prayer room": 2,
+    "sports bookings": 2,
+    "visitor parking": 2
+  },
+  "rows": [
+    {
+      "id": "live01",
+      "question": "What is the usual weighting of semester work and the final exam in the final grade?",
+      "topic": "assessment",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q05",
+      "cosine": 0.9515129295278306,
+      "covered": true
+    },
+    {
+      "id": "live02",
+      "question": "Who approves changes to the normal 50/50 semester-work and final-exam split?",
+      "topic": "assessment",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q34",
+      "cosine": 0.93908738271381,
+      "covered": true
+    },
+    {
+      "id": "live03",
+      "question": "What minimum CGPA does an undergraduate need to avoid an academic warning?",
+      "topic": "academic-warning",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q01",
+      "cosine": 0.975254878992581,
+      "covered": true
+    },
+    {
+      "id": "live04",
+      "question": "What happens after three straight semesters with CGPA below 2.00?",
+      "topic": "academic-warning",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q39",
+      "cosine": 0.885204110031581,
+      "covered": true
+    },
+    {
+      "id": "live05",
+      "question": "Does the warning count reset if my CGPA reaches 2.00 after the second academic warning?",
+      "topic": "academic-warning",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q40",
+      "cosine": 0.8254557856848761,
+      "covered": true
+    },
+    {
+      "id": "live06",
+      "question": "When can someone on a second academic warning sign up for a new course?",
+      "topic": "registration",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q29",
+      "cosine": 0.9391275001134376,
+      "covered": true
+    },
+    {
+      "id": "live07",
+      "question": "Which students are allowed to register for a sixth course under the June 2026 rules?",
+      "topic": "registration",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q20",
+      "cosine": 0.8186173092714772,
+      "covered": true
+    },
+    {
+      "id": "live08",
+      "question": "Can a core course be replaced with another course?",
+      "topic": "registration",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q38",
+      "cosine": 0.8269886818480449,
+      "covered": true
+    },
+    {
+      "id": "live09",
+      "question": "How much attendance is required, and what percentage of absence can the HoD excuse?",
+      "topic": "attendance",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q03",
+      "cosine": 0.9446114724168424,
+      "covered": true
+    },
+    {
+      "id": "live10",
+      "question": "What happens if a student doesn't meet the attendance requirement for a course?",
+      "topic": "attendance",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q04",
+      "cosine": 0.9778145774689455,
+      "covered": true
+    },
+    {
+      "id": "live11",
+      "question": "What attendance does clause 1.21 require?",
+      "topic": "attendance",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q12",
+      "cosine": 0.9835094130696513,
+      "covered": true
+    },
+    {
+      "id": "live12",
+      "question": "What CGPA do I need to graduate as an undergraduate?",
+      "topic": "degree",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q02",
+      "cosine": 0.8043096587434403,
+      "covered": true
+    },
+    {
+      "id": "live13",
+      "question": "How long does a bachelor\u2019s degree take at minimum, and what is the maximum with an approved extension?",
+      "topic": "degree",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q27",
+      "cosine": 0.9495408508325003,
+      "covered": true
+    },
+    {
+      "id": "live14",
+      "question": "For a readmitted student keeping old credits, when does the degree-completion clock start?",
+      "topic": "degree",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q28",
+      "cosine": 0.8680609267020553,
+      "covered": true
+    },
+    {
+      "id": "live15",
+      "question": "How much is BBA or BS tuition per credit hour in 2026\u201327?",
+      "topic": "fees",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q06",
+      "cosine": 0.9585551908070878,
+      "covered": true
+    },
+    {
+      "id": "live16",
+      "question": "What percentage of tuition is refunded by the tenth day after classes start?",
+      "topic": "fees",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q07",
+      "cosine": 0.9652298491770378,
+      "covered": true
+    },
+    {
+      "id": "live17",
+      "question": "How many grade points is an A+ worth for a BBA or BS student?",
+      "topic": "grades",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q08",
+      "cosine": 0.9343734803549335,
+      "covered": true
+    },
+    {
+      "id": "live18",
+      "question": "What is the difference between SGPA and CGPA and how are course grades used?",
+      "topic": "grades",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q35",
+      "cosine": 0.9598177646983094,
+      "covered": true
+    },
+    {
+      "id": "live19",
+      "question": "Which grades count toward CGPA if I repeat a failed course versus taking another course instead?",
+      "topic": "grades",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q41",
+      "cosine": 0.9140432319655168,
+      "covered": true
+    },
+    {
+      "id": "live20",
+      "question": "May I enter confidential personal data in unsupported generative AI tools?",
+      "topic": "privacy",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q09",
+      "cosine": 0.8662255667272681,
+      "covered": true
+    },
+    {
+      "id": "live21",
+      "question": "What is the final day for withdrawing from a course?",
+      "topic": "withdrawal",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q36",
+      "cosine": 0.915013209490966,
+      "covered": true
+    },
+    {
+      "id": "live22",
+      "question": "Can students on university financial support withdraw from a course?",
+      "topic": "withdrawal",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q37",
+      "cosine": 0.950019148189888,
+      "covered": true
+    },
+    {
+      "id": "live23",
+      "question": "If I pass the lab but fail theory, which parts of the course do I repeat?",
+      "topic": "labs",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q32",
+      "cosine": 0.9339923878879433,
+      "covered": true
+    },
+    {
+      "id": "live24",
+      "question": "If I pass theory but fail the lab, which part do I have to repeat?",
+      "topic": "labs",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q32",
+      "cosine": 0.9560697220666919,
+      "covered": true
+    },
+    {
+      "id": "live25",
+      "question": "Under clause 4.6 can I drop only the lab and stay enrolled in theory?",
+      "topic": "labs",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q30",
+      "cosine": 0.8700184777052408,
+      "covered": true
+    },
+    {
+      "id": "live26",
+      "question": "In which semester does the final-year project start and how long does it run?",
+      "topic": "final-year-project",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q33",
+      "cosine": 0.90984712143741,
+      "covered": true
+    },
+    {
+      "id": "live27",
+      "question": "How can I request a late exam after missing it due to an unavoidable emergency?",
+      "topic": "exams",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q42",
+      "cosine": 0.8754046464685984,
+      "covered": true
+    },
+    {
+      "id": "live28",
+      "question": "What registration limits apply to students on academic warning under clause 4.4?",
+      "topic": "academic-warning",
+      "cohort": "in_domain",
+      "nearest_golden_id": "q15",
+      "cosine": 0.9638217285771463,
+      "covered": true
+    },
+    {
+      "id": "live29",
+      "question": "How do students book the campus table tennis room after classes?",
+      "topic": "sports bookings",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q04",
+      "cosine": 0.5889123900228562,
+      "covered": false
+    },
+    {
+      "id": "live30",
+      "question": "Can I reserve a table tennis slot on campus in the evening?",
+      "topic": "sports bookings",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q16",
+      "cosine": 0.5970671403391133,
+      "covered": false
+    },
+    {
+      "id": "live31",
+      "question": "What is the refundable deposit for borrowing a guitar from the university music club?",
+      "topic": "music equipment",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q07",
+      "cosine": 0.6175359619804166,
+      "covered": false
+    },
+    {
+      "id": "live32",
+      "question": "How much guitar deposit do I pay when I borrow from the campus music club?",
+      "topic": "music equipment",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q24",
+      "cosine": 0.5715356131276874,
+      "covered": false
+    },
+    {
+      "id": "live33",
+      "question": "How much does the university charge visitors for overnight campus parking?",
+      "topic": "visitor parking",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q24",
+      "cosine": 0.6429230927147578,
+      "covered": false
+    },
+    {
+      "id": "live34",
+      "question": "What is the overnight parking fee for a visitor\u2019s car on campus?",
+      "topic": "visitor parking",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q22",
+      "cosine": 0.639827778908859,
+      "covered": false
+    },
+    {
+      "id": "live35",
+      "question": "What is the campus library\u2019s price per page for colour printing?",
+      "topic": "library printing",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q14",
+      "cosine": 0.6132515245629286,
+      "covered": false
+    },
+    {
+      "id": "live36",
+      "question": "How much does the library charge students to print one colour page?",
+      "topic": "library printing",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q14",
+      "cosine": 0.564917549810624,
+      "covered": false
+    },
+    {
+      "id": "live37",
+      "question": "How long does the university lost-and-found keep an unclaimed item?",
+      "topic": "lost property",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q28",
+      "cosine": 0.5686030354263115,
+      "covered": false
+    },
+    {
+      "id": "live38",
+      "question": "When does the campus lost property office dispose of unclaimed belongings?",
+      "topic": "lost property",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q36",
+      "cosine": 0.6111180276433518,
+      "covered": false
+    },
+    {
+      "id": "live39",
+      "question": "Which hours is the campus prayer room open on Saturdays?",
+      "topic": "prayer room",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q16",
+      "cosine": 0.6246934557900043,
+      "covered": false
+    },
+    {
+      "id": "live40",
+      "question": "What time does the campus prayer room open and close on Saturday?",
+      "topic": "prayer room",
+      "cohort": "coverage_gap",
+      "nearest_golden_id": "q16",
+      "cosine": 0.6084857615142739,
+      "covered": false
+    }
+  ]
+}

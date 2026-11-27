@@ -10,6 +10,11 @@ kubeconfig
 
 # Corpus files you did not write: commit corpus/MANIFEST.md and corpus/fetch.py instead
 corpus/raw/
+corpus/data_lake/
+corpus/quarantine/
+corpus/archive/
+corpus/reports/
+traces/
 
 # Python
 __pycache__/
@@ -38,3 +43,8 @@ corpus/**/*.pdf
 .tools/
 .artifacts/
 k8s/overlays/local/
+
+!VIVA_GUIDE_PARTNER_B.md
+!traces/
+traces/*
+!traces/asg3-*.jsonl

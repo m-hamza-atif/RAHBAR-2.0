@@ -147,15 +147,30 @@ def gate(results: dict, baseline: dict | None) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Evaluate RAHBAR against a golden set.")
     parser.add_argument("--api", required=True, help="base URL, e.g. http://192.168.49.2")
+    parser.add_argument("--suite", choices=("legacy", "ragops"), default="legacy")
     parser.add_argument("--host", help="Host header, when your Ingress rule names a host")
     parser.add_argument('--use-cache', action='store_true', help='include cache in evaluation; default bypasses it')
     parser.add_argument('--timeout', type=float, default=300.0, help='per-request timeout including model loading/retry')
-    parser.add_argument("--golden", type=Path, default=HERE / "golden.yaml")
+    parser.add_argument("--golden", type=Path)
     parser.add_argument("--baseline", type=Path, default=HERE / "baseline.json")
-    parser.add_argument("--out", type=Path, default=HERE / "results.json")
+    parser.add_argument("--out", type=Path)
+    parser.add_argument("--embedding-pairs", type=Path, default=HERE / "embedding_pairs.jsonl")
+    parser.add_argument("--stochasticity-check", action="store_true")
+    parser.add_argument("--cluster-retry", action="store_true",
+                        help="retry brief dependency outages and retain the first scored pass")
     parser.add_argument("--update-baseline", action="store_true",
                         help="write these results as the new baseline")
     args = parser.parse_args()
+    if args.suite == "ragops":
+        from ragops_eval import run
+
+        if args.update_baseline:
+            parser.error("RAGOps compares independently saved reports through release_gate.py")
+        return run(args)
+    if args.cluster_retry:
+        parser.error("--cluster-retry requires --suite ragops")
+    args.golden = args.golden or HERE / "golden.yaml"
+    args.out = args.out or HERE / "results.json"
 
     questions = load_golden(args.golden)
     rows = []

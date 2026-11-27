@@ -152,3 +152,38 @@ Temporary verification servers were stopped after testing and model memory was
 unloaded. Start the service explicitly with the runbook when needed. Obsolete
 phase2/phase3 smoke collections have been retired; use the current CI collection
 above or the real-model production collection in EVALUATION.md.
+
+## Assignment 03 query traces
+
+Every processed `POST /api/ask` creates a server-generated `trace_id`. Successful
+responses expose it alongside `request_id`. The API emits the same JSONL record
+to stdout and `$TRACE_DIR/queries.jsonl` (default `./traces`). Set
+`TRACE_DIR=/data/traces` in Kubernetes and mount writable storage that supports
+atomic append by the API replicas. Keep traces internal because they include
+the user query, exact model context and response. A sink failure is counted by
+`rahbar_trace_write_failures_total`.
+
+```bash
+uv run python scripts/inspect_trace.py --trace-id "$TRACE_ID"
+uv run python scripts/summarize_traces.py --minutes 60
+```
+
+The inspector shows the context after relevance filtering and guardrail
+removal, followed by the exact model messages and each retry. Cache hits link
+to the producing trace when that record is still available. Early abstentions
+and stub results can have no model prompt. The API filters flagged instructions
+from evidence before generation and records each affected chunk.
+
+For a Prometheus window, use the top-1 histogram to get median and mean and
+the stage histogram to get p95 by stage. Process-local top-1 gauges expose
+minimum and maximum since startup. Skipped stages do not contribute latency
+samples. The trace CLI computes the same statistics directly over the chosen
+window and uses successful query responses as the rate denominator.
+
+```promql
+histogram_quantile(0.50, sum by (le) (rate(rahbar_top1_similarity_bucket[5m])))
+sum(rate(rahbar_top1_similarity_sum[5m])) / sum(rate(rahbar_top1_similarity_count[5m]))
+histogram_quantile(0.95, sum by (stage, le) (rate(rahbar_query_stage_seconds_bucket[5m])))
+sum(rate(rahbar_query_outcomes_total{outcome="abstained"}[5m])) / sum(rate(rahbar_query_outcomes_total{outcome=~"answered|abstained"}[5m]))
+sum(rate(rahbar_cache_hits_total[5m])) / sum(rate(rahbar_query_outcomes_total{outcome=~"answered|abstained"}[5m]))
+```

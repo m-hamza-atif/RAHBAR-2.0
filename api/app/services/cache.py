@@ -58,6 +58,8 @@ class SemanticCache:
         s = self.settings
         identity = ["cache-v1", s.collection, revision, s.embed_model, s.embed_dim, s.llm_provider,
                     s.llm_model, s.top_k, s.relevance_floor, s.temperature]
+        if s.generation_seed is not None:
+            identity.append(s.generation_seed)
         return 'rahbar:cache:' + hashlib.sha256(json.dumps(identity).encode()).hexdigest() + ':'
 
     def find(self, question: str, vector: list[float], revision: str) -> AskResponse | None:

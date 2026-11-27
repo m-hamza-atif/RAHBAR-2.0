@@ -1,0 +1,1023 @@
+{
+  "schema": "ragops-v1",
+  "configuration": {
+    "retriever": "chroma",
+    "llm_provider": "ollama-host",
+    "llm_model": "llama3.2:3b",
+    "embed_model": "nomic-embed-text",
+    "embed_dim": 768,
+    "collection": "ragops-phase3",
+    "top_k": 1,
+    "relevance_floor": 0.99,
+    "cache_threshold": 0.9,
+    "embed_version": "sha256:0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "temperature": 0.1,
+    "generation_seed": 42
+  },
+  "index_revision": "1b00d39fa3f64b17a508110be55d33cf",
+  "golden_sha256": "2a19cfeb6c9b8781b71b97076ef036dc6fe1d0b4d32271a046c4356710b1b14f",
+  "pairs_sha256": "4d8199ced9bd45334d340d4d8d4fed7bb854d5a21518e6e30499a6ac432b6976",
+  "cache_bypass": true,
+  "annotation_status": {
+    "human_written": 8,
+    "synthetic_reviewed": 0
+  },
+  "embedding": {
+    "paraphrase_mean_cosine": 0.6985103147421976,
+    "unrelated_mean_cosine": 0.41136108624206846,
+    "separation_gap": 0.28714922850012914,
+    "mean_embedding_ms": 45.29194666687949,
+    "max_absolute_repeat_difference": 0.0,
+    "pair_counts": {
+      "paraphrase": 15,
+      "unrelated": 15
+    }
+  },
+  "retrieval": {
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_5": 0.0
+  },
+  "noise": {
+    "rows": [
+      {
+        "id": "q01",
+        "question": "What mniimum CGPA must an undergraduate maintain to avoid academic warning?",
+        "clean": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "noisy": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      },
+      {
+        "id": "q06",
+        "question": "What is the tiution fee per credit hour for BBA and BS in academic year 2026-27?",
+        "clean": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "noisy": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      },
+      {
+        "id": "q12",
+        "question": "What does Caluse 1.21 require about attendance?",
+        "clean": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "noisy": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        },
+        "delta": {
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "mrr": 0.0,
+          "ndcg_at_5": 0.0
+        }
+      }
+    ],
+    "mean_delta": {
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_5": 0.0
+    }
+  },
+  "end_to_end": {
+    "faithfulness": 0,
+    "faithfulness_method": "reference_facts_and_gold_page_citation",
+    "citation_validity": null,
+    "citation_count": 0,
+    "abstention_correctness": 1,
+    "p50_latency_ms": 277.91069999966567,
+    "p95_latency_ms": 330.4127999999764
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "response": {
+        "request_id": "32ffcdfcb9d341edbb9519a2f5f19722",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "b9f0a6acd1e444b8a3a2c7c42b0dcbc4"
+      },
+      "latency_ms": 323.25029999992694,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q02",
+      "response": {
+        "request_id": "658499e36d4b451b894c8107102fd72b",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "9c285b761e63465385ea2686c5a27cb0"
+      },
+      "latency_ms": 279.9599000009039,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q03",
+      "response": {
+        "request_id": "34d8442573ee460c967576862570b344",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "b518341816404487a70c30babb86a28d"
+      },
+      "latency_ms": 248.623100000259,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q04",
+      "response": {
+        "request_id": "9e7d726d636b4b4aa7910bb254220a9d",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "c369562d7241491d9c2bd1142e6411b4"
+      },
+      "latency_ms": 210.60769999894546,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q05",
+      "response": {
+        "request_id": "9384b281a26e4a02ab30d13ca002b6f1",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "d8b2ef4628a24d2f8bb00a272c527b49"
+      },
+      "latency_ms": 228.29710000041814,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q06",
+      "response": {
+        "request_id": "f2c9c1ec009c47deb434407b65619ab7",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "513537f8d90d452c9d5943efd832a563"
+      },
+      "latency_ms": 277.86939999896276,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q07",
+      "response": {
+        "request_id": "23e035bac34e40d59f4d938d5d91c313",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "ad084e2fccd74af5bb6c621f2b21e820"
+      },
+      "latency_ms": 209.34239999951387,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q08",
+      "response": {
+        "request_id": "607434a29a254377800c38ff6f23aa9e",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "00f6219733e8457d95b1c29402fb17b8"
+      },
+      "latency_ms": 224.46209999907296,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q09",
+      "response": {
+        "request_id": "e8a9b5e39369444b84c292e902ff5676",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "30a52b7c14034604b0f41833ac4edb47"
+      },
+      "latency_ms": 228.9318999992247,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q10",
+      "response": {
+        "request_id": "fd36edc0ab7c40f8a4ca0027ee69c9c3",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "66472d20c9f444888252f43582a82e21"
+      },
+      "latency_ms": 320.9621000005427,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q11",
+      "response": {
+        "request_id": "e5561511083546cf956404cd2a97358a",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "7738133a679b44e485e00eab4af96199"
+      },
+      "latency_ms": 327.64959999985876,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q12",
+      "response": {
+        "request_id": "ccd52596c4324017a033325b60c7f5af",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "d3d4c8a0e2c848cba503901afa593a1e"
+      },
+      "latency_ms": 250.49599999874772,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q13",
+      "response": {
+        "request_id": "b8e42241301141a29f87db8a67efb01a",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "6c1d2b36cd91455bbaf0971132cf5de8"
+      },
+      "latency_ms": 275.3169000006892,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q14",
+      "response": {
+        "request_id": "6ac74b1ce1d34b9484d31a6c60076a36",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "7c62b073c6f248c183363b5429579f1d"
+      },
+      "latency_ms": 305.4578000010224,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q15",
+      "response": {
+        "request_id": "be74817285c84bf0a9619e0139e6bb9a",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "5c5ada1e47c14725bd6f3fc2e24669b3"
+      },
+      "latency_ms": 242.28770000081568,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q16",
+      "response": {
+        "request_id": "20e3b2aab4c440878a943df0d00cead2",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "f14fec53f3274beaa44bfbe84a67fdc5"
+      },
+      "latency_ms": 287.26479999932053,
+      "correct_abstention": true
+    },
+    {
+      "id": "q17",
+      "response": {
+        "request_id": "661b38048547463983361f536c32f1e8",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "1d247fc173594499bbc00ab5cac6edff"
+      },
+      "latency_ms": 292.76519999984885,
+      "correct_abstention": true
+    },
+    {
+      "id": "q18",
+      "response": {
+        "request_id": "9cf9b8d6d1da4dfdb6a0c2720f671ad3",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "244928e466c04853a5f2880cdea5766c"
+      },
+      "latency_ms": 320.74269999975513,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q19",
+      "response": {
+        "request_id": "b312a0e19b7b4e108ddb83c67d494028",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "2866240baa684218b0a56985d0743248"
+      },
+      "latency_ms": 342.23949999977776,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q20",
+      "response": {
+        "request_id": "7eb0eeae80f64cf08cf0c07b89b99119",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "b851338e5e4d4b67a19c1c31a87304bf"
+      },
+      "latency_ms": 319.4175999997242,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q21",
+      "response": {
+        "request_id": "a788da5617b74193ad1db7d46d420b28",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "4cf348ee4c094c539f09bb75881554d2"
+      },
+      "latency_ms": 251.29050000032294,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q22",
+      "response": {
+        "request_id": "1f0adfb161e442bca33a74ff9d59a03f",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "dc85fa2830d948cbafec93e066e616a0"
+      },
+      "latency_ms": 284.8462000001746,
+      "correct_abstention": true
+    },
+    {
+      "id": "q23",
+      "response": {
+        "request_id": "1f7f73bbd8644f57be5c1b7823b71ff5",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "ced1a66322c046bbb3d89aa5b4a2d875"
+      },
+      "latency_ms": 284.8039999989851,
+      "correct_abstention": true
+    },
+    {
+      "id": "q24",
+      "response": {
+        "request_id": "3270223310b640428123415625c6eb20",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "a597daf9da834dcebff86e992ae7f82f"
+      },
+      "latency_ms": 257.85929999983637,
+      "correct_abstention": true
+    },
+    {
+      "id": "q25",
+      "response": {
+        "request_id": "0b66e276273c42e7a7e3494748784457",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "25e6edfe61694abc93b39f065c292fda"
+      },
+      "latency_ms": 277.95200000036857,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q26",
+      "response": {
+        "request_id": "c93787674f3f403599d830127b5a007f",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "368eb70eaedb46f0b2faa6d37b347c73"
+      },
+      "latency_ms": 330.4127999999764,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q27",
+      "response": {
+        "request_id": "5e1c849166f84dd4943827ae834a8e4a",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "1505656cf91f42dabd0c7183d21cd3ec"
+      },
+      "latency_ms": 295.94300000098883,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q28",
+      "response": {
+        "request_id": "01a08b39a81644eb8174612ed108a0cf",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "b1a571cc80ca4d9990a1ce8948cfdec4"
+      },
+      "latency_ms": 286.7192999983672,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q29",
+      "response": {
+        "request_id": "0fc8dc928bc64d4d9fcc27a690cb2bb1",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "0238353a7b22472e94dd1b2f90d7186f"
+      },
+      "latency_ms": 327.6089000009961,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q30",
+      "response": {
+        "request_id": "b3903eb7eeca49429efc05b1d5d233af",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "cc1d7c3031654169b15734c8328a34fc"
+      },
+      "latency_ms": 235.74459999872488,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q31",
+      "response": {
+        "request_id": "1b84b3bfa9f34f27b579f9a6c199ab3c",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "fbebe79325574dd1be60c5d68be4ce5b"
+      },
+      "latency_ms": 257.52420000026177,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q32",
+      "response": {
+        "request_id": "d963fb6131844b4187bc2bc45c4023d1",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "46bf10a994fd4e5082b6f4d46a1eb66b"
+      },
+      "latency_ms": 250.74150000000373,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q33",
+      "response": {
+        "request_id": "a8486132ceb944a49b87da1009576efa",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "4ba3a03621f44244bd552bcac461195a"
+      },
+      "latency_ms": 268.53139999911946,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q34",
+      "response": {
+        "request_id": "4a3bcd2f5db94320b3712f5dbd95af51",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "cd9e30eeedeb473e8a243d19a6ee5ae3"
+      },
+      "latency_ms": 375.92700000095647,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q35",
+      "response": {
+        "request_id": "9a7966af63f14cdb88529d703c5a5d79",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "58da54ef0fc04e7ab73a7f1331384073"
+      },
+      "latency_ms": 277.3592000012286,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q36",
+      "response": {
+        "request_id": "2020d723ed7d4297bc11947de76b4cfb",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "6a8204f794b044ebb7820483a1b2a7e9"
+      },
+      "latency_ms": 259.23839999995835,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q37",
+      "response": {
+        "request_id": "b507a9b66b4345caa156e6d0dfd9739d",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "e62cb2924e2b4cb7832e4fe43685017a"
+      },
+      "latency_ms": 291.06550000142306,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q38",
+      "response": {
+        "request_id": "4ccc8916ddc54e71940cf82d4e115f66",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "8ee739e57d9e4eea86fd992b3af4b5fd"
+      },
+      "latency_ms": 245.11600000005274,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q39",
+      "response": {
+        "request_id": "114aa85a68ea4f60a4769f2fc3e7eb21",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "410629fc73d14e8c91dba878f3457012"
+      },
+      "latency_ms": 249.28989999898477,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q40",
+      "response": {
+        "request_id": "5fd4723376c2415b99921f72425d15a2",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "db68423070ad4965991bc122d15856af"
+      },
+      "latency_ms": 255.85820000014792,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q41",
+      "response": {
+        "request_id": "4eb99001134e4ca0b9d0ab2f64c70a3a",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "a28a2edf833f4922ab6bb7ec52c81988"
+      },
+      "latency_ms": 292.4110000003566,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    },
+    {
+      "id": "q42",
+      "response": {
+        "request_id": "8ee1dd5fcf4f4694bb4ec181efabee24",
+        "answer": "The available corpus does not cover the requested information.",
+        "citations": [],
+        "answered_from_context": false,
+        "confidence": "low",
+        "retrieved": [],
+        "provider": "ollama",
+        "cached": false,
+        "trace_id": "3d4be07edbbc442395367ef55b36c41f"
+      },
+      "latency_ms": 283.52539999832516,
+      "retrieval": {
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_5": 0.0
+      },
+      "faithful": false
+    }
+  ]
+}
