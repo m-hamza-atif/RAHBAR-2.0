@@ -1,0 +1,5 @@
+FAIL  max_recall5_drop             1.0000 <= 0.0200
+FAIL  min_faithfulness             0.0000 >= 0.7000
+PASS  max_p95_latency_ms           4937.8939 <= 20000.0000
+PASS  min_abstention_correctness   1.0000 >= 0.8000
+Release gate: FAIL
