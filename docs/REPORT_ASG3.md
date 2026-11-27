@@ -77,13 +77,13 @@ Source `docs/TRACE_ROOT_CAUSE_D5.md`. In a 60-minute cluster window, two academi
 
 | Workload | CPU request / limit | Memory request / limit | Measurement basis |
 |---|---:|---:|---|
-| Stable and candidate API, each | 100m / 500m | 128 / 512 Mi | Stable reached 489m / 114 Mi, candidate 32m / 100 Mi during the measured request and rollout windows. The 500m cap accommodates the startup burst. |
+| Stable and candidate API, each | 100m / 500m | 128 / 512 Mi | Stable reached 489m / 114 Mi, candidate 59m / 100 Mi during the measured request and rollout windows. The 500m cap accommodates the startup burst. |
 | Chroma | 250m / 1000m | 256 / 1024 Mi | Indexing and queries reached 201m / 120 Mi. The 250m CPU reservation covers this sampled demand. |
 | Redis | 100m / 500m | 64 / 256 Mi | Cache and lease activity reached 280m / 16 Mi. The 500m limit accommodates short CPU bursts. |
 | Ingestion and schedule | 750m / 1500m | 512 / 1536 Mi | Stable ingestion reached 1499m and 346 Mi. Increase the request from 250m to reserve half the measured CPU peak while allowing OCR to use the full limit. |
-| Evaluation | 100m / 500m | 128 / 384 Mi | Early active sample reached 141m / 42 Mi. The 500m limit allows CPU bursts above the request. |
+| Evaluation | 100m / 500m | 128 / 384 Mi | Early active sample reached 141m / 44 Mi. The 500m limit allows CPU bursts above the request. |
 
-The two independent Batch A Jobs embedded 875 chunks each and left zero orphans. The stable unchanged rerun embedded zero in 3.3 s. In a third lake, Batch B quarantined five files and embedded six chunks. The archive Job restored the June handbook, with zero newly embedded chunks. Concurrent requests completed on both Services (184.10 s stable and 211.73 s candidate). These timings include workload contention. Four Jobs replaying the archived 42-question scores produced PASS, latency FAIL after patch, restored PASS and degraded FAIL on the same evaluator image. The first fresh 48-question Job received SIGTERM on Docker shutdown before it wrote scores. The recovery Job `rahbar-eval-b2c5797b45` scored all 48 stable questions in its first pass. A Redis restart returned HTTP 503 during the repeat, before the reports and gate were written. Its stable timings are workload observations. The current evaluator preserves first-pass reports and includes bounded dependency retry time in latency.
+The two independent Batch A Jobs embedded 875 chunks each and left zero orphans. The stable unchanged rerun embedded zero in 3.3 s. In a third lake, Batch B quarantined five files and embedded six chunks. The archive Job restored the June handbook, with zero newly embedded chunks. The CronJob controller launched a repeat on the isolated lake and produced zero new chunks and zero orphans. Concurrent requests completed on both Services (184.10 s stable and 211.73 s candidate). These timings include workload contention. Four Jobs replaying the archived 42-question scores produced PASS, latency FAIL after patch, restored PASS and degraded FAIL on the same evaluator image. The first fresh 48-question Job received SIGTERM on Docker shutdown before it wrote scores. The recovery Job `rahbar-eval-b2c5797b45` scored all 48 stable questions in its first pass. A Redis restart returned HTTP 503 during the repeat, before the reports and gate were written. All 48 first-pass stable requests exceeded 20 s, with p95 111.50 s. The current evaluator preserves first-pass reports and includes bounded dependency retry time in latency. A separate Windows Intel Vulkan replay of one recorded prompt took 71.41 s cold and 21.46 s warm with the same model and prompt options.
 
 ## 4. Short answers
 
@@ -218,3 +218,15 @@ Each image is a full-screen capture of the interactive xterm running the display
 **F3 · Restored index, embedding and query configuration.** The operator inspected the before, defective and restored trace records in order.
 
 ![Verified trace fields from each release stage](../appendix-screenshots/cluster/restored-trace.png)
+
+**F2 · Genuine 48-question degraded scoring Job.** This Job scored k1/floor 0.99 on a separate API Service. The paired gate compares these scores with the current stable report.
+
+![Degraded evaluator’s complete terminal output](../appendix-screenshots/cluster/quality-degraded-score-458eb765.png)
+
+**F2 · Scheduled writer.** Kubernetes automatically created this Job from the isolated CronJob template.
+
+![Automatically scheduled writer’s complete terminal output](../appendix-screenshots/cluster/quality-asg3-schedule-proof-29929280.png)
+
+**F2 · Recovery from a temporary dependency outage.** The new evaluator retried the isolated Service after an observed connection timeout.
+
+![Cluster Job recovered and returned a fresh trace](../appendix-screenshots/cluster/quality-verify-retry-87def221.png)

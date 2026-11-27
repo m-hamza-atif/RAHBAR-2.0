@@ -1,0 +1,29 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u .artifacts/test_service_recovery.py
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar scale deployment/rahbar-api-degraded --replicas=1
+deployment.apps/rahbar-api-degraded scaled
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/rahbar-api-degraded --timeout=600s
+Waiting for deployment "rahbar-api-degraded" rollout to finish: 0 of 1 updated replicas are available...
+deployment "rahbar-api-degraded" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api-degraded:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar get service/rahbar-api-degraded -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar patch service/rahbar-api-degraded --type=merge --patch-file .artifacts\retry-service-patch.json
+service/rahbar-api-degraded patched
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/verify-retry-87def221 created
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar patch service/rahbar-api-degraded --type=merge --patch-file .artifacts\retry-service-patch.json
+service/rahbar-api-degraded patched
+
+Waiting for Job verify-retry-87def221 to complete or fail.
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/verify-retry-87def221
+Brief API dependency outage (ConnectTimeout); retrying
+API recovered and returned a new abstention trace: 390598a2f1214ab29c2d4d078df9e8c6
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar scale deployment/rahbar-api-degraded --replicas=0
+deployment.apps/rahbar-api-degraded scaled
+
+exit 0

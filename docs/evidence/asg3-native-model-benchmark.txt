@@ -1,0 +1,16 @@
+Loopback-only portable Windows inference replay using the exact API prompt, schema, model options and seed from cluster trace 7d5d7fff6ee3440cbdd44577aeee8337. The CPU cluster comparison was active during this separate check.
+Portable release asset SHA-256 verified against upstream v0.40.15 metadata.
+Portable runtime version {'version': '0.40.15'}
+Portable runtime version {'version': '0.40.15'}
+Verified pinned V2 manifest copied llama3.2:3b a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72
+Verified pinned V2 manifest copied nomic-embed-text:latest 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
+Portable runtime version {'version': '0.40.15'}
+Both digests match the assignment manifest.
+cold wall seconds 71.406 prompt tokens 1488 answer tokens 171
+model allocation [('llama3.2:3b', 3034956430, 3034956430)]
+valid structured output True
+warm wall seconds 21.457 prompt tokens 1488 answer tokens 171
+model allocation [('llama3.2:3b', 3034956430, 3034956430)]
+valid structured output True
+time=2026-11-27T10:12:03.864+05:00 level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=Vulkan compute=0.0 name=Vulkan0 description="Intel(R) Iris(R) Xe Graphics" libdirs=ollama,vulkan driver=0.0 pci_id="" type=iGPU total="7.9 GiB" available="7.2 GiB"
+load_tensors: offloaded 29/29 layers to GPU

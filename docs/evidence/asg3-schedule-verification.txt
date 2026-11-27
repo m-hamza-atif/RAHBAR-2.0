@@ -1,0 +1,31 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u .artifacts/test_scheduler.py
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar apply -f -
+cronjob.batch/asg3-schedule-proof created
+$ kubectl --context kind-rahbar-asg3 -n rahbar patch cronjob/asg3-schedule-proof --type=merge --patch-file .artifacts\test-schedule-patch.json
+cronjob.batch/asg3-schedule-proof patched
+
+CronJob created the Job automatically: asg3-schedule-proof-29929280
+Waiting for Job asg3-schedule-proof-29929280 to complete or fail.
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/asg3-schedule-proof-29929280
+{"ts": "2026-11-27T05:20:28Z", "logger": "rahbar.indexer", "msg": "indexer starting", "dummy": false, "embed_model": "nomic-embed-text", "collection": "drift_bcf7357e1f", "chroma": "chroma:8000", "pod": "asg3-schedule-proof-29929280-fqgsk"}
+Document                                                Disposition  Quality Completeness Recency Uniqueness
+01-registration.md                                      active       pass    pass         pass    pass
+02-library.md                                           active       pass    pass         pass    pass
+03-lab.md                                               active       pass    pass         pass    pass
+04-scholarships.md                                      active       pass    pass         pass    pass
+05-injection.md                                         active       pass    pass         pass    pass
+academic-rules-handbook-jun-2026.pdf                    active       pass    pass         pass    pass
+annual-report-2019-20.pdf                               active       pass    pass         pass    pass
+annual-report-2023-24.pdf                               active       pass    pass         pass    pass
+faculty-entrepreneurship-and-technical-start-ups-policy.pdf active       pass    pass         pass    pass
+fee-structure-page.html                                 active       pass    pass         pass    pass
+grading-page.html                                       active       pass    pass         pass    pass
+prospectus-2026-academic-rules-and-regulations.pdf      active       pass    pass         pass    pass
+scanned=12 quarantined=0 unchanged=12 updated=0 deleted=0 chunks_embedded=0 orphan_chunks=0
+{"ts": "2026-11-27T05:20:37Z", "logger": "rahbar.indexer", "msg": "indexer finished", "chunks": 881, "seconds": 8.8}
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar get cronjob/ragops-reindex -o json
+Automatic schedule verified on isolated storage; the weekly serving writer remains suspended for evaluation.
+exit 0
