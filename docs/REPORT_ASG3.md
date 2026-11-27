@@ -1,10 +1,12 @@
 # RAHBAR 2.0 · Assignment 03 — RAGOps
 
 **National University of Computer and Emerging Sciences, Islamabad**
+
 Department of Software Engineering · CS4032 Software Construction and Development · Fall 2026
+
 **M. Hamza Atif (24I-3160) · M. Huzaima (24I-3014)**
 
-**Decision under review.** Partner A’s 42-question local experiment accepted the higher retrieval floor and rejected a deliberately degraded pipeline. The current golden set has 48 questions. The Kubernetes release requires a new compatible pair of reports. The two experiments use separate result series.
+**Submission · 27 November 2026.** The normal Kubernetes candidate completed the 48-question comparison and was rejected because p95 latency was 48.66 s against a 20 s limit. The stable revision remains in service. Partner A’s separate 42-question local comparison produced a passing candidate.
 
 ## 1. Lifecycle mapping
 
@@ -34,7 +36,7 @@ Faithfulness ≥0.70 holds the reference score near the observed local baseline 
 
 ## 3. Experimental results
 
-**Parts A and E · local data changes.** Batch B supplied 11 synthetic inputs. Of 18 active-lake files scanned, seven were unchanged, six updated, five quarantined, six chunks embedded and zero orphans remained. The June academic handbook moved to the archive. A second run on identical input is shown in Appendix A2. The expected behavior for deletion, updates and restore is exercised by `indexer/tests/test_incremental.py`.
+**Parts A and E · local data changes.** Batch B supplied 11 synthetic inputs. Of 18 active-lake files scanned, seven were unchanged, six updated, five quarantined, six chunks embedded and zero orphans remained. The June academic handbook moved to the archive. A second run on identical input is shown in Appendix A2. An isolated Kubernetes archive restoration reactivated the June edition with zero new chunks. The expected behavior for deletion, updates and restore is exercised by `indexer/tests/test_incremental.py`.
 
 | Frozen 42-question drift comparison | Batch A | After Batch B |
 |---|---:|---:|
@@ -45,7 +47,7 @@ Faithfulness ≥0.70 holds the reference score near the observed local baseline 
 
 ![Local experiments. Recall and faithfulness fell after Batch B, while adding six golden questions raised coverage from 28 of 40 to 40 of 40.](figures/ragops-local-results.png)
 
-The fictional November edition omitted previously labeled sections. Historical filtering uses years, so a month-specific question can retrieve the wrong edition. Coverage at cosine ≥0.78 rose from **28/40 (70%)** to **40/40 (100%)** after six questions addressing printing, lost property, music equipment, prayer rooms, sports bookings and visitor parking. The target was 85%. Sources are `docs/RAGOPS_DRIFT.md` and `eval/results/coverage_{before,after}.json`.
+The fictional November edition omitted previously labeled sections. Historical filtering uses years, so a month-specific question can retrieve the wrong edition. Coverage at cosine ≥0.78 rose from **28/40 (70%)** to **40/40 (100%)** after six questions addressing printing, lost property, music equipment, prayer rooms, sports bookings and visitor parking. The coverage target was 85%. The 0.78 cosine cutoff admits semantically similar questions when their wording differs. The in-cluster checker reproduced both coverage counts and decisions. Sources are `docs/RAGOPS_DRIFT.md` and `eval/results/coverage_{before,after}.json`.
 
 **Parts B and C · Partner A’s local comparison.** Each column uses the same 42 questions and embedding-pair hash. Each embedding group contained 15 pairs. The current 48-question dataset contains eight human-authored items and eight reviewed synthetic items.
 
@@ -61,9 +63,35 @@ The fictional November edition omitted previously labeled sections. Historical f
 | End-to-end p50 / p95, seconds | 3.58 / 7.42 | 5.01 / 10.85 | 0.28 / 0.33 |
 | Local release gate | Reference | Pass, all four rules | Reject, recall and faithfulness |
 
-Three typo probes produced zero mean change on all four retrieval metrics. Repeating the stable suite with seed 42 preserved all quality metrics and increased p50 by 2.43 s and p95 by 4.30 s. Seeded sampling cannot fix scheduling or model warm-up. Source files are the `eval/results/annotated-*` reports and gate transcripts dated 20261124.
+Three typo probes produced zero mean change on all four retrieval metrics. Repeating the stable suite with seed 42 preserved all quality metrics and increased p50 by 2.43 s and p95 by 4.30 s. Seeded sampling cannot fix scheduling or model warm-up. Faithfulness uses reference facts and gold-page citations. Source files are the `eval/results/annotated-*` reports and gate transcripts dated 20261124.
 
-**Part D · five-line trace-only diagnosis.**
+### Parts B and C · 48-question Kubernetes comparison
+
+Each profile used the same golden and embedding-pair hashes, pinned models, seed 42 and cache bypass. Stable and normal candidate each scored 48 questions and three typo probes twice. The degraded profile was scored in a separate run and compared with the stable first pass.
+
+| Measurement | Stable k5 / 0.35 | Normal k3 / 0.35 | Degraded k1 / 0.99 |
+|---|---:|---:|---:|
+| Paraphrase / unrelated cosine / gap | 0.698 / 0.411 / 0.287 | 0.698 / 0.411 / 0.287 | 0.698 / 0.411 / 0.287 |
+| Mean embedding ms / largest repeat difference | 288.51 / 0 | 84.05 / 0 | 186.56 / 0 |
+| Recall@3 / recall@5 | 1.000 / 1.000 | 1.000 / 1.000 | 0.000 / 0.000 |
+| MRR / nDCG@5 | 0.968 / 0.974 | 0.968 / 0.974 | 0.000 / 0.000 |
+| Faithfulness / abstention correctness | 0.730 / 1.000 | 0.703 / 0.909 | 0.000 / 1.000 |
+| Citation validity (count) | 1.000 (58) | 1.000 (84) | Undefined (0) |
+| End-to-end p50 / p95, seconds | 30.81 / 102.20 | 29.30 / 48.66 | 1.26 / 4.94 |
+
+| Seeded repeat minus first pass | Stable | Normal candidate |
+|---|---:|---:|
+| Mean embedding time, ms | −215.18 | −13.69 |
+| End-to-end p50 / p95, seconds | +8.42 / −19.52 | +4.67 / +4.81 |
+| Every other numeric metric | 0 | 0 |
+
+The three typo probes produced zero mean deltas for Recall@3, Recall@5, MRR and nDCG@5 in every scored pass. The seeded repeats preserved embedding similarity and determinism, retrieval scores, answer quality, citation counts and abstention correctness. Timing varied across passes. Fixed seeds control sampling, while warm-up, host load and scheduling affect latency.
+
+**Release decision · reject.** The normal candidate preserved Recall@5 (loss 0.0000 against a 0.02 maximum) and passed faithfulness (0.7027 against 0.70) and abstention (0.9091 against 0.80). Its p95 of 48.661 s exceeded the 20 s ceiling by 28.661 s. Both reports were written before the evaluator returned exit 1 through the Kubernetes Job. The separate degraded Job failed recall and faithfulness. After the normal gate, stable still served `rahbar_policies` at k5. A successful fresh normal-candidate Kubernetes promotion and post-promotion trace remain unverified. The successful local gate and previous bad-release undo are recorded separately.
+
+Source reports and gate output are under `eval/results/5df892be-9cef-4988-934a-0be12c072f24/`. The degraded report is `eval/results/degraded-resume-a97d3f74.json`.
+
+### Part D · five-line trace-only diagnosis
 
 1. Trace `4044ec61c6a84c4685da7be954b8f043` asked about attendance, excused absence and consequences.
 2. The prompt included June handbook clauses 1.21 and 1.22 from physical page 10.
@@ -71,19 +99,21 @@ Three typo probes produced zero mean change on all four retrieval metrics. Repea
 4. Generation cited clause 1.22 and returned only exam ineligibility.
 5. The omission arose during generation. The missing fact was already in the context.
 
-Source `docs/TRACE_ROOT_CAUSE_D5.md`. In a 60-minute cluster window, two academic-warning requests had top-1 similarity 0.808, zero cache hits and zero injection flags. One abstained after a timeout during concurrent indexing. Stage p95 was 5.54 s for embedding, 0.42 s for retrieval and 242.50 s for generation. A later request completed generation, and its stdout and PVC records matched. Sample size limits generalization. See `docs/evidence/asg3-trace-summary.json`.
+Source `docs/TRACE_ROOT_CAUSE_D5.md`. In a 60-minute cluster window, two academic-warning requests had top-1 similarity 0.808, zero cache hits and zero injection flags. One timed out during concurrent indexing, giving a 50% abstention rate. Stage p95 was 5.54 s for embedding, 0.42 s for retrieval, 0.31 ms for reranking, 242.50 s for generation and 243.04 s overall. A later request completed generation, and its stdout and PVC records matched. Sample size limits generalization. See `docs/evidence/asg3-trace-summary.json`.
 
 **Part F · cluster evidence.** The stable Service and the candidate Service select disjoint API pods. The cluster experiment changes one assigned variable, top-k from 5 to 3, at a fixed 0.35 floor. Both use `nomic-embed-text` and `llama3.2:3b`. The evaluator snapshots the thresholds and runs the full suite twice per Service. A failed Job prevents promotion. The separate bad-release drill switched live to the retained candidate collection, k1/floor 0.99, which abstained. After `kubectl rollout undo`, trace `58a50ef8465046589110d1c0fb147e80` answered from stable `rahbar_policies`, revision `dcfb2a4cde934baaaf968a2085aefa62`, at k5/floor 0.35. The embedding version stayed fixed.
 
 | Workload | CPU request / limit | Memory request / limit | Measurement basis |
 |---|---:|---:|---|
 | Stable and candidate API, each | 100m / 500m | 128 / 512 Mi | Stable reached 489m / 114 Mi, candidate 59m / 100 Mi during the measured request and rollout windows. The 500m cap accommodates the startup burst. |
-| Chroma | 250m / 1000m | 256 / 1024 Mi | Indexing and queries reached 201m / 120 Mi. The 250m CPU reservation covers this sampled demand. |
-| Redis | 100m / 500m | 64 / 256 Mi | Cache and lease activity reached 280m / 16 Mi. The 500m limit accommodates short CPU bursts. |
-| Ingestion and schedule | 750m / 1500m | 512 / 1536 Mi | Stable ingestion reached 1499m and 346 Mi. Increase the request from 250m to reserve half the measured CPU peak while allowing OCR to use the full limit. |
-| Evaluation | 100m / 500m | 128 / 384 Mi | Early active sample reached 141m / 44 Mi. The 500m limit allows CPU bursts above the request. |
+| Chroma | 250m / 1000m | 256 / 1024 Mi | Sampled peaks reached 297m / 172 Mi. The 1000m limit accommodates bursts above the 250m request. |
+| Redis | 100m / 500m | 64 / 256 Mi | Cache and lease activity reached 280m / 17 Mi. The 500m limit accommodates short CPU bursts. |
+| Ingestion and schedule | 750m / 1500m | 512 / 1536 Mi | Stable ingestion reached 1499m and 346 Mi. The 750m request reserves half the measured CPU peak. The 1500m limit accommodates OCR bursts. |
+| Evaluation | 100m / 500m | 128 / 384 Mi | Sampled peaks reached 485m / 44 Mi. The 500m limit allows CPU bursts above the request. |
 
-The two independent Batch A Jobs embedded 875 chunks each and left zero orphans. The stable unchanged rerun embedded zero in 3.3 s. In a third lake, Batch B quarantined five files and embedded six chunks. The archive Job restored the June handbook, with zero newly embedded chunks. The CronJob controller launched a repeat on the isolated lake and produced zero new chunks and zero orphans. Concurrent requests completed on both Services (184.10 s stable and 211.73 s candidate). These timings include workload contention. Four Jobs replaying the archived 42-question scores produced PASS, latency FAIL after patch, restored PASS and degraded FAIL on the same evaluator image. The first fresh 48-question Job received SIGTERM on Docker shutdown before it wrote scores. The recovery Job `rahbar-eval-b2c5797b45` scored all 48 stable questions in its first pass. A Redis restart returned HTTP 503 during the repeat, before the reports and gate were written. All 48 first-pass stable requests exceeded 20 s, with p95 111.50 s. A later CPU attempt logged all 48 stable timings, then the API connection dropped during noise probes. The resumable evaluator now saves every answer and noise probe on the PVC and includes per-request retry time in latency. A Windows Intel Vulkan replay of one prompt took 71.41 s cold and 21.46 s warm. Both live lanes verified the same pinned model digests after switching to the private Vulkan endpoint for the new comparison.
+Each independent Batch A Job embedded 875 chunks with zero orphans. The unchanged stable run embedded zero in 3.3 s. The CronJob controller also launched an unchanged repeat on the isolated lake. An attempted competing writer exited before indexing because the Redis lease was held. Sampled peak values come from `docs/evidence/k8s_resources_asg3.txt`. Ollama uses resources outside these Pod limits.
+
+The ConfigMap experiment replayed the archived 42-question scores on one evaluator image. The Job passed at the original 20 s p95 ceiling, failed when the ConfigMap set it to zero, then passed after restoration. The deliberately degraded 48-question Job was scored and gated separately. The completed normal run resumed from its persistent PVC after the original Job exhausted its retries during an infrastructure outage. By the time of resumption, the stable first pass and six repeat answers were saved. The replacement began at q07 of the stable repeat on the same Vulkan model endpoint and completed the remaining work. The normal-candidate latency rejection preserved the stable Deployment.
 
 ## 4. Short answers
 
@@ -104,133 +134,126 @@ The two independent Batch A Jobs embedded 875 chunks each and left zero orphans.
 | Member | Scope |
 |---|---|
 | M. Hamza Atif · 24I-3160 | Data verification and incremental state, three-level evaluation, local change experiment and gate, traces, coverage, drift and A–E handoff. |
-| M. Huzaima · 24I-3014 | Partner B branch for cluster integration, persistent volumes, orchestration, release procedure, CI and report preparation with Codex assistance. Live evidence status is recorded separately. |
+| M. Huzaima · 24I-3014 | Kubernetes integration, persistent volumes, Job orchestration and recovery, release and rollback, resource measurements, CI/CD, and report and appendix preparation. |
 
 Codex assisted with Kubernetes manifests, integration scripts, tests, evidence collection and report drafting.
-The experimental tables use repository results. The team must review the final figures and capture the terminal appendix.
+
+The reported measurements and screenshots come from repository evidence and the team’s own runs.
 
 ## Appendix · uncropped terminal evidence
 
-The following positions belong after the eight-page main report. Use multiple full terminal views for long outputs, preserving the command and the entire output.
+Each capture shows an actual terminal session. Archived reads and fresh cluster commands are labeled with their provenance. The normal comparison logs and rejection appear below. The accepted historical gate and the controlled undo exercise have their own captures.
 
-| Label | Required image | Existing material / completion |
-|---|---|---|
-| A1–A2 | Batch B reasons and unchanged counters | Cluster captures `verification.png` and `unchanged.png`. |
-| B1–B2 | Three levels, noise and seeded repeat | `stored-evaluation.png` inspects Partner A’s saved baseline. |
-| C1–C2 | Both gate decisions and four rules | `gates.png` shows the archived reports scored inside Kubernetes. |
-| D1–D2 | Complete record and exact reconstruction | `trace.png` and `reconstruction.png` use the same cluster ID. |
-| E1–E2 | Both coverage decisions | `coverage.png` shows the live checker and inputs. |
-| F1 | Namespace inventory | `inventory.png` shows the actual cluster after restart. |
-| F2 | Completed writer, evaluation and threshold edit | `unchanged.png` and `gates.png` cover ingestion and archived gate replay. Fresh quality run tracked in the audit. |
-| F3 | Rollout, undo, restored trace | `rollout.png`, `undo.png` and `restored-trace.png`. |
-| F4–F5 | Trace after replacement and measured resources | `persistence.png`, `resources.png` and the timestamped sampling log. |
+### A1 · Batch B verification
 
-### Partner A’s existing local captures
+The isolated cluster report gives all four checks and their reasons for each scanned input.
 
-**A-1 · Batch B disposition summary**
+![Batch B verification](../appendix-screenshots/cluster/verification.png)
 
-![Batch B disposition summary](../appendix-screenshots/Appendix-A-1.png)
+### A2 / F2a · Completed unchanged ingestion
 
-**A-2 · Unchanged ingestion counters**
+The stable Job reports zero newly embedded chunks and zero orphans.
 
-![Unchanged ingestion counters](../appendix-screenshots/Appendix-A-2.png)
+![Completed unchanged ingestion](../appendix-screenshots/cluster/unchanged.png)
 
-**B-1 · Three evaluation levels**
+### B1 · Historical three-level evaluation
 
-![Three evaluation levels](../appendix-screenshots/Appendix-B-1.png)
+The terminal reads Partner A’s 42-question report and shows the module, component, end-to-end, noise and seeded repeat metrics.
 
-**B-2 · Noise and seeded repeat**
+![Historical three-level evaluation](../appendix-screenshots/cluster/stored-evaluation.png)
 
-![Noise and seeded repeat](../appendix-screenshots/Appendix-B-2.png)
+### B2 / F2b · Completed 48-question degraded evaluator
 
-**C-1 · Accepted local candidate**
+The first Pod saved three answers. A replacement resumed at q04 and completed the evaluation of the degraded test profile.
 
-![Accepted local candidate](../appendix-screenshots/Appendix-C-1.png)
+![Completed 48-question degraded evaluator](../appendix-screenshots/cluster/resumable-evaluator.png)
 
-**C-2 · Rejected local candidate**
+### B3 / F2c · Completed normal scoring (1/3)
 
-![Rejected local candidate](../appendix-screenshots/Appendix-C-2.png)
+This full terminal view shows lines 1–76 of the Job log. Together the three captures preserve the resumed scoring output, both repeat summaries and the release decision.
 
-**D-1 · Selected trace fields**
+![Normal evaluation Job log, part 1](../appendix-screenshots/cluster/normal-evaluation-log-1.png)
 
-![Selected trace fields](../appendix-screenshots/Appendix-D-1.png)
+### B3 / F2c · Completed normal scoring (2/3)
 
-**D-2 · Prompt reconstruction**
+This full terminal view shows lines 77–152 of the Job log. Together the three captures preserve the resumed scoring output, both repeat summaries and the release decision.
 
-![Prompt reconstruction](../appendix-screenshots/Appendix-D-2.png)
+![Normal evaluation Job log, part 2](../appendix-screenshots/cluster/normal-evaluation-log-2.png)
 
-**E · Coverage before and after**
+### B3 / F2c · Completed normal scoring (3/3)
 
-![Coverage before and after](../appendix-screenshots/Appendix-E.png)
+This full terminal view shows lines 153–224 of the Job log. Together the three captures preserve the resumed scoring output, both repeat summaries and the release decision.
 
-### Partner B’s feature-branch cluster captures
+![Normal evaluation Job log, part 3](../appendix-screenshots/cluster/normal-evaluation-log-3.png)
 
-Each image is a full-screen capture of the interactive xterm running the displayed command against the assignment cluster or reading its exported public demonstration trace. The underlying PNGs retain their original resolution.
+### C1 / C2 · Archived pass and rejection
 
-**A-2 / F2 · Unchanged incremental Job.** The completed writer reports seven unchanged files, zero newly embedded chunks and zero orphans.
+Kubernetes gate Jobs used archived 42-question reports. The table includes the mounted rule outcomes, evaluator image IDs and exits.
 
-![Completed unchanged ingestion Job](../appendix-screenshots/cluster/unchanged.png)
+![Archived pass and rejection](../appendix-screenshots/cluster/gates.png)
 
-**C / F2 · Archived 42-question reports, gate executed in Kubernetes.** Four Jobs show the initial threshold, its zero-latency modification, the restored threshold and the degraded local candidate. The evaluator image ID and exit code appear beside each Job.
+### C2b · Fresh 48-question degraded rejection
 
-![Gate outcomes and evaluator image IDs](../appendix-screenshots/cluster/gates.png)
+This gate compared the stable first pass with the isolated degraded report. It failed recall and faithfulness.
 
-**D-1 · Complete public JSONL trace.** The stable API returned trace `7d5d7fff6ee3440cbdd44577aeee8337` for the academic-warning question. The full trace is also under `traces/`.
+![Fresh 48-question degraded rejection](../appendix-screenshots/cluster/fresh-degraded-gate.png)
 
-![Full exported cluster trace](../appendix-screenshots/cluster/trace.png)
+### C2c · Normal-candidate latency rejection
 
-**D-2 · Exact context and prompt.** The inspection pod reconstructed the same ID from the shared trace volume.
+The normal scorer finished all four passes. The Job failed the latency rule, and the post-gate readiness output shows the original stable collection and index revision.
 
-![Complete in-cluster prompt reconstruction](../appendix-screenshots/cluster/reconstruction.png)
+![Normal gate and preserved stable profile](../appendix-screenshots/cluster/normal-release-rejection.png)
 
-**E · Coverage before and after six additional golden questions.** Both commands used the pinned embedding model and the same 40-query sample.
+### D1 · Full JSONL trace
 
-![Coverage before and after in the inspection pod](../appendix-screenshots/cluster/coverage.png)
+The academic-warning request returned trace 7d5d7fff6ee3440cbdd44577aeee8337. The terminal prints its complete stored record.
 
-**B · Partner A's archived baseline.** The terminal reads the stored report and displays its three evaluation levels, noise deltas and seeded repeat deltas.
+![Full JSONL trace](../appendix-screenshots/cluster/trace.png)
 
-![Historical evaluation levels and repeat](../appendix-screenshots/cluster/stored-evaluation.png)
+### D2 · Exact prompt and context
 
-**F3 · Stable rollout status and revision history.**
+The inspector reconstructs the complete recorded prompt and evidence for the D1 trace ID.
 
-![Stable rollout status](../appendix-screenshots/cluster/rollout.png)
+![Exact prompt and context](../appendix-screenshots/cluster/reconstruction.png)
 
-**F5 · Container usage during the archive and rollout exercise.** The complete time series and configured budgets are under `docs/evidence/k8s_resources_asg3.txt`.
+### E1 / E2 · Coverage before and after
 
-![Metrics-server container measurements](../appendix-screenshots/cluster/resources.png)
+The cluster checker used the same 40 queries and embedding model. The first gate failed at 28/40 and passed at 40/40 after the additions.
 
-**F3 · Deliberate release and actual rollback.** Both rollout-status commands completed. The following image shows the command that changed the live template and Kubernetes' response to the undo.
+![Coverage before and after](../appendix-screenshots/cluster/coverage.png)
 
-![Actual rollback and both rollout waits](../appendix-screenshots/cluster/undo.png)
+### F1 · Namespace inventory
 
-**F4 · Trace persistence.** The original trace predates the serving pods shown above its inspection output. The summary reads the same persistent volume.
+The original cluster terminal output shows Services, Deployments, Jobs, CronJobs, ConfigMaps and PVCs.
 
-![Replacement pod creation times, original trace and summary](../appendix-screenshots/cluster/persistence.png)
+![Namespace inventory](../appendix-screenshots/cluster/inventory.png)
 
-**A1 · Batch B verification.** All four checks and reasons for every scanned file come from the isolated cluster Job’s persisted report.
+### F3 · ConfigMap threshold change
 
-![Batch B check reasons](../appendix-screenshots/cluster/verification.png)
+The terminal opens the original saved kubectl patch transcript. Its three archived-score decisions are pass, fail and pass, using one evaluator image. C1/C2 shows the image IDs and exits.
 
-**F1 · Cluster inventory after recovery.** The inventory includes the independently seeded lakes, experiment PVC, Services and original interrupted evaluation Job.
+![ConfigMap threshold change](../appendix-screenshots/cluster/archived-threshold-transcript.png)
 
-![Actual cluster inventory](../appendix-screenshots/cluster/inventory.png)
+### F4 · Controlled rollout and undo
 
-**F3 · Restored index, embedding and query configuration.** The operator inspected the before, defective and restored trace records in order.
+The deliberately bad release used k1 and floor 0.99. The terminal shows successful status for the bad rollout, the undo, and successful status after restoration.
 
-![Verified trace fields from each release stage](../appendix-screenshots/cluster/restored-trace.png)
+![Controlled rollout and undo](../appendix-screenshots/cluster/undo.png)
 
-**F2 · Genuine 48-question degraded scoring Job.** This Job scored k1/floor 0.99 on a separate API Service. The paired gate compares these scores with the current stable report.
+### F5 · Fresh post-rollback trace check
 
-![Degraded evaluator’s complete terminal output](../appendix-screenshots/cluster/quality-degraded-score-458eb765.png)
+The three genuine trace records show the original, bad, and restored profiles. The restored record uses the original collection, embedding version and index revision.
 
-**F2 · Scheduled writer.** Kubernetes automatically created this Job from the isolated CronJob template.
+![Fresh post-rollback trace check](../appendix-screenshots/cluster/restored-trace.png)
 
-![Automatically scheduled writer’s complete terminal output](../appendix-screenshots/cluster/quality-asg3-schedule-proof-29929280.png)
+### F6 · Persistent trace and metrics
 
-**F2 · Recovery from a temporary dependency outage.** The new evaluator retried the isolated Service after an observed connection timeout.
+The inspection Pod recovered a trace created before the serving Pods were replaced and summarized the shared trace volume.
 
-![Cluster Job recovered and returned a fresh trace](../appendix-screenshots/cluster/quality-verify-retry-87def221.png)
+![Persistent trace and metrics](../appendix-screenshots/cluster/persistence.png)
 
-**F2 · Interrupted evaluator resumed.** The test Job persisted q01 to q03. Its replacement resumed at q04 and completed the report from the same fixed dataset.
+### F7 · Sampled container resources
 
-![Initial and replacement Kubernetes evaluator logs](../appendix-screenshots/cluster/resumable-evaluator.png)
+The standard metrics-server query measured each currently running container. The timestamped series supports the report’s resource table.
+
+![Sampled container resources](../appendix-screenshots/cluster/resources.png)
