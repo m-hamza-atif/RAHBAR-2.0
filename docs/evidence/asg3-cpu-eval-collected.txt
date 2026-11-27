@@ -1,0 +1,74 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u scripts/ragops_cluster.py collect-job rahbar-eval-1efec5bec2
+Waiting for Job rahbar-eval-1efec5bec2 to complete or fail.
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/rahbar-eval-1efec5bec2
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- ls -1 /data/eval-results/20261127T045615Z-182e27bbdaa7
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- cat /data/eval-results/20261127T045615Z-182e27bbdaa7/gate_config.yaml
+RESULT_DIR=/data/eval-results/20261127T045615Z-182e27bbdaa7
+  q01          242981.1 ms
+  q02          203481.4 ms
+  q03          182516.9 ms
+  q04          196992.3 ms
+  q05           88692.8 ms
+  q06          109682.9 ms
+  q07           59554.5 ms
+  q08           78699.5 ms
+  q09          211752.6 ms
+  q10          117993.2 ms
+  q11          184983.9 ms
+  q12           58585.2 ms
+  q13           40445.2 ms
+  q14           59152.6 ms
+  q15           51037.2 ms
+  q16          143905.0 ms
+  q17           91031.0 ms
+  q18           21442.0 ms
+  q19           54968.2 ms
+  q20           98073.7 ms
+  q21           45885.0 ms
+  q22          150485.0 ms
+  q23          240814.5 ms
+  q24          120997.2 ms
+  q25          220954.9 ms
+  q26          157562.4 ms
+  q27          195793.2 ms
+  q28           63073.7 ms
+  q29           46612.5 ms
+  q30           41154.9 ms
+  q31           54580.5 ms
+  q32           35040.2 ms
+  q33           33512.1 ms
+  q34           66424.1 ms
+  q35           62281.5 ms
+  q36           34523.5 ms
+  q37           31366.4 ms
+  q38           29200.9 ms
+  q39           39431.7 ms
+  q40           56185.1 ms
+  q41           56797.0 ms
+  q42           43373.9 ms
+  q43          149470.0 ms
+  q44           75863.9 ms
+  q45           72664.5 ms
+  q46          133648.2 ms
+  q47          129844.0 ms
+  q48          271033.0 ms
+Evaluation failed: Server disconnected without sending a response.
+Traceback (most recent call last):
+  File "/app/eval/cluster_job.py", line 43, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/app/eval/cluster_job.py", line 30, in main
+    subprocess.run([sys.executable, "eval/run_eval.py", "--suite", "ragops", "--api",
+  File "/usr/local/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/local/bin/python', 'eval/run_eval.py', '--suite', 'ragops', '--api', 'http://rahbar-api:8000', '--cluster-retry', '--golden', 'eval/golden.jsonl', '--embedding-pairs', 'eval/embedding_pairs.jsonl', '--stochasticity-check', '--out', '/data/eval-results/20261127T045615Z-182e27bbdaa7/baseline.json']' returned non-zero exit status 1.
+
+Traceback (most recent call last):
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 368, in <module>
+    main()
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 340, in main
+    wait_job(args.name)
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 174, in wait_job
+    raise RuntimeError(f"Job {name} failed; see its log and pod events")
+RuntimeError: Job rahbar-eval-1efec5bec2 failed; see its log and pod events
+exit 1

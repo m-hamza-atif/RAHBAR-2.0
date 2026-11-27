@@ -42,6 +42,7 @@ jobs:
           docker build --provenance=false -t "$OWNER/rahbar-api:$TAG" api
           docker build --provenance=false -f indexer/Dockerfile -t "$OWNER/rahbar-indexer:$TAG" .
           docker build --provenance=false -t "$OWNER/rahbar-ui:$TAG" ui
+          docker build --provenance=false -f eval/Dockerfile -t "$OWNER/rahbar-eval:$TAG" .
       - uses: actions/cache@v4
         with:
           path: .tools
@@ -51,10 +52,10 @@ jobs:
           OWNER: ${{ secrets.DOCKERHUB_USERNAME }}
           TAG: ${{ github.sha }}
         run: |
-          for image in api indexer ui; do
+          for image in api indexer ui eval; do
             trivy image --scanners vuln --ignore-unfixed --severity HIGH,CRITICAL --exit-code 1 "$OWNER/rahbar-$image:$TAG"
           done
-          for image in api indexer ui; do docker push "$OWNER/rahbar-$image:$TAG"; done
+          for image in api indexer ui eval; do docker push "$OWNER/rahbar-$image:$TAG"; done
   deploy:
     needs: build-push
     runs-on: ubuntu-24.04

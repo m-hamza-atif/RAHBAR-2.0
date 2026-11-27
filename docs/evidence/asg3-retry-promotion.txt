@@ -1,0 +1,43 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u scripts/ragops_cluster.py promote
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/rahbar-api --timeout=600s
+deployment "rahbar-api" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/rahbar-api-candidate --timeout=600s
+deployment "rahbar-api-candidate" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar get deployment/rahbar-api -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get deployment/rahbar-api-candidate -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pods -l app=api,lane=stable -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pods -l app=api,lane=candidate -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get configmap/rahbar-gate-config -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get cronjob/ragops-reindex -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api-candidate:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/rahbar-eval-1efec5bec2 created
+
+Waiting for Job rahbar-eval-1efec5bec2 to complete or fail.
+Unable to connect to the server: net/http: TLS handshake timeout
+Traceback (most recent call last):
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 337, in <module>
+
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 333, in main
+    cron["spec"]["suspend"] = False
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 234, in evaluate
+    logs = new_job(yaml.safe_load(Path("k8s/eval-job.yaml").read_text()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 155, in new_job
+    return wait_job(name)
+           ^^^^^^^^^^^^^^
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 127, in wait_job
+    job = read("job/" + name, show=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 32, in read
+    return json.loads(k("get", resource, "-o", "json", show=show))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 27, in k
+    return subprocess.run([*K, *args], input=data, capture_output=False, stdout=subprocess.PIPE,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Muhammad\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['kubectl', '--context', 'kind-rahbar-asg3', '-n', 'rahbar', 'get', 'job/rahbar-eval-1efec5bec2', '-o', 'json']' returned non-zero exit status 1.
+exit 1

@@ -1,0 +1,23 @@
+{
+  "window_minutes": 60,
+  "queries": 2,
+  "completed": 2,
+  "top1_similarity": {
+    "count": 2,
+    "min": 0.80789244,
+    "p50": 0.80789244,
+    "mean": 0.80789244,
+    "max": 0.80789244
+  },
+  "abstention_rate": 0.5,
+  "cache_hit_rate": 0.0,
+  "p95_latency_per_stage_ms": {
+    "cache_ms": null,
+    "embed_ms": 5542.534,
+    "retrieve_ms": 421.948,
+    "rerank_ms": 0.313,
+    "generate_ms": 242498.572,
+    "total_ms": 243039.873
+  },
+  "injection_attempts_flagged": 0
+}

@@ -1,0 +1,38 @@
+{"ts": "2026-11-25T21:55:02Z", "logger": "rahbar.indexer", "msg": "indexer starting", "dummy": false, "embed_model": "nomic-embed-text", "collection": "drift_bcf7357e1f", "chroma": "chroma:8000", "pod": "drift-bcf7357e1f-batch-b6c6ffbcea-mx2xn"}
+{"ts": "2026-11-25T21:55:04Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:04Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "01-registration.md", "chunks": 1, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "02-library.md", "chunks": 1, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "03-lab.md", "chunks": 1, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "04-scholarships.md", "chunks": 1, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "05-injection.md", "chunks": 1, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:05Z", "logger": "rahbar.indexer", "msg": "chunking_summary", "source": "06-academic-rules.md", "chunks": 1, "storage_amplification": 1.0, "size": 512, "overlap": 64, "strategy": "structure", "token_unit": "whitespace"}
+{"ts": "2026-11-25T21:55:06Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:06Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:06Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 1}
+{"ts": "2026-11-25T21:55:07Z", "logger": "rahbar.indexer", "msg": "embedded", "embed_model": "nomic-embed-text", "embed_dim": 768, "embedding_backend": "ollama", "chunks": 6}
+Document                                                Disposition  Quality Completeness Recency Uniqueness
+academic-rules-handbook-jun-2026.pdf                    archive      pass    pass         fail    pass
+annual-report-2019-20.pdf                               active       pass    pass         pass    pass
+annual-report-2023-24.pdf                               active       pass    pass         pass    pass
+faculty-entrepreneurship-and-technical-start-ups-policy.pdf active       pass    pass         pass    pass
+fee-structure-page.html                                 active       pass    pass         pass    pass
+grading-page.html                                       active       pass    pass         pass    pass
+prospectus-2026-academic-rules-and-regulations.pdf      active       pass    pass         pass    pass
+01-registration.md                                      active       pass    pass         pass    pass
+02-library.md                                           active       pass    pass         pass    pass
+03-lab.md                                               active       pass    pass         pass    pass
+04-scholarships.md                                      active       pass    pass         pass    pass
+05-injection.md                                         active       pass    pass         pass    pass
+06-academic-rules.md                                    active       pass    pass         pass    pass
+07-truncated.md                                         quarantine   pass    fail         fail    pass
+08-missing-metadata.md                                  quarantine   pass    fail         fail    pass
+zz-copy-library.md                                      quarantine   pass    pass         fail    fail
+zz-copy-registration.md                                 quarantine   pass    pass         fail    fail
+zz-near-duplicate.md                                    quarantine   pass    pass         fail    fail
+scanned=18 quarantined=5 unchanged=7 updated=6 deleted=0 chunks_embedded=6 orphan_chunks=0
+{"ts": "2026-11-25T21:55:07Z", "logger": "rahbar.indexer", "msg": "indexer finished", "chunks": 881, "seconds": 5.5}

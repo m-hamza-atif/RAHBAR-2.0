@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rahbar-api
+  namespace: rahbar
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: api
+      lane: stable
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: api
+        lane: stable
+    spec:
+      serviceAccountName: api
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: api
+        image: rahbar-api:asg3
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        ports:
+        - name: http
+          containerPort: 8000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        env:
+        - name: HOME
+          value: /tmp
+        - name: TMPDIR
+          value: /tmp
+        - name: EMBED_MODEL
+          value: nomic-embed-text
+        - name: EMBED_VERSION
+          value: 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
+        - name: EMBED_DIM
+          value: '768'
+        - name: LLM_PROVIDER
+          value: ollama-host
+        - name: LLM_MODEL
+          value: llama3.2:3b
+        - name: TEMPERATURE
+          value: '0.1'
+        - name: GENERATION_SEED
+          value: '42'
+        - name: CACHE_THRESHOLD
+          value: '0.90'
+        - name: CHROMA_COLLECTION
+          value: rahbar_policies
+        - name: TOP_K
+          value: '5'
+        - name: RELEVANCE_FLOOR
+          value: '0.35'
+        - name: TRACE_DIR
+          value: /data/traces
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: traces
+          mountPath: /data/traces
+          readOnly: false
+        envFrom:
+        - configMapRef:
+            name: rahbar-config
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          periodSeconds: 2
+          timeoutSeconds: 5
+          failureThreshold: 30
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          periodSeconds: 20
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8000
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - python
+              - -c
+              - import time; time.sleep(5)
+      volumes:
+      - name: tmp
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: traces
+        persistentVolumeClaim:
+          claimName: traces
+      terminationGracePeriodSeconds: 30
+      enableServiceLinks: false

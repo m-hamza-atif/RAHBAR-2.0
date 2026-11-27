@@ -1,0 +1,24 @@
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pods -l role=inspection -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python eval/check_coverage.py --live eval/live_queries.jsonl --golden /tmp/before.jsonl --similarity-threshold 0.78 --out /tmp/k8s-coverage-before.json
+Coverage: 28/40 (70.0%) at cosine >= 0.78
+  Uncovered library printing: 2
+  Uncovered lost property: 2
+  Uncovered music equipment: 2
+  Uncovered prayer room: 2
+  Uncovered sports bookings: 2
+  Uncovered visitor parking: 2
+Coverage gate: FAIL (target 85.0%)
+.venv/Scripts/python : command terminated with exit code 1
+At line:4 char:1
++ .venv/Scripts/python -u .artifacts/coverage_live.py *> docs/evidence/ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (command terminated with exit code 1:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+exit 1
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- cat /tmp/k8s-coverage-before.json
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python eval/check_coverage.py --live eval/live_queries.jsonl --golden eval/golden.jsonl --similarity-threshold 0.78 --out /tmp/k8s-coverage-after.json
+Coverage: 40/40 (100.0%) at cosine >= 0.78
+Coverage gate: PASS (target 85.0%)
+exit 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- cat /tmp/k8s-coverage-after.json

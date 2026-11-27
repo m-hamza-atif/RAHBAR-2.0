@@ -1,0 +1,2 @@
+Brief API dependency outage (ConnectTimeout); retrying
+API recovered and returned a new abstention trace: 390598a2f1214ab29c2d4d078df9e8c6

@@ -1,0 +1,95 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ragops-indexer
+  namespace: rahbar
+spec:
+  backoffLimit: 3
+  activeDeadlineSeconds: 1800
+  template:
+    metadata:
+      labels:
+        app: indexer
+    spec:
+      serviceAccountName: indexer
+      automountServiceAccountToken: false
+      restartPolicy: OnFailure
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: indexer
+        image: rahbar-indexer:asg3
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            cpu: 750m
+            memory: 512Mi
+          limits:
+            cpu: 1500m
+            memory: 1536Mi
+        env:
+        - name: HOME
+          value: /tmp
+        - name: TMPDIR
+          value: /tmp
+        - name: EMBED_MODEL
+          value: nomic-embed-text
+        - name: EMBED_VERSION
+          value: 0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
+        - name: EMBED_DIM
+          value: '768'
+        - name: LLM_PROVIDER
+          value: ollama-host
+        - name: LLM_MODEL
+          value: llama3.2:3b
+        - name: TEMPERATURE
+          value: '0.1'
+        - name: GENERATION_SEED
+          value: '42'
+        - name: CACHE_THRESHOLD
+          value: '0.90'
+        - name: CHROMA_COLLECTION
+          value: rahbar_policies
+        - name: DATA_LAKE_DIR
+          value: /data/lake
+        - name: ARCHIVE_DIR
+          value: /data/archive
+        - name: QUARANTINE_DIR
+          value: /data/quarantine
+        - name: VERIFICATION_REPORT_DIR
+          value: /data/reports
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: state-stable
+          mountPath: /data
+          readOnly: false
+        envFrom:
+        - configMapRef:
+            name: rahbar-config
+        command:
+        - python
+        - /app/entrypoint.py
+        args:
+        - --incremental
+      volumes:
+      - name: tmp
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: state-stable
+        persistentVolumeClaim:
+          claimName: state-stable
+      terminationGracePeriodSeconds: 30
+      enableServiceLinks: false

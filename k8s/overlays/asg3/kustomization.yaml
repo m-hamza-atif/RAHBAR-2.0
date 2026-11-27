@@ -1,0 +1,76 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rahbar
+resources:
+- ../../base
+- storage.yaml
+- stable.yaml
+- candidate.yaml
+- writer.yaml
+- candidate-writer.yaml
+- schedule.yaml
+- api-services.yaml
+- gate.yaml
+- eval-network.yaml
+- inspection.yaml
+patches:
+- patch: |-
+    $patch: delete
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: api
+      namespace: rahbar
+- patch: |-
+    $patch: delete
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: indexer
+      namespace: rahbar
+- patch: |-
+    $patch: delete
+    apiVersion: batch/v1
+    kind: CronJob
+    metadata:
+      name: reindex
+      namespace: rahbar
+- patch: |-
+    $patch: delete
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: corpus
+      namespace: rahbar
+- patch: |-
+    $patch: delete
+    apiVersion: autoscaling/v2
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: api
+      namespace: rahbar
+- patch: |-
+    $patch: delete
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: ui
+      namespace: rahbar
+- patch: |-
+    $patch: delete
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: ui
+      namespace: rahbar
+- patch: |-
+    $patch: delete
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: rahbar
+      namespace: rahbar
+- target:
+    kind: Service
+    name: api
+  patch: '[{"op":"add","path":"/spec/selector/lane","value":"stable"}]'

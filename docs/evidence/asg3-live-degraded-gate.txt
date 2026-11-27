@@ -1,0 +1,13 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u .artifacts/gate_live_degraded.py 20261127T045615Z-182e27bbdaa7
+Unable to connect to the server: net/http: TLS handshake timeout
+Traceback (most recent call last):
+  File "D:\scd a03\RAHBAR-2.0\.artifacts\gate_live_degraded.py", line 14, in <module>
+    paths=r.k('exec',r.INSPECT,'--','ls','-1','/data/eval-results/'+run,show=False).splitlines()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\scd a03\RAHBAR-2.0\scripts\ragops_cluster.py", line 27, in k
+    return subprocess.run([*K, *args], input=data, capture_output=False, stdout=subprocess.PIPE,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Muhammad\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['kubectl', '--context', 'kind-rahbar-asg3', '-n', 'rahbar', 'exec', 'deployment/ragops-inspect', '--', 'ls', '-1', '/data/eval-results/20261127T045615Z-182e27bbdaa7']' returned non-zero exit status 1.
+exit 1

@@ -1,0 +1,184 @@
+$ kubectl config current-context
+kind-rahbar-asg3
+
+exit 0
+$ kubectl get nodes
+NAME                        STATUS   ROLES           AGE   VERSION
+rahbar-asg3-control-plane   Ready    control-plane   10h   v1.32.2
+
+exit 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar get all,pvc,configmap,cronjob,job
+NAME                                            READY   STATUS      RESTARTS        AGE
+pod/archived-gate-degraded-95ln2                0/1     Error       0               10h
+pod/archived-gate-original-7clzf                0/1     Completed   0               10h
+pod/archived-gate-restored-qzpwf                0/1     Completed   0               10h
+pod/archived-gate-strict-9ppht                  0/1     Error       0               10h
+pod/asg3-verify-seeds                           0/1     Completed   0               10h
+pod/chroma-0                                    1/1     Running     1 (5m14s ago)   10h
+pod/drift-bcf7357e1f-batch-b6c6ffbcea-mx2xn     0/1     Completed   0               9h
+pod/drift-bcf7357e1f-index-0d22de9cbf-57mx4     0/1     Completed   0               9h
+pod/drift-bcf7357e1f-index-99dd7be2dc-t7nhs     0/1     Completed   0               9h
+pod/drift-bcf7357e1f-restore-fe406aceee-8cfm8   0/1     Completed   0               9h
+pod/ragops-indexer-c1bac11558-rbrss             0/1     Completed   0               10h
+pod/ragops-indexer-candidate-e8d23ba497-h2rtk   0/1     Completed   0               10h
+pod/ragops-indexer-d260aa9640-wrvzr             0/1     Completed   0               10h
+pod/ragops-inspect-6cf6cbf48b-tgwvp             1/1     Running     1 (5m14s ago)   10h
+pod/rahbar-api-68476c5c6b-9vn6q                 1/1     Running     1 (5m14s ago)   9h
+pod/rahbar-api-68476c5c6b-rnlls                 1/1     Running     1 (5m14s ago)   9h
+pod/rahbar-api-candidate-76766f9f6f-4nm8z       1/1     Running     1 (5m14s ago)   9h
+pod/rahbar-eval-6lwj6                           0/1     Unknown     0               9h
+pod/rahbar-eval-b2c5797b45-s2s46                1/1     Running     0               3m27s
+pod/redis-8474494f99-sxqmk                      1/1     Running     1 (5m14s ago)   10h
+
+NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/api                    ClusterIP   10.96.117.216   <none>        8000/TCP   10h
+service/chroma                 ClusterIP   10.96.197.36    <none>        8000/TCP   10h
+service/rahbar-api             ClusterIP   10.96.73.97     <none>        8000/TCP   10h
+service/rahbar-api-candidate   ClusterIP   10.96.127.85    <none>        8000/TCP   10h
+service/redis                  ClusterIP   10.96.41.243    <none>        6379/TCP   10h
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/ragops-inspect         1/1     1            1           10h
+deployment.apps/rahbar-api             2/2     2            2           10h
+deployment.apps/rahbar-api-candidate   1/1     1            1           9h
+deployment.apps/redis                  1/1     1            1           10h
+
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/ragops-inspect-6474789bbd         0         0         0       10h
+replicaset.apps/ragops-inspect-68577d444          0         0         0       10h
+replicaset.apps/ragops-inspect-6cf6cbf48b         1         1         1       10h
+replicaset.apps/rahbar-api-68476c5c6b             2         2         2       9h
+replicaset.apps/rahbar-api-6cd85db699             0         0         0       10h
+replicaset.apps/rahbar-api-849d46f47d             0         0         0       9h
+replicaset.apps/rahbar-api-candidate-76766f9f6f   1         1         1       9h
+replicaset.apps/redis-8474494f99                  1         1         1       10h
+
+NAME                      READY   AGE
+statefulset.apps/chroma   1/1     10h
+
+NAME                           SCHEDULE    TIMEZONE       SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/ragops-reindex   0 2 * * 0   Asia/Karachi   True      0        <none>          10h
+
+NAME                                            STATUS     COMPLETIONS   DURATION   AGE
+job.batch/archived-gate-degraded                Failed     0/1           10h        10h
+job.batch/archived-gate-original                Complete   1/1           5s         10h
+job.batch/archived-gate-restored                Complete   1/1           5s         10h
+job.batch/archived-gate-strict                  Failed     0/1           10h        10h
+job.batch/drift-bcf7357e1f-batch-b6c6ffbcea     Complete   1/1           11s        9h
+job.batch/drift-bcf7357e1f-index-0d22de9cbf     Complete   1/1           20m        9h
+job.batch/drift-bcf7357e1f-index-99dd7be2dc     Complete   1/1           43s        9h
+job.batch/drift-bcf7357e1f-restore-fe406aceee   Complete   1/1           7s         9h
+job.batch/ragops-indexer-c1bac11558             Complete   1/1           10s        10h
+job.batch/ragops-indexer-candidate-e8d23ba497   Complete   1/1           14m        10h
+job.batch/ragops-indexer-d260aa9640             Complete   1/1           12m        10h
+job.batch/rahbar-eval                           Failed     0/1           9h         9h
+job.batch/rahbar-eval-b2c5797b45                Running    0/1           3m27s      3m27s
+
+NAME                                     STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/data-chroma-0      Bound    pvc-5f4bfc0a-b5ca-49b5-926e-0493536bca88   2Gi        RWO            standard       <unset>                 10h
+persistentvolumeclaim/drift-bcf7357e1f   Bound    pvc-152abe7c-7315-4681-99a6-a55e3ccb3620   2Gi        RWO            standard       <unset>                 9h
+persistentvolumeclaim/eval-results       Bound    pvc-f5c0f7b9-2435-454e-b045-65c7948fa52b   1Gi        RWO            standard       <unset>                 10h
+persistentvolumeclaim/redis-data         Bound    pvc-a14a64f5-3fc8-4677-be63-ae1471f16f19   1Gi        RWO            standard       <unset>                 10h
+persistentvolumeclaim/state-candidate    Bound    pvc-093046ed-91cb-43c9-b6d3-37868827895e   2Gi        RWO            standard       <unset>                 10h
+persistentvolumeclaim/state-stable       Bound    pvc-6056fe59-98cb-43f5-b137-f74c932aee8e   2Gi        RWO            standard       <unset>                 10h
+persistentvolumeclaim/traces             Bound    pvc-dae55648-f6fd-4613-ab37-7b6a6830c208   2Gi        RWO            standard       <unset>                 10h
+
+NAME                           DATA   AGE
+configmap/drift-bcf7357e1f     11     9h
+configmap/kube-root-ca.crt     1      10h
+configmap/rahbar-config        20     10h
+configmap/rahbar-gate-config   1      10h
+
+exit 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar apply --dry-run=server -k k8s/overlays/asg3
+namespace/rahbar unchanged (server dry run)
+serviceaccount/api unchanged (server dry run)
+serviceaccount/chroma unchanged (server dry run)
+serviceaccount/indexer unchanged (server dry run)
+serviceaccount/redis unchanged (server dry run)
+serviceaccount/ui unchanged (server dry run)
+configmap/rahbar-config configured (server dry run)
+configmap/rahbar-gate-config unchanged (server dry run)
+service/api unchanged (server dry run)
+service/chroma unchanged (server dry run)
+service/rahbar-api unchanged (server dry run)
+service/rahbar-api-candidate unchanged (server dry run)
+service/redis unchanged (server dry run)
+persistentvolumeclaim/eval-results unchanged (server dry run)
+persistentvolumeclaim/redis-data unchanged (server dry run)
+persistentvolumeclaim/state-candidate unchanged (server dry run)
+persistentvolumeclaim/state-stable unchanged (server dry run)
+persistentvolumeclaim/traces unchanged (server dry run)
+deployment.apps/ragops-inspect configured (server dry run)
+deployment.apps/rahbar-api configured (server dry run)
+deployment.apps/rahbar-api-candidate configured (server dry run)
+deployment.apps/redis unchanged (server dry run)
+statefulset.apps/chroma configured (server dry run)
+cronjob.batch/ragops-reindex configured (server dry run)
+job.batch/ragops-indexer created (server dry run)
+job.batch/ragops-indexer-candidate created (server dry run)
+networkpolicy.networking.k8s.io/api-data unchanged (server dry run)
+networkpolicy.networking.k8s.io/api-eval unchanged (server dry run)
+networkpolicy.networking.k8s.io/api-ingress unchanged (server dry run)
+networkpolicy.networking.k8s.io/chroma-clients unchanged (server dry run)
+networkpolicy.networking.k8s.io/default-deny configured (server dry run)
+networkpolicy.networking.k8s.io/dns unchanged (server dry run)
+networkpolicy.networking.k8s.io/eval-api unchanged (server dry run)
+networkpolicy.networking.k8s.io/indexer-data unchanged (server dry run)
+networkpolicy.networking.k8s.io/redis-clients unchanged (server dry run)
+networkpolicy.networking.k8s.io/ui-api unchanged (server dry run)
+networkpolicy.networking.k8s.io/ui-ingress unchanged (server dry run)
+
+exit 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar apply --dry-run=server -f k8s/eval-job.yaml
+job.batch/rahbar-eval configured (server dry run)
+
+exit 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pods -o custom-columns=POD:.metadata.name,IMAGE:.status.containerStatuses[*].imageID
+POD                                         IMAGE
+archived-gate-degraded-95ln2                sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9
+archived-gate-original-7clzf                sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9
+archived-gate-restored-qzpwf                sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9
+archived-gate-strict-9ppht                  sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9
+asg3-verify-seeds                           sha256:b789fb2ecbf1ee6338f796ae8ee2ed20822262b3554b06fe40fa3baf281e02dd
+chroma-0                                    docker.io/chromadb/chroma@sha256:28a3b2c05c74c83686c2273d4d0994b80c481805d0f47887f289c53a4616e592
+drift-bcf7357e1f-batch-b6c6ffbcea-mx2xn     sha256:3ade6fba04cdd2907b0868d55412585a2fb0f7245f628eb636aabc164413f5ff
+drift-bcf7357e1f-index-0d22de9cbf-57mx4     sha256:3ade6fba04cdd2907b0868d55412585a2fb0f7245f628eb636aabc164413f5ff
+drift-bcf7357e1f-index-99dd7be2dc-t7nhs     sha256:3ade6fba04cdd2907b0868d55412585a2fb0f7245f628eb636aabc164413f5ff
+drift-bcf7357e1f-restore-fe406aceee-8cfm8   sha256:3ade6fba04cdd2907b0868d55412585a2fb0f7245f628eb636aabc164413f5ff
+ragops-indexer-c1bac11558-rbrss             sha256:3ade6fba04cdd2907b0868d55412585a2fb0f7245f628eb636aabc164413f5ff
+ragops-indexer-candidate-e8d23ba497-h2rtk   sha256:3ade6fba04cdd2907b0868d55412585a2fb0f7245f628eb636aabc164413f5ff
+ragops-indexer-d260aa9640-wrvzr             sha256:3ade6fba04cdd2907b0868d55412585a2fb0f7245f628eb636aabc164413f5ff
+ragops-inspect-6cf6cbf48b-tgwvp             sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9
+rahbar-api-68476c5c6b-9vn6q                 sha256:23c002adb38eeac2dd21974afc4aa0cc63f36e903385cc4d9a0cc933a14bd3a3
+rahbar-api-68476c5c6b-rnlls                 sha256:23c002adb38eeac2dd21974afc4aa0cc63f36e903385cc4d9a0cc933a14bd3a3
+rahbar-api-candidate-76766f9f6f-4nm8z       sha256:23c002adb38eeac2dd21974afc4aa0cc63f36e903385cc4d9a0cc933a14bd3a3
+rahbar-eval-6lwj6                           sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9
+rahbar-eval-b2c5797b45-s2s46                sha256:825c79ecdfc0da4d863ca969036775f199fe66f9292ea62e49b09a58afcd24f9
+redis-8474494f99-sxqmk                      docker.io/library/redis@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952
+
+exit 0
+$ kubectl --context kind-rahbar-asg3 -n rahbar top pods --containers
+POD                                     NAME      CPU(cores)   MEMORY(bytes)
+chroma-0                                chroma    3m           68Mi
+ragops-inspect-6cf6cbf48b-tgwvp         inspect   0m           6Mi
+rahbar-api-68476c5c6b-9vn6q             api       6m           69Mi
+rahbar-api-68476c5c6b-rnlls             api       6m           98Mi
+rahbar-api-candidate-76766f9f6f-4nm8z   api       6m           70Mi
+rahbar-eval-b2c5797b45-s2s46            eval      0m           43Mi
+redis-8474494f99-sxqmk                  redis     24m          11Mi
+
+exit 0
+$ .venv/Scripts/python .artifacts/public/fetch.py --verify
+  ok        undergraduate-academic-rules-aug-2023.pdf
+  ok        academic-rules-handbook-jun-2026.pdf
+  ok        prospectus-2026-academic-rules-and-regulations.pdf
+  ok        annual-report-2019-20.pdf
+  ok        annual-report-2023-24.pdf
+  ok        fee-structure-page.html
+  ok        grading-page.html
+  ok        faculty-entrepreneurship-and-technical-start-ups-policy.pdf
+
+8 of 8 match the manifest
+
+exit 0

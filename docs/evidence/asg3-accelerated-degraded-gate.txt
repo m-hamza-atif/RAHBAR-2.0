@@ -1,0 +1,20 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u .artifacts/gate_accelerated_degraded.py 5df892be-9cef-4988-934a-0be12c072f24 rahbar-eval-cf08356c2e
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- cat /data/eval-results/5df892be-9cef-4988-934a-0be12c072f24/baseline.first-pass.json
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/degraded-gate-9ad5a5d1 created
+
+Waiting for Job degraded-gate-9ad5a5d1 to complete or fail.
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pods -l batch.kubernetes.io/controller-uid=339a40a4-b394-4fe5-b976-6e55e1dc4dcc --sort-by=.metadata.creationTimestamp -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs degraded-gate-9ad5a5d1-vqrsw
+Pod degraded-gate-9ad5a5d1-vqrsw
+FAIL  max_recall5_drop             1.0000 <= 0.0200
+FAIL  min_faithfulness             0.0000 >= 0.7000
+PASS  max_p95_latency_ms           4937.8939 <= 20000.0000
+PASS  min_abstention_correctness   1.0000 >= 0.8000
+Release gate: FAIL
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/degraded-gate-9ad5a5d1
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+Genuine 48-question degraded release rejected against the paired stable first pass; serving revision unchanged.
+exit 0

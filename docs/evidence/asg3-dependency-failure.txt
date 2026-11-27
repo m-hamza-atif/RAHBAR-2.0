@@ -1,0 +1,112 @@
+$ kubectl --context kind-rahbar-asg3 -n rahbar get job/rahbar-eval-b2c5797b45 -o wide
+NAME                     STATUS   COMPLETIONS   DURATION   AGE   CONTAINERS   IMAGES             SELECTOR
+rahbar-eval-b2c5797b45   Failed   0/1           21h        21h   eval         rahbar-eval:asg3   batch.kubernetes.io/controller-uid=ea244b18-2648-479a-ac95-0daa93c21c79
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pods -l job-name=rahbar-eval-b2c5797b45 -o custom-columns=NAME:.metadata.name,REASON:.status.containerStatuses[0].state.terminated.reason,EXIT:.status.containerStatuses[0].state.terminated.exitCode,STOP:.status.containerStatuses[0].state.terminated.finishedAt
+NAME                           REASON   EXIT   STOP
+rahbar-eval-b2c5797b45-s2s46   Error    1      2026-11-26T08:13:12Z
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/rahbar-eval-b2c5797b45
+Results: /data/eval-results/20261126T071616Z-2788d8da2e69
+  q01          105322.5 ms
+  q02           43378.7 ms
+  q03           52792.0 ms
+  q04           38838.3 ms
+  q05           62894.2 ms
+  q06           51557.2 ms
+  q07           49151.6 ms
+  q08           62399.3 ms
+  q09           82666.1 ms
+  q10           51663.1 ms
+  q11           97201.5 ms
+  q12           88316.0 ms
+  q13           49697.2 ms
+  q14           41611.0 ms
+  q15           47762.6 ms
+  q16           93538.1 ms
+  q17           76308.1 ms
+  q18           20778.9 ms
+  q19           52130.2 ms
+  q20           35430.3 ms
+  q21           41427.9 ms
+  q22           85672.0 ms
+  q23          111501.8 ms
+  q24           62789.1 ms
+  q25           60489.7 ms
+  q26           43860.9 ms
+  q27           82318.2 ms
+  q28           52374.3 ms
+  q29           46395.7 ms
+  q30           42363.9 ms
+  q31           60948.3 ms
+  q32           35898.6 ms
+  q33           39371.8 ms
+  q34           63245.3 ms
+  q35           71190.5 ms
+  q36           27909.4 ms
+  q37           31793.8 ms
+  q38           28481.0 ms
+  q39           40602.6 ms
+  q40           56650.8 ms
+  q41          100453.1 ms
+  q42           41906.5 ms
+  q43          133458.3 ms
+  q44           57441.6 ms
+  q45           67056.9 ms
+  q46          130961.8 ms
+  q47           74369.9 ms
+  q48          101244.5 ms
+  q01          243361.6 ms
+Evaluation failed: Server error '503 Service Unavailable' for url 'http://rahbar-api:8000/api/ask'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503
+Traceback (most recent call last):
+  File "/app/eval/cluster_job.py", line 44, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/app/eval/cluster_job.py", line 30, in main
+    subprocess.run([sys.executable, "eval/run_eval.py", "--suite", "ragops", "--api",
+  File "/usr/local/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/local/bin/python', 'eval/run_eval.py', '--suite', 'ragops', '--api', 'http://rahbar-api:8000', '--golden', 'eval/golden.jsonl', '--embedding-pairs', 'eval/embedding_pairs.jsonl', '--stochasticity-check', '--out', '/data/eval-results/20261126T071616Z-2788d8da2e69/baseline.json']' returned non-zero exit status 1.
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- ls -l /data/eval-results/20261126T071616Z-2788d8da2e69
+total 4
+-rw-r--r-- 1 10001 10001 105 Nov 26 07:16 gate_config.yaml
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs -l app=api,lane=stable --since-time=2026-11-26T08:10:00Z --tail=1500 --prefix=false
+{"ts": "2026-11-26T08:12:43Z", "level": "ERROR", "logger": "rahbar.readiness", "msg": "readiness_failed", "request_id": "016ee8c2c7404ac9887fd9fd81697a85", "checks": {"chroma": "ok", "redis": "Redis unavailable: ConnectionError"}}
+{"ts": "2026-11-26T08:12:55Z", "level": "ERROR", "logger": "rahbar.readiness", "msg": "readiness_failed", "request_id": "8a4fa038ed434b9eb81c05c4c2b9aef8", "checks": {"chroma": "ok", "redis": "Redis unavailable: ConnectionError"}}
+{"ts": "2026-11-26T08:12:55Z", "level": "ERROR", "logger": "rahbar.readiness", "msg": "readiness_failed", "request_id": "cac2d52df9a54343af07a415adc9e8fe", "checks": {"chroma": "ok", "redis": "Redis unavailable: ConnectionError"}}
+{"ts": "2026-11-26T08:12:56Z", "level": "ERROR", "logger": "rahbar.readiness", "msg": "readiness_failed", "request_id": "64b772f3cc664656b7f97bd8479c4d1c", "checks": {"chroma": "ok", "redis": "Redis unavailable: ConnectionError"}}
+{"ts": "2026-11-26T08:12:43Z", "level": "ERROR", "logger": "rahbar.readiness", "msg": "readiness_failed", "request_id": "049520186f6942e9a86ab6227772d103", "checks": {"chroma": "ok", "redis": "Redis unavailable: ConnectionError"}}
+{"ts": "2026-11-26T08:12:55Z", "level": "ERROR", "logger": "rahbar.readiness", "msg": "readiness_failed", "request_id": "8cc5df3b7d9b440585bde16ba2bf870c", "checks": {"chroma": "ok", "redis": "Redis unavailable: ConnectionError"}}
+{"ts": "2026-11-26T08:12:55Z", "level": "ERROR", "logger": "rahbar.readiness", "msg": "readiness_failed", "request_id": "5344e66f20ca4666886250eea1d8f2d0", "checks": {"chroma": "ok", "redis": "Redis unavailable: ConnectionError"}}
+{"ts": "2026-11-26T08:12:57Z", "level": "ERROR", "logger": "rahbar.readiness", "msg": "readiness_failed", "request_id": "ff7919e6064d437c9f313102f02167ce", "checks": {"chroma": "ok", "redis": "Redis unavailable: ConnectionError"}}
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs deploy/redis --since-time=2026-11-26T08:12:40Z --tail=20
+1:C 26 Nov 2026 08:12:57.165 * Configuration loaded
+1:M 26 Nov 2026 08:12:57.172 * monotonic clock: POSIX clock_gettime
+1:M 26 Nov 2026 08:12:57.182 * Running mode=standalone, port=6379.
+1:M 26 Nov 2026 08:12:57.188 * Server initialized
+1:M 26 Nov 2026 08:12:57.218 * Reading RDB base file on AOF loading...
+1:M 26 Nov 2026 08:12:57.218 * Loading RDB produced by version 7.4.2
+1:M 26 Nov 2026 08:12:57.219 * RDB age 41185 seconds
+1:M 26 Nov 2026 08:12:57.219 * RDB memory usage when created 0.90 Mb
+1:M 26 Nov 2026 08:12:57.219 * RDB is base AOF
+1:M 26 Nov 2026 08:12:57.219 * Done loading RDB, keys loaded: 0, keys expired: 0.
+1:M 26 Nov 2026 08:12:57.221 * DB loaded from base file appendonly.aof.1.base.rdb: 0.005 seconds
+1:M 26 Nov 2026 08:12:57.268 * DB loaded from incr file appendonly.aof.1.incr.aof: 0.046 seconds
+1:M 26 Nov 2026 08:12:57.268 * DB loaded from append only file: 0.055 seconds
+1:M 26 Nov 2026 08:12:57.268 * Opening AOF incr file appendonly.aof.1.incr.aof on server start
+1:M 26 Nov 2026 08:12:57.268 * Ready to accept connections tcp
+1:M 26 Nov 2026 08:17:58.023 * 100 changes in 300 seconds. Saving...
+1:M 26 Nov 2026 08:17:58.024 * Background saving started by pid 458
+458:C 26 Nov 2026 08:17:58.156 * DB saved on disk
+458:C 26 Nov 2026 08:17:58.157 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+1:M 26 Nov 2026 08:17:58.225 * Background saving terminated with success
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout history deployment/rahbar-api
+deployment.apps/rahbar-api
+REVISION  CHANGE-CAUSE
+1         <none>
+5         <none>
+6         <none>
