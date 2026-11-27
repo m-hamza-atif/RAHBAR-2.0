@@ -1,0 +1,17 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u .artifacts/test_writer_lease.py
+$ kubectl --context kind-rahbar-asg3 -n rahbar get cronjob/asg3-schedule-proof -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+Acquired the real existing writer lease in Redis with a short TTL.
+$ kubectl --context kind-rahbar-asg3 -n rahbar create job verify-busy-writer-b8eab45b --from=cronjob/asg3-schedule-proof --dry-run=client -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/verify-busy-writer-b8eab45b created
+
+Waiting for Job verify-busy-writer-b8eab45b to complete or fail.
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/verify-busy-writer-b8eab45b
+writer lock held: refusing concurrent indexing
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/verify-busy-writer-b8eab45b
+Released the temporary test lease by verified owner token: 1
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+Actual writer refusal verified; no pipeline child started and live revision stayed fixed.
+exit 0
