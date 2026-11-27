@@ -165,6 +165,28 @@ def average_metrics(rows: list[dict]) -> dict:
     return {name: statistics.mean(row[name] for row in rows) for name in rows[0]}
 
 
+def ask_with_retry(client: httpx.Client, args: argparse.Namespace, question: str,
+                   readiness: dict, bypass_cache: bool = True) -> dict:
+    if not args.cluster_retry:
+        return ask(client, args.api, question, bypass_cache)
+    for delay in (0, 5, 15, 30):
+        if delay:
+            time.sleep(delay)
+        try:
+            response = client.get(args.api.rstrip("/") + "/readyz")
+            response.raise_for_status()
+            current = response.json()
+            if (current["configuration"] != readiness["configuration"] or
+                    current["index_revision"] != readiness["index_revision"]):
+                raise ValueError("API configuration or index changed during evaluation")
+            return ask(client, args.api, question, bypass_cache)
+        except (httpx.HTTPStatusError, httpx.ConnectError, httpx.ConnectTimeout) as exc:
+            if delay == 30 or (isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code != 503):
+                raise
+            print(f"Brief API dependency outage ({type(exc).__name__}); retrying", flush=True)
+    raise AssertionError("Retry loop exited without a result")
+
+
 def run_once(args: argparse.Namespace, questions: list[dict], pairs: list[dict]) -> dict:
     random.seed(42)
     headers = {"Host": args.host} if args.host else {}
@@ -181,7 +203,8 @@ def run_once(args: argparse.Namespace, questions: list[dict], pairs: list[dict])
         rows = []
         for question in questions:
             started = time.perf_counter()
-            response = ask(client, args.api, question["question"], bypass_cache=not args.use_cache)
+            response = ask_with_retry(client, args, question["question"], ready.json(),
+                                      bypass_cache=not args.use_cache)
             latency = (time.perf_counter() - started) * 1000
             row = {"id": question["id"], "response": response, "latency_ms": latency}
             if question["answered_from_context"]:
@@ -198,7 +221,7 @@ def run_once(args: argparse.Namespace, questions: list[dict], pairs: list[dict])
             noisy = typo(question["question"])
             if noisy == question["question"]:
                 raise ValueError(f"noise mutation made no change for {row['id']}")
-            response = ask(client, args.api, noisy)
+            response = ask_with_retry(client, args, noisy, ready.json())
             noisy_scores = retrieval_scores(question["relevant"], response["retrieved"])
             noise.append({"id": row["id"], "question": noisy, "clean": row["retrieval"],
                           "noisy": noisy_scores,
@@ -252,7 +275,14 @@ def run(args: argparse.Namespace) -> int:
         validate_golden(questions)
         report = run_once(args, questions, pairs)
         if args.stochasticity_check:
+            if args.cluster_retry:
+                out.parent.mkdir(parents=True, exist_ok=True)
+                first = out.with_name(out.stem + ".first-pass.json")
+                first.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
             repeat = run_once(args, questions, pairs)
+            if (repeat["configuration"] != report["configuration"] or
+                    repeat["index_revision"] != report["index_revision"]):
+                raise ValueError("API configuration or index changed between repeat passes")
             if repeat["index_revision"] != report["index_revision"]:
                 raise ValueError("index changed between repeat runs")
             differences = {}

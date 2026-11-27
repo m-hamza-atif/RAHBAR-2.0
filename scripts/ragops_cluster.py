@@ -134,7 +134,11 @@ def wait_job(name):
                 directory = match[1]
                 target = Path("eval/results") / Path(directory).name
                 target.mkdir(exist_ok=True)
-                for file in ("baseline.json", "candidate.json", "gate_config.yaml", "gate.txt"):
+                files = set(k("exec", INSPECT, "--", "ls", "-1", directory).splitlines())
+                for file in ("baseline.json", "candidate.json", "gate_config.yaml", "gate.txt",
+                             "baseline.first-pass.json", "candidate.first-pass.json"):
+                    if file not in files or (file.endswith(".first-pass.json") and file.replace(".first-pass", "") in files):
+                        continue
                     (target / file).write_text(k("exec", INSPECT, "--", "cat", directory + "/" + file),
                                                encoding="utf-8")
             print(logs, flush=True)
@@ -290,6 +294,7 @@ def main():
     for name in ("eval", "promote"):
         p.add_parser(name).add_argument("--official-job", action="store_true",
                                         help="use kubectl apply -f k8s/eval-job.yaml for the first run")
+    p.add_parser("collect-job").add_argument("name", help="existing Job in the assignment namespace")
     for name in ("trace", "bad-release-demo", "sync-cron"):
         p.add_parser(name)
     args = parser.parse_args()
@@ -303,6 +308,8 @@ def main():
         deploy(args.lane)
     elif args.action == "reports":
         export_reports("state-" + args.lane)
+    elif args.action == "collect-job":
+        wait_job(args.name)
     elif args.action == "trace":
         trace()
     elif args.action == "bad-release-demo":

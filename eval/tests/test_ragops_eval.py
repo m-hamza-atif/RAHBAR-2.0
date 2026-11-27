@@ -1,8 +1,10 @@
 """Regression coverage for page-level scoring, distinct ranks and gate inputs."""
+from argparse import Namespace
 from copy import deepcopy
 import importlib
 from pathlib import Path
 
+import httpx
 import pytest
 
 
@@ -64,6 +66,35 @@ def test_draft_and_embedding_pairs_meet_content_counts(evaluation):
     pairs = suite.read_jsonl(directory / "embedding_pairs.jsonl")
     assert {label: sum(pair["label"] == label for pair in pairs)
             for label in ("paraphrase", "unrelated")} == {"paraphrase": 15, "unrelated": 15}
+
+
+@pytest.mark.parametrize("revision_changed", [False, True])
+def test_cluster_retry_requires_same_revision(evaluation, monkeypatch, revision_changed):
+    suite, _ = evaluation
+    profile = {"configuration": {"top_k": 3}, "index_revision": "original"}
+    requests = []
+    delays = []
+    monkeypatch.setattr(suite.time, "sleep", delays.append)
+
+    def respond(request):
+        requests.append(request)
+        if request.url.path == "/readyz":
+            if revision_changed and len(requests) == 3:
+                return httpx.Response(200, json={**profile, "index_revision": "new"})
+            return httpx.Response(200, json=profile)
+        if len(requests) == 2:
+            return httpx.Response(503)
+        return httpx.Response(200, json={"trace_id": "fresh"})
+
+    args = Namespace(api="http://candidate", cluster_retry=True)
+    with httpx.Client(transport=httpx.MockTransport(respond)) as client:
+        if revision_changed:
+            with pytest.raises(ValueError, match="index changed"):
+                suite.ask_with_retry(client, args, "Question", profile)
+        else:
+            assert suite.ask_with_retry(client, args, "Question", profile) == {"trace_id": "fresh"}
+            assert requests[-1].headers["X-Cache-Bypass"] == "true"
+    assert delays == [5]
 
 
 def test_coverage_uses_nearest_question_and_inclusive_threshold(evaluation):

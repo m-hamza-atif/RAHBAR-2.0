@@ -23,12 +23,12 @@ def main():
     run = Path(os.environ["EVAL_RESULTS_DIR"]) / (
         datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid4().hex[:12])
     run.mkdir(parents=True)
-    print(f"Results: {run}", flush=True)
+    print(f"RESULT_DIR={run}", flush=True)
     config = run / "gate_config.yaml"
     config.write_bytes(Path(os.environ["GATE_CONFIG_PATH"]).read_bytes())
     for name, address in (("baseline", "STABLE_API"), ("candidate", "CANDIDATE_API")):
         subprocess.run([sys.executable, "eval/run_eval.py", "--suite", "ragops", "--api",
-                        os.environ[address], "--golden", "eval/golden.jsonl", "--embedding-pairs",
+                        os.environ[address], "--cluster-retry", "--golden", "eval/golden.jsonl", "--embedding-pairs",
                         "eval/embedding_pairs.jsonl", "--stochasticity-check",
                         "--out", str(run / (name + ".json"))], check=True)
     gate = subprocess.run([sys.executable, "eval/release_gate.py", "--baseline",
@@ -36,7 +36,6 @@ def main():
                            "--config", str(config)], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     (run / "gate.txt").write_bytes(gate.stdout)
     print(gate.stdout.decode(), end="", flush=True)
-    print(f"RESULT_DIR={run}", flush=True)
     return gate.returncode
 
 

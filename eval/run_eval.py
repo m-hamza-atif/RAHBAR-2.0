@@ -156,6 +156,8 @@ def main() -> int:
     parser.add_argument("--out", type=Path)
     parser.add_argument("--embedding-pairs", type=Path, default=HERE / "embedding_pairs.jsonl")
     parser.add_argument("--stochasticity-check", action="store_true")
+    parser.add_argument("--cluster-retry", action="store_true",
+                        help="retry brief dependency outages and retain the first scored pass")
     parser.add_argument("--update-baseline", action="store_true",
                         help="write these results as the new baseline")
     args = parser.parse_args()
@@ -165,6 +167,8 @@ def main() -> int:
         if args.update_baseline:
             parser.error("RAGOps compares independently saved reports through release_gate.py")
         return run(args)
+    if args.cluster_retry:
+        parser.error("--cluster-retry requires --suite ragops")
     args.golden = args.golden or HERE / "golden.yaml"
     args.out = args.out or HERE / "results.json"
 
