@@ -180,14 +180,22 @@ def ask_with_retry(client: httpx.Client, args: argparse.Namespace, question: str
                     current["index_revision"] != readiness["index_revision"]):
                 raise ValueError("API configuration or index changed during evaluation")
             return ask(client, args.api, question, bypass_cache)
-        except (httpx.HTTPStatusError, httpx.ConnectError, httpx.ConnectTimeout) as exc:
+        except (httpx.HTTPStatusError, httpx.ConnectError, httpx.ConnectTimeout, httpx.RemoteProtocolError) as exc:
             if delay == 30 or (isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code != 503):
                 raise
             print(f"Brief API dependency outage ({type(exc).__name__}); retrying", flush=True)
     raise AssertionError("Retry loop exited without a result")
 
 
-def run_once(args: argparse.Namespace, questions: list[dict], pairs: list[dict]) -> dict:
+def save_report(path: Path, data: dict, *, pretty: bool = False):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(data, indent=2 if pretty else None) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def run_once(args: argparse.Namespace, questions: list[dict], pairs: list[dict],
+             checkpoint: Path | None = None) -> dict:
     random.seed(42)
     headers = {"Host": args.host} if args.host else {}
     with httpx.Client(timeout=args.timeout) as embed_client, httpx.Client(
@@ -195,15 +203,32 @@ def run_once(args: argparse.Namespace, questions: list[dict], pairs: list[dict])
     ) as client:
         ready = client.get(args.api.rstrip("/") + "/readyz")
         ready.raise_for_status()
-        profile = ready.json()["configuration"]
+        readiness = ready.json()
+        profile = readiness["configuration"]
         if (args.stochasticity_check and profile["llm_provider"].startswith("ollama")
                 and profile.get("generation_seed") is None):
             raise ValueError("set GENERATION_SEED on the API before an Ollama stochasticity check")
-        embedding = embedding_level(embed_client, pairs, profile)
-        rows = []
-        for question in questions:
+        identity = {"configuration": profile, "index_revision": readiness["index_revision"],
+                    "golden_sha256": args.golden_sha256, "pairs_sha256": args.pairs_sha256,
+                    "cache_bypass": not args.use_cache}
+        noise_questions = [question for question in questions if question.get("noise_test")]
+        if checkpoint and checkpoint.exists():
+            progress = json.loads(checkpoint.read_text(encoding="utf-8"))
+            if progress["identity"] != identity:
+                raise ValueError("checkpoint uses a different API configuration, index or dataset")
+            for key, source in (("rows", questions), ("noise", noise_questions)):
+                ids = [row["id"] for row in progress[key]]
+                if ids != [question["id"] for question in source[:len(ids)]]:
+                    raise ValueError(f"checkpoint has unexpected {key} IDs")
+            print(f"Resuming {checkpoint.name}: {len(progress['rows'])} questions, "
+                  f"{len(progress['noise'])} noise probes", flush=True)
+        else:
+            progress = {"identity": identity, "embedding": embedding_level(embed_client, pairs, profile),
+                        "rows": [], "noise": []}
+        rows, noise = progress["rows"], progress["noise"]
+        for question in questions[len(rows):]:
             started = time.perf_counter()
-            response = ask_with_retry(client, args, question["question"], ready.json(),
+            response = ask_with_retry(client, args, question["question"], readiness,
                                       bypass_cache=not args.use_cache)
             latency = (time.perf_counter() - started) * 1000
             row = {"id": question["id"], "response": response, "latency_ms": latency}
@@ -213,23 +238,26 @@ def run_once(args: argparse.Namespace, questions: list[dict], pairs: list[dict])
             else:
                 row["correct_abstention"] = not response["answered_from_context"] and not response["citations"]
             rows.append(row)
+            if checkpoint:
+                save_report(checkpoint, progress)
             print(f"  {row['id']:<12} {latency:8.1f} ms", flush=True)
-        noise = []
-        for question, row in zip(questions, rows, strict=True):
-            if not question.get("noise_test"):
-                continue
+        by_id = {row["id"]: row for row in rows}
+        for question in noise_questions[len(noise):]:
+            row = by_id[question["id"]]
             noisy = typo(question["question"])
             if noisy == question["question"]:
                 raise ValueError(f"noise mutation made no change for {row['id']}")
-            response = ask_with_retry(client, args, noisy, ready.json())
+            response = ask_with_retry(client, args, noisy, readiness)
             noisy_scores = retrieval_scores(question["relevant"], response["retrieved"])
             noise.append({"id": row["id"], "question": noisy, "clean": row["retrieval"],
                           "noisy": noisy_scores,
                           "delta": {key: val - row["retrieval"][key] for key, val in noisy_scores.items()}})
+            if checkpoint:
+                save_report(checkpoint, progress)
         end = client.get(args.api.rstrip("/") + "/readyz")
         end.raise_for_status()
-        if end.json().get("index_revision") != ready.json().get("index_revision"):
-            raise ValueError("index changed during evaluation")
+        if any(end.json().get(key) != readiness.get(key) for key in ("index_revision", "configuration")):
+            raise ValueError("API configuration or index changed during evaluation")
     if len(noise) < 3:
         raise ValueError("at least three answerable questions must be marked noise_test")
     latency = sorted(row["latency_ms"] for row in rows)
@@ -237,15 +265,14 @@ def run_once(args: argparse.Namespace, questions: list[dict], pairs: list[dict])
     valid_citations = sum(round((citation_validity(row["response"]) or 0)
                                 * len(row["response"]["citations"])) for row in rows)
     return {
-        "schema": "ragops-v1", "configuration": profile, "index_revision": ready.json()["index_revision"],
-        "golden_sha256": args.golden_sha256, "pairs_sha256": args.pairs_sha256,
-        "cache_bypass": not args.use_cache,
+        "schema": "ragops-v1", **identity,
         "annotation_status": {
             "human_written": sum(q["author"] == "human" for q in questions),
             "synthetic_reviewed": sum(q["author"] == "synthetic" and q.get("reviewed_by_human") is True
                                       for q in questions),
         },
-        "embedding": embedding, "retrieval": average_metrics([r["retrieval"] for r in rows if "retrieval" in r]),
+        "embedding": progress["embedding"],
+        "retrieval": average_metrics([r["retrieval"] for r in rows if "retrieval" in r]),
         "noise": {"rows": noise, "mean_delta": average_metrics([row["delta"] for row in noise])},
         "end_to_end": {
             "faithfulness": statistics.mean(r["faithful"] for r in rows if "faithful" in r),
@@ -273,13 +300,14 @@ def run(args: argparse.Namespace) -> int:
                 or args.pairs_sha256 != golden_digest(args.embedding_pairs)):
             raise ValueError("evaluation data changed during loading")
         validate_golden(questions)
-        report = run_once(args, questions, pairs)
+        report = run_once(args, questions, pairs,
+                          out.with_suffix(".initial.progress.json") if args.cluster_retry else None)
         if args.stochasticity_check:
             if args.cluster_retry:
-                out.parent.mkdir(parents=True, exist_ok=True)
                 first = out.with_name(out.stem + ".first-pass.json")
-                first.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-            repeat = run_once(args, questions, pairs)
+                save_report(first, report, pretty=True)
+            repeat = run_once(args, questions, pairs,
+                              out.with_suffix(".repeat.progress.json") if args.cluster_retry else None)
             if (repeat["configuration"] != report["configuration"] or
                     repeat["index_revision"] != report["index_revision"]):
                 raise ValueError("API configuration or index changed between repeat passes")
@@ -299,8 +327,7 @@ def run(args: argparse.Namespace) -> int:
                 "note": "Latency varies with warm-up, scheduling and model load. "
                         "A fixed Ollama seed controls sampling, while hardware and batching may still vary.",
             }
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        save_report(out, report, pretty=True)
         print("\nLevel          Metric                              Value")
         for group in ("embedding", "retrieval", "end_to_end"):
             for name, value in report[group].items():

@@ -97,6 +97,41 @@ def test_cluster_retry_requires_same_revision(evaluation, monkeypatch, revision_
     assert delays == [5]
 
 
+def test_cluster_checkpoint_resumes_without_rescoring_saved_rows(evaluation, monkeypatch, tmp_path):
+    suite, _ = evaluation
+    golden = Path(__file__).resolve().parents[1] / "golden.jsonl"
+    dataset = suite.read_jsonl(golden)
+    noise_questions = [q for q in dataset if q.get("noise_test")]
+    questions = [*noise_questions, next(q for q in dataset if not q["answered_from_context"])]
+    profile = {"configuration": {"llm_provider": "stub"}, "index_revision": "original"}
+    identity = {**profile, "golden_sha256": "golden", "pairs_sha256": "pairs", "cache_bypass": True}
+    response = {"answered_from_context": False, "retrieved": [], "citations": []}
+    first = {"id": questions[0]["id"], "response": response, "latency_ms": 123.0,
+             "retrieval": suite.retrieval_scores(questions[0]["relevant"], []), "faithful": False}
+    checkpoint = tmp_path / "baseline.initial.progress.json"
+    suite.save_report(checkpoint, {"identity": identity, "embedding": {"prior": 1}, "rows": [first], "noise": []})
+    client = httpx.Client
+    transport = httpx.MockTransport(lambda request: httpx.Response(200, json=profile))
+    monkeypatch.setattr(suite.httpx, "Client", lambda **kw: client(transport=transport, **kw))
+    submitted = []
+
+    def ask(_client, _api, question, _bypass_cache):
+        submitted.append(question)
+        return response
+
+    monkeypatch.setattr(suite, "ask", ask)
+    args = Namespace(api="http://candidate", cluster_retry=True, host=None, timeout=1,
+                     golden_sha256="golden", pairs_sha256="pairs", use_cache=False, stochasticity_check=True)
+    report = suite.run_once(args, questions, [], checkpoint)
+    assert report["rows"][0] == first
+    assert report["embedding"] == {"prior": 1}
+    assert len(submitted) == len(questions) + len(noise_questions) - 1
+    assert questions[0]["question"] not in submitted
+    args.pairs_sha256 = "changed"
+    with pytest.raises(ValueError, match="checkpoint uses a different"):
+        suite.run_once(args, questions, [], checkpoint)
+
+
 def test_coverage_uses_nearest_question_and_inclusive_threshold(evaluation):
     coverage = importlib.import_module("check_coverage")
     model = {"loan renewal": [1, 0], "registration": [0, 1],

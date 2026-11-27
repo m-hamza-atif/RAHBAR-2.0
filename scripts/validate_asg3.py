@@ -10,7 +10,10 @@ def validate(docs, evaluation):
     assert len(by) == len(docs)
     assert all(d["metadata"].get("namespace") == "rahbar" for d in [*docs, evaluation] if d["kind"] != "Namespace")
     assert evaluation["metadata"]["name"] == "rahbar-eval"
-    assert evaluation["spec"]["backoffLimit"] == 0
+    assert evaluation["spec"]["backoffLimit"] == 2
+    assert evaluation["spec"]["podFailurePolicy"]["rules"] == [
+        {"action": "FailJob", "onExitCodes": {"containerName": "eval", "operator": "In", "values": [1]}}
+    ]
     assert evaluation["spec"]["template"]["spec"]["restartPolicy"] == "Never"
     gate = by["ConfigMap", "rahbar-gate-config"]["data"]["gate_config.yaml"]
     assert yaml.safe_load(gate) == yaml.safe_load(Path("eval/gate_config.yaml").read_text())

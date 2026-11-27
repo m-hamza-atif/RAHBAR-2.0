@@ -52,7 +52,7 @@ kubectl -n rahbar logs job/rahbar-eval
 
 Module tests ask whether paraphrases embed more similarly than unrelated pairs and how reproducible the result is. Component tests measure the rank of gold pages. End-to-end tests examine reference facts, valid citations, abstention and latency. A model can produce deterministic vectors and still retrieve nothing if the relevance floor is too high.
 
-Both Services are scored with the same packaged golden and embedding-pair files, cache bypass and seed 42. Current data has 48 questions. Partner A’s saved comparison used 42. The gate rejects incompatible hashes or model profiles. Show each rule and its observed value. Thresholds come from a mounted ConfigMap. A new Job picks up a changed threshold without building an image. A failing rule returns exit 1, with zero retries. A connection error is a failed Job but gives no evidence of a quality rejection.
+Both Services are scored with the same packaged golden and embedding-pair files, cache bypass and seed 42. Current data has 48 questions. Partner A’s saved comparison used 42. The gate rejects incompatible hashes or model profiles. Show each rule and its observed value. Thresholds come from a mounted ConfigMap. A new Job picks up a changed threshold without building an image. A failing rule returns exit 1 and fails the Job immediately. An interruption during scoring can trigger a replacement pod that resumes from the request checkpoint after verifying the same dataset and index revision. A connection error is a failed Job but gives no evidence of a quality rejection.
 
 The local candidate used a higher floor. The cluster experiment changes top-k from 5 to 3 at a fixed floor. The old pass cannot decide this release. The 20-second latency budget still applies when CPU inference is slow.
 
@@ -100,7 +100,7 @@ Finish by opening a complete trace, a failed gate and the before/after revision.
 ## Numbers to explain from the feature branch
 
 - The two separately seeded indexes each ingested eight files and retained 875 chunks. The stable rerun embedded zero in 3.3 seconds. Point to each writer’s JSON report before explaining incremental ingestion.
-- The full Linux suite passed 134 tests. The corresponding Windows run passed 126 and skipped eight Linux/bash installer cases.
+- The full Linux suite passed 135 tests. The corresponding Windows run passed 127 and skipped eight Linux/bash installer cases.
 - On the CPU-only model server, one academic-warning query timed out during concurrent indexing. The next stable query completed and its stdout record matched the trace volume. The query-stage summary covers two requests; use the separate evaluation report for release latency.
 - Increasing the writer request from 250m to 750m reserves CPU for OCR without raising its 1500m cap. The observed stable peak was 1499m and 346 MiB.
 - The in-cluster coverage check rose from 28/40 to 40/40 at the same 0.78 similarity threshold. The same evaluator image accepted, rejected and accepted the archived 42-question comparison as the latency threshold changed and was restored. Identify the fresh comparison separately.

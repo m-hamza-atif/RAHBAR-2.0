@@ -123,21 +123,54 @@ def seed(source, lane, claim=None):
 
 def wait_job(name):
     print(f"Waiting for Job {name} to complete or fail.", flush=True)
+    failures = 0
     while True:
-        job = read("job/" + name, show=False)
+        try:
+            job = json.loads(k("get", "job/" + name, "--request-timeout=15s", "-o", "json", show=False))
+        except subprocess.CalledProcessError:
+            failures += 1
+            if failures == 12:
+                raise
+            print(f"Job status unavailable; check {failures} of 12", flush=True)
+            time.sleep(10)
+            continue
+        failures = 0
         conditions = {v["type"] for v in job.get("status", {}).get("conditions", []) if v["status"] == "True"}
         if conditions & {"Failed", "Complete"}:
-            logs = k("logs", "job/" + name)
+            if job["spec"].get("podFailurePolicy"):
+                pods = json.loads(k("get", "pods", "-l",
+                                    "batch.kubernetes.io/controller-uid=" + job["metadata"]["uid"],
+                                    "--sort-by=.metadata.creationTimestamp", "-o", "json"))["items"]
+                attempts = []
+                for pod in pods:
+                    pod_name = pod["metadata"]["name"]
+                    try:
+                        log = k("logs", pod_name)
+                    except subprocess.CalledProcessError:
+                        log = f"Pod log unavailable (phase {pod['status']['phase']})"
+                    attempts.append(f"Pod {pod_name}\n{log}")
+                logs = "\n".join(attempts)
+            else:
+                logs = k("logs", "job/" + name)
             EVIDENCE.mkdir(exist_ok=True, parents=True)
             (EVIDENCE / (name + ".txt")).write_text(logs, encoding="utf-8")
             if match := re.search(r"^RESULT_DIR=(/data/eval-results/[\w-]+)$", logs, re.M):
                 directory = match[1]
                 target = Path("eval/results") / Path(directory).name
                 target.mkdir(exist_ok=True)
+                (target / "job.json").write_text(json.dumps({
+                    "name": name, "uid": job["metadata"]["uid"],
+                    "created_at": job["metadata"]["creationTimestamp"],
+                    "status": job["status"],
+                }, indent=2) + "\n", encoding="utf-8")
                 files = set(k("exec", INSPECT, "--", "ls", "-1", directory).splitlines())
                 for file in ("baseline.json", "candidate.json", "gate_config.yaml", "gate.txt",
-                             "baseline.first-pass.json", "candidate.first-pass.json"):
+                             "baseline.first-pass.json", "candidate.first-pass.json",
+                             "baseline.initial.progress.json", "baseline.repeat.progress.json",
+                             "candidate.initial.progress.json", "candidate.repeat.progress.json"):
                     if file not in files or (file.endswith(".first-pass.json") and file.replace(".first-pass", "") in files):
+                        continue
+                    if file.endswith(".progress.json") and file.split(".")[0] + ".json" in files:
                         continue
                     (target / file).write_text(k("exec", INSPECT, "--", "cat", directory + "/" + file),
                                                encoding="utf-8")

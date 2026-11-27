@@ -4,7 +4,14 @@ metadata:
   name: rahbar-eval
   namespace: rahbar
 spec:
-  backoffLimit: 0
+  backoffLimit: 2
+  podFailurePolicy:
+    rules:
+    - action: FailJob
+      onExitCodes:
+        containerName: eval
+        operator: In
+        values: [1]
   activeDeadlineSeconds: 86400
   template:
     metadata:
@@ -39,6 +46,10 @@ spec:
             cpu: 500m
             memory: 384Mi
         env:
+        - name: EVAL_JOB_UID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['batch.kubernetes.io/controller-uid']
         - name: EVAL_RESULTS_DIR
           value: /data/eval-results
         - name: STABLE_API

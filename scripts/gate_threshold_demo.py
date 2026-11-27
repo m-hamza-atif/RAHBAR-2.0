@@ -5,7 +5,7 @@ import tempfile
 
 import yaml
 
-from ragops_cluster import k, read, wait_job
+from ragops_cluster import EVIDENCE, k, read, wait_job
 from uuid import uuid4
 
 
@@ -30,16 +30,21 @@ def attempt(expect_pass):
     except RuntimeError:
         if expect_pass:
             raise
-        logs = k("logs", "job/" + name)
+        logs = (EVIDENCE / (name + ".txt")).read_text(encoding="utf-8")
         if "FAIL  max_p95_latency_ms" not in logs or "Release gate: FAIL" not in logs:
             raise RuntimeError("Job failed for a different reason")
     else:
         if not expect_pass or "Release gate: PASS" not in logs:
             raise RuntimeError("Unexpected gate decision")
     pods = json.loads(k("get", "pod", "-l", "job-name=" + name, "-o", "json"))["items"]
-    status = pods[0]["status"]["containerStatuses"][0]
-    print(name, status["imageID"], status["state"]["terminated"]["exitCode"])
-    return status["imageID"]
+    statuses = [status for pod in pods for status in pod["status"].get("containerStatuses", [])
+                if status["name"] == "eval" and "terminated" in status["state"]]
+    images = {status["imageID"] for status in statuses if status["imageID"]}
+    if len(images) != 1:
+        raise RuntimeError(f"Expected one evaluator image throughout {name}: {images}")
+    for status in statuses:
+        print(name, status["imageID"], status["state"]["terminated"]["exitCode"])
+    return images.pop()
 
 
 def main():

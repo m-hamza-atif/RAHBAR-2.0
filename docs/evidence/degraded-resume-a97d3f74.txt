@@ -1,0 +1,70 @@
+Pod degraded-resume-a97d3f74-skw9s
+  q01            1828.4 ms
+  q02            1075.3 ms
+  q03             716.3 ms
+Controlled interruption after 3 completed questions
+
+Pod degraded-resume-a97d3f74-785kt
+Resuming degraded-resume-a97d3f74.initial.progress.json: 3 questions, 0 noise probes
+  q04            5536.2 ms
+  q05            3725.6 ms
+  q06            4937.9 ms
+  q07            4181.0 ms
+  q08            1142.5 ms
+  q09            1130.3 ms
+  q10            4075.1 ms
+  q11            1624.2 ms
+  q12            1111.0 ms
+  q13            1397.6 ms
+  q14            1656.5 ms
+  q15            1245.3 ms
+  q16            1405.9 ms
+  q17            1307.8 ms
+  q18            1282.4 ms
+  q19            1848.1 ms
+  q20            1334.1 ms
+  q21             969.5 ms
+  q22            1203.0 ms
+  q23            1349.1 ms
+  q24             768.0 ms
+  q25            9145.7 ms
+  q26            1100.4 ms
+  q27             912.8 ms
+  q28             967.8 ms
+  q29            1488.3 ms
+  q30            1203.9 ms
+  q31            1227.8 ms
+  q32            1070.5 ms
+  q33            1413.8 ms
+  q34            1350.5 ms
+  q35            1282.5 ms
+  q36            1398.4 ms
+  q37             866.4 ms
+  q38             481.4 ms
+  q39             377.3 ms
+  q40             418.6 ms
+  q41             451.2 ms
+  q42             690.1 ms
+  q43            1104.1 ms
+  q44            1479.5 ms
+  q45            1290.6 ms
+  q46             959.7 ms
+  q47             712.5 ms
+  q48            1332.9 ms
+
+Level          Metric                              Value
+embedding      paraphrase_mean_cosine                 0.6983
+embedding      unrelated_mean_cosine                  0.4111
+embedding      separation_gap                         0.2873
+embedding      mean_embedding_ms                    186.5622
+embedding      max_absolute_repeat_difference         0.0000
+retrieval      recall_at_3                            0.0000
+retrieval      recall_at_5                            0.0000
+retrieval      mrr                                    0.0000
+retrieval      ndcg_at_5                              0.0000
+end_to_end     faithfulness                           0.0000
+end_to_end     citation_count                         0.0000
+end_to_end     abstention_correctness                 1.0000
+end_to_end     p50_latency_ms                      1263.8463
+end_to_end     p95_latency_ms                      4937.8939
+Report written to /data/eval-results/degraded-resume-a97d3f74.json
