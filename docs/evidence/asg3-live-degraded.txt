@@ -1,0 +1,91 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u .artifacts/live_degraded.py
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar apply -f -
+deployment.apps/rahbar-api-degraded created
+$ kubectl --context kind-rahbar-asg3 -n rahbar apply -f -
+service/rahbar-api-degraded created
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/rahbar-api-degraded --timeout=600s
+Waiting for deployment "rahbar-api-degraded" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "rahbar-api-degraded" rollout to finish: 0 of 1 updated replicas are available...
+deployment "rahbar-api-degraded" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api-degraded:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api-candidate:8000/readyz
+DEGRADED_RESULT=/data/eval-results/degraded-score-458eb765.json
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/degraded-score-458eb765 created
+
+Waiting for Job degraded-score-458eb765 to complete or fail.
+$ kubectl --context kind-rahbar-asg3 -n rahbar logs job/degraded-score-458eb765
+  q01            1584.9 ms
+  q02             902.1 ms
+  q03            1288.0 ms
+  q04             855.2 ms
+  q05            1109.8 ms
+  q06            2661.1 ms
+  q07            3372.0 ms
+  q08            2353.5 ms
+  q09             813.4 ms
+  q10            2254.1 ms
+  q11            1962.5 ms
+  q12             689.3 ms
+  q13            1079.8 ms
+  q14            1061.5 ms
+  q15             599.1 ms
+  q16            1424.7 ms
+  q17            1147.0 ms
+  q18            1776.1 ms
+  q19            1367.2 ms
+  q20             639.1 ms
+  q21             845.3 ms
+  q22            1025.2 ms
+  q23            1258.5 ms
+  q24            1328.1 ms
+  q25            1480.9 ms
+  q26            2494.0 ms
+  q27            2071.3 ms
+  q28            1535.3 ms
+  q29            1413.9 ms
+  q30            3227.0 ms
+  q31            3174.0 ms
+  q32            1567.6 ms
+  q33           11525.1 ms
+  q34            8692.6 ms
+  q35            6115.6 ms
+  q36            4935.8 ms
+  q37            3099.8 ms
+  q38            2827.2 ms
+  q39            2646.2 ms
+  q40            5951.1 ms
+  q41            5095.6 ms
+  q42            1480.7 ms
+  q43            1918.8 ms
+  q44            2594.7 ms
+  q45            1493.1 ms
+  q46            2318.2 ms
+  q47            1308.6 ms
+  q48            1230.8 ms
+
+Level          Metric                              Value
+embedding      paraphrase_mean_cosine                 0.6985
+embedding      unrelated_mean_cosine                  0.4114
+embedding      separation_gap                         0.2872
+embedding      mean_embedding_ms                   1676.6772
+embedding      max_absolute_repeat_difference         0.0000
+retrieval      recall_at_3                            0.0000
+retrieval      recall_at_5                            0.0000
+retrieval      mrr                                    0.0000
+retrieval      ndcg_at_5                              0.0000
+end_to_end     faithfulness                           0.0000
+end_to_end     citation_count                         0.0000
+end_to_end     abstention_correctness                 1.0000
+end_to_end     p50_latency_ms                      1551.4486
+end_to_end     p95_latency_ms                      6115.6267
+Report written to /data/eval-results/degraded-score-458eb765.json
+
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- cat /data/eval-results/degraded-score-458eb765.json
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar scale deployment/rahbar-api-degraded --replicas=0
+deployment.apps/rahbar-api-degraded scaled
+
+Scored all 48 questions on a separate degraded API with unchanged serving profile.
+exit 0

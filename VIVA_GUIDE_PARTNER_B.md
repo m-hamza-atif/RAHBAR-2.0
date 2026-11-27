@@ -100,7 +100,7 @@ Finish by opening a complete trace, a failed gate and the before/after revision.
 ## Numbers to explain from the feature branch
 
 - The two separately seeded indexes each ingested eight files and retained 875 chunks. The stable rerun embedded zero in 3.3 seconds. Point to each writer’s JSON report before explaining incremental ingestion.
-- The full Linux suite passed 132 tests. The corresponding Windows run passed 124 and skipped eight Linux/bash installer cases.
+- The full Linux suite passed 134 tests. The corresponding Windows run passed 126 and skipped eight Linux/bash installer cases.
 - On the CPU-only model server, one academic-warning query timed out during concurrent indexing. The next stable query completed and its stdout record matched the trace volume. The query-stage summary covers two requests; use the separate evaluation report for release latency.
 - Increasing the writer request from 250m to 750m reserves CPU for OCR without raising its 1500m cap. The observed stable peak was 1499m and 346 MiB.
 - The in-cluster coverage check rose from 28/40 to 40/40 at the same 0.78 similarity threshold. The same evaluator image accepted, rejected and accepted the archived 42-question comparison as the latency threshold changed and was restored. Identify the fresh comparison separately.

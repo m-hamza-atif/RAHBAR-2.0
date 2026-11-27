@@ -1,0 +1,17 @@
+$ D:\scd a03\RAHBAR-2.0\.venv\Scripts\python.exe -u scripts/ragops_cluster.py promote
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/rahbar-api --timeout=600s
+deployment "rahbar-api" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar rollout status deployment/rahbar-api-candidate --timeout=600s
+deployment "rahbar-api-candidate" successfully rolled out
+$ kubectl --context kind-rahbar-asg3 -n rahbar get deployment/rahbar-api -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get deployment/rahbar-api-candidate -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pods -l app=api,lane=stable -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get pods -l app=api,lane=candidate -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get configmap/rahbar-gate-config -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar get cronjob/ragops-reindex -o json
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar exec deployment/ragops-inspect -- python -c import httpx,sys;print(httpx.get(sys.argv[1]).raise_for_status().text) http://rahbar-api-candidate:8000/readyz
+$ kubectl --context kind-rahbar-asg3 -n rahbar create -f -
+job.batch/rahbar-eval-b2c5797b45 created
+
+Waiting for Job rahbar-eval-b2c5797b45 to complete or fail.

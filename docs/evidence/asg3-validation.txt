@@ -16,5 +16,5 @@ ci: invariants and strict schema PASS
 asg3: invariants and strict schema PASS
 exit 0
 $ kubectl apply --dry-run=server -f k8s/eval-job.yaml
-job.batch/rahbar-eval created (server dry run)
+job.batch/rahbar-eval configured (server dry run)
 exit 0
